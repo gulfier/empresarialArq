@@ -18,6 +18,9 @@ public class PagingRequestTO<T extends BaseTO>
   private int size;
   private String sortBy;
   private Direction direction;
+  protected String ip;
+  protected String user;
+  protected String token;
 
   /**
    * Enumeracion para la direccion de la consulta paginada

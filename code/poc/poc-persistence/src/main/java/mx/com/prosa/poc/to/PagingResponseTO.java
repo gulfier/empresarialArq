@@ -1,5 +1,6 @@
 package mx.com.prosa.poc.to;
 
+import java.io.Serializable;
 import java.util.List;
 
 import lombok.Getter;
@@ -13,9 +14,10 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class PagingResponseTO<T extends BaseTO>
+public class PagingResponseTO<T extends BaseTO> implements Serializable
 {
 
+  private static final long serialVersionUID = 1119272018217831326L;
   private List<T> data;
   private long records;
   private int pages;

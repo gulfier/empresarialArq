@@ -112,7 +112,12 @@ public final class BaseTOValidationUtil
     }
   }
 
-  private static void validateIdNotNull( BaseTO baseTO )
+  /**
+   * Valida que el Id no sea nulo
+   * 
+   * @param baseTO
+   */
+  public static void validateIdNotNull( BaseTO baseTO )
   {
     if( baseTO.getId() == null )
     {

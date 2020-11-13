@@ -55,8 +55,9 @@ public interface SiteService
    * Edita un sitio
    * 
    * @param site
+   * @param patch  Indica si es parcial
    */
-  void edit( SiteTO site );
+  void edit( SiteTO site, boolean patch );
 
   /**
    * Elimina un sitio

@@ -184,7 +184,63 @@ public class SiteServiceTest
     response.setName( "qwerty2" );
     response.setCode( code );
     
-    siteService.edit( response );
+    siteService.edit( response, false );
+    
+    response = siteService.findById(siteTO.getId() );
+    
+    Assert.assertNotNull( response );
+
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+    LOG.info( gson.toJson( response ) );
+  }
+  
+  @Test
+  public void testEdit_patchCode()
+  {
+    String code = UUID.randomUUID().toString();
+    SiteTO siteTO = new SiteTO();
+    siteTO.setUser( "user@example.com" );
+    siteTO.setName( "qwerty" );
+    siteTO.setCode( code );
+    
+    siteService.save( siteTO );
+    
+    code = UUID.randomUUID().toString();
+    SiteTO response = siteService.findById(siteTO.getId() );
+    Assert.assertNotNull( response );
+    response.setUser( "user2@example.com" );
+    response.setCode( code );
+    
+    siteService.edit( response, true );
+    
+    response = siteService.findById(siteTO.getId() );
+    
+    Assert.assertNotNull( response );
+
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+    LOG.info( gson.toJson( response ) );
+  }
+  
+  @Test
+  public void testEdit_patchName()
+  {
+    String code = UUID.randomUUID().toString();
+    SiteTO siteTO = new SiteTO();
+    siteTO.setUser( "user@example.com" );
+    siteTO.setName( "qwerty" );
+    siteTO.setCode( code );
+    
+    siteService.save( siteTO );
+    
+    code = UUID.randomUUID().toString();
+    SiteTO response = siteService.findById(siteTO.getId() );
+    Assert.assertNotNull( response );
+    response.setUser( "user2@example.com" );
+    response.setName( "qwerty2" );
+    
+    siteService.edit( response, true );
     
     response = siteService.findById(siteTO.getId() );
     

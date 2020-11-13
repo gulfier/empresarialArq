@@ -1,8 +1,19 @@
 package mx.com.prosa.poc.to;
 
+import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * The Class ErrorTO.
  */
+@Getter
+@Setter
 public class ErrorTO extends CatalogTO
 {
 
@@ -10,72 +21,27 @@ public class ErrorTO extends CatalogTO
   private static final long serialVersionUID = 6821167174466991022L;
 
   /** The description. */
+  @JsonInclude(Include.NON_NULL)
   private String description;
 
   /** The trace. */
+  @JsonInclude(Include.NON_NULL)
   private String trace;
 
   /** The bad request. */
+  @JsonIgnore
   private boolean badRequest;
 
-  /**
-   * Gets the description.
-   *
-   * @return the description
-   */
-  public String getDescription()
-  {
-    return description;
-  }
+  /** Forbidden . */
+  @JsonIgnore
+  private boolean forbidden;
 
-  /**
-   * Sets the description.
-   *
-   * @param description the new description
-   */
-  public void setDescription( String description )
-  {
-    this.description = description;
-  }
-
-  /**
-   * Gets the trace.
-   *
-   * @return the trace
-   */
-  public String getTrace()
-  {
-    return trace;
-  }
-
-  /**
-   * Sets the trace.
-   *
-   * @param trace the new trace
-   */
-  public void setTrace( String trace )
-  {
-    this.trace = trace;
-  }
-
-  /**
-   * Checks if is bad request.
-   *
-   * @return true, if is bad request
-   */
-  public boolean isBadRequest()
-  {
-    return badRequest;
-  }
-
-  /**
-   * Sets the bad request.
-   *
-   * @param badRequest the new bad request
-   */
-  public void setBadRequest( boolean badRequest )
-  {
-    this.badRequest = badRequest;
-  }
+  /** Unauthorized */
+  @JsonIgnore
+  private boolean unauthorized;
+  
+  /** Detail */
+  @JsonInclude(Include.NON_NULL)
+  private Serializable detail;
 
 }

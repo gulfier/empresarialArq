@@ -36,6 +36,7 @@ import mx.com.prosa.poc.util.SupplierBusinessException;
 public class SiteServiceImpl implements SiteService
 {
 
+  private static final String VALIDATION_ERROR = "Error de validaci\u00F3n";
   private static final String VALIDATION_ERROR_SITE_CODE_EXISTS = "Ya existe el sitio";
 
   private static final String VALIDATION_ERROR_APPLICATION_ASSOCIATED_NUMBER = "Hay %s aplicaciones asociadas al sitio";
@@ -66,7 +67,7 @@ public class SiteServiceImpl implements SiteService
     this.siteRepository.save( entity );
     this.siteRepository.flush();
     site.setId( entity.getId() );
-    
+
   }
 
   private void validateExistence( SiteTO site )
@@ -74,7 +75,7 @@ public class SiteServiceImpl implements SiteService
     Optional<SiteDO> exists = this.siteRepository.findByCode( site.getCode().trim() );
     if( exists.isPresent() )
     {
-      BusinessException e = new BusinessException( VALIDATION_ERROR_SITE_CODE_EXISTS );
+      BusinessException e = new BusinessException( VALIDATION_ERROR );
       e.getError().setId( 500L );
       e.getError().setBadRequest( false );
       e.getError().setDescription( VALIDATION_ERROR_SITE_CODE_EXISTS );
@@ -119,7 +120,8 @@ public class SiteServiceImpl implements SiteService
     siteTO.setName( entity.getName() );
 
     siteTO.setApplications( new ArrayList<>() );
-    if (CollectionUtils.isNotEmpty( entity.getApplications() )) {
+    if( CollectionUtils.isNotEmpty( entity.getApplications() ) )
+    {
       entity.getApplications().stream().forEach( app -> {
         BaseTO applicationTO = new BaseTO();
         applicationTO.setId( app.getId() );
@@ -214,19 +216,29 @@ public class SiteServiceImpl implements SiteService
    * {@inheritDoc}
    */
   @Override
-  public void edit( SiteTO site )
+  public void edit( SiteTO site, boolean patch )
   {
-    BaseTOValidationUtil.validateEdit( site );
+    if( patch )
+    {
+      BaseTOValidationUtil.validateIdNotNull( site );
+    }
+    else
+    {
+      BaseTOValidationUtil.validateEdit( site );
+    }
     SiteDO entity = this.siteRepository.findById( site.getId() )
         .orElseThrow( SupplierBusinessException.SITE_NOT_FOUND );
 
-    if( !entity.getCode().equals( site.getCode().trim() ) )
+    if( ((patch && site.getCode() != null) || !patch) && !entity.getCode().equals( site.getCode().trim() ) )
     {
       validateExistence( site );
       entity.setCode( site.getCode().trim() );
     }
 
-    entity.setName( site.getName() );
+    if( (patch && site.getName() != null) || !patch )
+    {
+      entity.setName( site.getName() );
+    }
     entity.setModified( Calendar.getInstance().getTime() );
     entity.setUserModified( site.getUser() );
 
