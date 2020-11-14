@@ -31,6 +31,10 @@ public class ErrorTO extends CatalogTO
   /** The bad request. */
   @JsonIgnore
   private boolean badRequest;
+  
+  /** Not found. */
+  @JsonIgnore
+  private boolean notFound;
 
   /** Forbidden . */
   @JsonIgnore

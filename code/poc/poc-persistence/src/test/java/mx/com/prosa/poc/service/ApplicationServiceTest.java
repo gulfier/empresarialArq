@@ -426,7 +426,299 @@ public class ApplicationServiceTest
     s2.setId( 3L );
     servers.add( s2 );
     applicationTO.setServers( servers );
-    this.applicationService.edit( applicationTO );
+    this.applicationService.edit( applicationTO, false );
+
+    applicationTO = this.applicationService.findByCode( code );
+
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+    LOG.info( gson.toJson( applicationTO ) );
+  }
+  
+  
+  @Test
+  public void testEdit_patch()
+  {
+    String code = UUID.randomUUID().toString();
+    ApplicationTO applicationTO = new ApplicationTO();
+    applicationTO.setCode( code );
+    applicationTO.setName( "Application Name" );
+    applicationTO.setComment( "Lorem ipsum dolor sit amet" );
+    applicationTO.setUser( "user@test.com" );
+    applicationTO.setSite( new BaseTO() );
+    applicationTO.getSite().setId( 1L );
+    applicationTO.setItService( new BaseTO() );
+    applicationTO.getItService().setId( 1L );
+    List<BaseTO> servers = new ArrayList<>();
+    BaseTO s1 = new BaseTO();
+    s1.setId( 1L );
+    servers.add( s1 );
+    BaseTO s2 = new BaseTO();
+    s2.setId( 2L );
+    servers.add( s2 );
+    applicationTO.setServers( servers );
+    this.applicationService.save( applicationTO );
+
+    applicationTO = this.applicationService.findByCode( code );
+    applicationTO.setUser( "user@test.com" );
+    code = UUID.randomUUID().toString();
+
+    applicationTO.setCode( code );
+    applicationTO.setComment( "qwerty" );
+    applicationTO.setName( "Other name" );
+    applicationTO.getSite().setId( 2L );
+    applicationTO.getItService().setId( 2L );
+    servers = new ArrayList<>();
+    s1 = new BaseTO();
+    s1.setId( 2L );
+    servers.add( s1 );
+    s2 = new BaseTO();
+    s2.setId( 3L );
+    servers.add( s2 );
+    applicationTO.setServers( servers );
+    this.applicationService.edit( applicationTO, true );
+
+    applicationTO = this.applicationService.findByCode( code );
+
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+    LOG.info( gson.toJson( applicationTO ) );
+  }
+  
+  
+  
+  @Test
+  public void testEdit_patchName()
+  {
+    String code = UUID.randomUUID().toString();
+    ApplicationTO applicationTO = new ApplicationTO();
+    applicationTO.setCode( code );
+    applicationTO.setName( "Application Name" );
+    applicationTO.setComment( "Lorem ipsum dolor sit amet" );
+    applicationTO.setUser( "user@test.com" );
+    applicationTO.setSite( new BaseTO() );
+    applicationTO.getSite().setId( 1L );
+    applicationTO.setItService( new BaseTO() );
+    applicationTO.getItService().setId( 1L );
+    List<BaseTO> servers = new ArrayList<>();
+    BaseTO s1 = new BaseTO();
+    s1.setId( 1L );
+    servers.add( s1 );
+    BaseTO s2 = new BaseTO();
+    s2.setId( 2L );
+    servers.add( s2 );
+    applicationTO.setServers( servers );
+    this.applicationService.save( applicationTO );
+
+    applicationTO = this.applicationService.findByCode( code );
+    
+    ApplicationTO app = new ApplicationTO();
+    app.setId( applicationTO.getId() ); 
+    app.setName( "new name" );
+    app.setUser( "user@test.com" );
+    this.applicationService.edit( app, true );
+
+    applicationTO = this.applicationService.findByCode( code );
+
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+    LOG.info( gson.toJson( applicationTO ) );
+  }
+  
+  
+  @Test
+  public void testEdit_patchCode()
+  {
+    String code = UUID.randomUUID().toString();
+    ApplicationTO applicationTO = new ApplicationTO();
+    applicationTO.setCode( code );
+    applicationTO.setName( "Application Name" );
+    applicationTO.setComment( "Lorem ipsum dolor sit amet" );
+    applicationTO.setUser( "user@test.com" );
+    applicationTO.setSite( new BaseTO() );
+    applicationTO.getSite().setId( 1L );
+    applicationTO.setItService( new BaseTO() );
+    applicationTO.getItService().setId( 1L );
+    List<BaseTO> servers = new ArrayList<>();
+    BaseTO s1 = new BaseTO();
+    s1.setId( 1L );
+    servers.add( s1 );
+    BaseTO s2 = new BaseTO();
+    s2.setId( 2L );
+    servers.add( s2 );
+    applicationTO.setServers( servers );
+    this.applicationService.save( applicationTO );
+
+    applicationTO = this.applicationService.findByCode( code );
+    code = UUID.randomUUID().toString();
+    
+    ApplicationTO app = new ApplicationTO();
+    app.setId( applicationTO.getId() ); 
+    app.setCode( code );
+    app.setUser( "user@test.com" );
+    this.applicationService.edit( app, true );
+
+    applicationTO = this.applicationService.findByCode( code );
+
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+    LOG.info( gson.toJson( applicationTO ) );
+  }
+  
+  
+  @Test
+  public void testEdit_patchComment()
+  {
+    String code = UUID.randomUUID().toString();
+    ApplicationTO applicationTO = new ApplicationTO();
+    applicationTO.setCode( code );
+    applicationTO.setName( "Application Name" );
+    applicationTO.setComment( "Lorem ipsum dolor sit amet" );
+    applicationTO.setUser( "user@test.com" );
+    applicationTO.setSite( new BaseTO() );
+    applicationTO.getSite().setId( 1L );
+    applicationTO.setItService( new BaseTO() );
+    applicationTO.getItService().setId( 1L );
+    List<BaseTO> servers = new ArrayList<>();
+    BaseTO s1 = new BaseTO();
+    s1.setId( 1L );
+    servers.add( s1 );
+    BaseTO s2 = new BaseTO();
+    s2.setId( 2L );
+    servers.add( s2 );
+    applicationTO.setServers( servers );
+    this.applicationService.save( applicationTO );
+
+    applicationTO = this.applicationService.findByCode( code );
+    
+    ApplicationTO app = new ApplicationTO();
+    app.setId( applicationTO.getId() ); 
+    app.setComment( "Nuevo comentario" );
+    app.setUser( "user@test.com" );
+    this.applicationService.edit( app, true );
+
+    applicationTO = this.applicationService.findByCode( code );
+
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+    LOG.info( gson.toJson( applicationTO ) );
+  }
+  
+  
+  @Test
+  public void testEdit_patchSite()
+  {
+    String code = UUID.randomUUID().toString();
+    ApplicationTO applicationTO = new ApplicationTO();
+    applicationTO.setCode( code );
+    applicationTO.setName( "Application Name" );
+    applicationTO.setComment( "Lorem ipsum dolor sit amet" );
+    applicationTO.setUser( "user@test.com" );
+    applicationTO.setSite( new BaseTO() );
+    applicationTO.getSite().setId( 1L );
+    applicationTO.setItService( new BaseTO() );
+    applicationTO.getItService().setId( 1L );
+    List<BaseTO> servers = new ArrayList<>();
+    BaseTO s1 = new BaseTO();
+    s1.setId( 1L );
+    servers.add( s1 );
+    BaseTO s2 = new BaseTO();
+    s2.setId( 2L );
+    servers.add( s2 );
+    applicationTO.setServers( servers );
+    this.applicationService.save( applicationTO );
+
+    applicationTO = this.applicationService.findByCode( code );
+    
+    ApplicationTO app = new ApplicationTO();
+    app.setId( applicationTO.getId() ); 
+    app.setUser( "user@test.com" );
+    app.setSite( new BaseTO() );
+    app.getSite().setId( 2L );
+    this.applicationService.edit( app, true );
+
+    applicationTO = this.applicationService.findByCode( code );
+
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+    LOG.info( gson.toJson( applicationTO ) );
+  }
+  
+  
+  @Test
+  public void testEdit_patchITService()
+  {
+    String code = UUID.randomUUID().toString();
+    ApplicationTO applicationTO = new ApplicationTO();
+    applicationTO.setCode( code );
+    applicationTO.setName( "Application Name" );
+    applicationTO.setComment( "Lorem ipsum dolor sit amet" );
+    applicationTO.setUser( "user@test.com" );
+    applicationTO.setSite( new BaseTO() );
+    applicationTO.getSite().setId( 1L );
+    applicationTO.setItService( new BaseTO() );
+    applicationTO.getItService().setId( 1L );
+    List<BaseTO> servers = new ArrayList<>();
+    BaseTO s1 = new BaseTO();
+    s1.setId( 1L );
+    servers.add( s1 );
+    BaseTO s2 = new BaseTO();
+    s2.setId( 2L );
+    servers.add( s2 );
+    applicationTO.setServers( servers );
+    this.applicationService.save( applicationTO );
+
+    applicationTO = this.applicationService.findByCode( code );
+    
+    ApplicationTO app = new ApplicationTO();
+    app.setId( applicationTO.getId() ); 
+    app.setUser( "user@test.com" );
+    app.setItService( new BaseTO() );
+    app.getItService().setId( 2L );
+    this.applicationService.edit( app, true );
+
+    applicationTO = this.applicationService.findByCode( code );
+
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+    LOG.info( gson.toJson( applicationTO ) );
+  }
+  
+  
+  @Test
+  public void testEdit_patchServer()
+  {
+    String code = UUID.randomUUID().toString();
+    ApplicationTO applicationTO = new ApplicationTO();
+    applicationTO.setCode( code );
+    applicationTO.setName( "Application Name" );
+    applicationTO.setComment( "Lorem ipsum dolor sit amet" );
+    applicationTO.setUser( "user@test.com" );
+    applicationTO.setSite( new BaseTO() );
+    applicationTO.getSite().setId( 1L );
+    applicationTO.setItService( new BaseTO() );
+    applicationTO.getItService().setId( 1L );
+    List<BaseTO> servers = new ArrayList<>();
+    BaseTO s1 = new BaseTO();
+    s1.setId( 1L );
+    servers.add( s1 );
+    BaseTO s2 = new BaseTO();
+    s2.setId( 2L );
+    servers.add( s2 );
+    applicationTO.setServers( servers );
+    this.applicationService.save( applicationTO );
+
+    applicationTO = this.applicationService.findByCode( code );
+    
+    ApplicationTO app = new ApplicationTO();
+    app.setId( applicationTO.getId() ); 
+    app.setUser( "user@test.com" );
+    app.setServers( new ArrayList<>() );
+    s1 = new BaseTO();
+    s1.setId( 1L );
+    app.getServers().add( s1 );
+    
+    this.applicationService.edit( app, true );
 
     applicationTO = this.applicationService.findByCode( code );
 
@@ -474,7 +766,7 @@ public class ApplicationServiceTest
     s2.setId( 3L );
     servers.add( s2 );
     applicationTO.setServers( servers );
-    this.applicationService.edit( applicationTO );
+    this.applicationService.edit( applicationTO, false );
 
   }
 

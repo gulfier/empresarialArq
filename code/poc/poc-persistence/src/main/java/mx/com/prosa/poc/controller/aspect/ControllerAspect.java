@@ -48,8 +48,11 @@ public class ControllerAspect
       LOG.error( e.getMessage(), e );
       if( e.getError().isBadRequest() )
       {
-        response = new ResponseEntity<>( createResponse( e.getMessage(), e.getError() ),
-            HttpStatus.BAD_REQUEST );
+        response = new ResponseEntity<>( createResponse( e.getMessage(), e.getError() ), HttpStatus.BAD_REQUEST );
+      }
+      else if( e.getError().isNotFound() )
+      {
+        response = new ResponseEntity<>( createResponse( e.getMessage(), e.getError() ), HttpStatus.NOT_FOUND );
       }
       else if( e.getError().isUnauthorized() )
       {

@@ -60,7 +60,7 @@ public class ApplicationServiceImpl implements ApplicationService
   public void save( ApplicationTO application )
   {
     BaseTOValidationUtil.validateSave( application );
-    validateApplicationSave( application );
+    validateApplicationSave( application, false );
     validateExistence( application );
 
     ApplicationDO entity = new ApplicationDO();
@@ -151,10 +151,10 @@ public class ApplicationServiceImpl implements ApplicationService
     }
   }
 
-  private void validateApplicationSave( ApplicationTO application )
+  private void validateApplicationSave( ApplicationTO application, boolean patch )
   {
 
-    if( application.getSite() == null || application.getSite().getId() == null )
+    if( !patch && (application.getSite() == null || application.getSite().getId() == null) )
     {
       BusinessException e = new BusinessException( "Datos incorrectos" );
       e.getError().setId( 400L );
@@ -163,7 +163,7 @@ public class ApplicationServiceImpl implements ApplicationService
       throw e;
     }
 
-    if( application.getItService() == null || application.getItService().getId() == null )
+    if( !patch && (application.getItService() == null || application.getItService().getId() == null) )
     {
       BusinessException e = new BusinessException( "Datos incorrectos" );
       e.getError().setId( 400L );
@@ -172,7 +172,7 @@ public class ApplicationServiceImpl implements ApplicationService
       throw e;
     }
 
-    if( CollectionUtils.isEmpty( application.getServers() ) )
+    if( !patch && (CollectionUtils.isEmpty( application.getServers() )) )
     {
       BusinessException e = new BusinessException( "Datos incorrectos" );
       e.getError().setId( 400L );
@@ -317,6 +317,10 @@ public class ApplicationServiceImpl implements ApplicationService
     {
       to = transform2TO( op.get() );
     }
+    else
+    {
+      throw SupplierBusinessException.APPLICATION_NOT_FOUND.get();
+    }
     return to;
   }
 
@@ -332,6 +336,10 @@ public class ApplicationServiceImpl implements ApplicationService
     {
       to = transform2TO( op.get() );
     }
+    else
+    {
+      throw SupplierBusinessException.APPLICATION_NOT_FOUND.get();
+    }
     return to;
   }
 
@@ -339,64 +347,73 @@ public class ApplicationServiceImpl implements ApplicationService
    * {@inheritDoc}
    */
   @Override
-  public void edit( ApplicationTO application )
+  public void edit( ApplicationTO application, boolean patch )
   {
-    validateEdit( application );
+    validateEdit( application, patch );
     ApplicationDO entity = this.applicationRepository.findById( application.getId() )
         .orElseThrow( SupplierBusinessException.APPLICATION_NOT_FOUND );
 
-    if( !entity.getCode().equals( application.getCode().trim() ) )
-    {
-      validateExistence( application );
-      entity.setCode( application.getCode().trim() );
-    }
-    entity.setName( application.getName().trim() );
-    entity.setComment( application.getComment() );
+    editApplicationCode( application, patch, entity );
+    editApplicationName( application, patch, entity );
+    editApplicationComment( application, patch, entity );
+
     entity.setModified( Calendar.getInstance().getTime() );
     entity.setUserModified( application.getUser() );
 
-    editItService( application, entity );
-    editSite( application, entity );
+    editItService( application, entity, patch );
+    editSite( application, entity, patch );
 
     List<Long> idServers = new ArrayList<>();
     entity.getServers().stream().forEach( s -> {
       idServers.add( s.getId() );
     } );
 
-    List<Long> idServersApp = new ArrayList<>();
-    serversLazyInit( application );
-    application.getServers().stream().forEach( s -> {
-      idServersApp.add( s.getId() );
-    } );
-
-    List<Long> removeServers = new ArrayList<>( CollectionUtils.removeAll( idServers, idServersApp ) );
-    List<Long> addServers = new ArrayList<>( CollectionUtils.removeAll( idServersApp, idServers ) );
-
-    removeServers.stream().forEach( serverId -> {
-      ServerDO server = this.serverRepository.findById( serverId )
-          .orElseThrow( SupplierBusinessException.SERVER_NOT_FOUND );
-      entity.getServers().remove( server );
-
-      server.getApplications().remove( entity );
-      this.serverRepository.save( server );
-    } );
-
-    addServers.stream().forEach( serverId -> {
-      ServerDO server = this.serverRepository.findById( serverId )
-          .orElseThrow( SupplierBusinessException.SERVER_NOT_FOUND );
-      server.getApplications().add( entity );
-      this.serverRepository.save( server );
-
-      entity.getServers().add( server );
-    } );
+    editApplicationServers( application, entity, idServers, patch );
 
     this.applicationRepository.save( entity );
     this.applicationRepository.flush();
   }
 
-  private void editSite( ApplicationTO application, ApplicationDO entity )
+  private void editApplicationCode( ApplicationTO application, boolean patch, ApplicationDO entity )
   {
-    if( !entity.getSite().getId().equals( application.getSite().getId() ) )
+    if( ((patch && application.getCode() != null) || !patch)
+        && !entity.getCode().equals( application.getCode().trim() ) )
+    {
+      validateExistence( application );
+      entity.setCode( application.getCode().trim() );
+    }
+  }
+
+  private void editApplicationName( ApplicationTO application, boolean patch, ApplicationDO entity )
+  {
+    if( (patch && application.getName() != null) || !patch )
+    {
+      entity.setName( application.getName() );
+    }
+  }
+
+  private void editApplicationComment( ApplicationTO application, boolean patch, ApplicationDO entity )
+  {
+    if( (patch && application.getComment() != null) || !patch )
+    {
+      entity.setComment( application.getComment() );
+    }
+  }
+
+  private void editSite( ApplicationTO application, ApplicationDO entity, boolean patch )
+  {
+    boolean edit;
+    if( patch )
+    {
+      edit = application.getSite() != null && application.getSite().getId() != null
+          && !entity.getSite().getId().equals( application.getSite().getId() );
+    }
+    else
+    {
+      edit = !entity.getSite().getId().equals( application.getSite().getId() );
+    }
+
+    if( edit )
     {
       entity.getSite().getApplications().remove( entity );
       this.siteRepository.save( entity.getSite() );
@@ -413,9 +430,21 @@ public class ApplicationServiceImpl implements ApplicationService
     }
   }
 
-  private void editItService( ApplicationTO application, ApplicationDO entity )
+  private void editItService( ApplicationTO application, ApplicationDO entity, boolean patch )
   {
-    if( !entity.getItService().getId().equals( application.getItService().getId() ) )
+
+    boolean edit;
+    if( patch )
+    {
+      edit = application.getItService() != null && application.getItService().getId() != null
+          && !entity.getItService().getId().equals( application.getItService().getId() );
+    }
+    else
+    {
+      edit = !entity.getItService().getId().equals( application.getItService().getId() );
+    }
+
+    if( edit )
     {
       entity.getItService().getApplications().remove( entity );
       this.itServiceRepository.save( entity.getItService() );
@@ -431,10 +460,55 @@ public class ApplicationServiceImpl implements ApplicationService
     }
   }
 
-  private void validateEdit( ApplicationTO application )
+  private void editApplicationServers( ApplicationTO application, ApplicationDO entity, List<Long> idServers,
+      boolean patch )
   {
-    BaseTOValidationUtil.validateEdit( application );
-    validateApplicationSave( application );
+    boolean edit = !patch || (patch && CollectionUtils.isNotEmpty( idServers ));
+
+    if( edit )
+    {
+      List<Long> idServersApp = new ArrayList<>();
+      serversLazyInit( application );
+      application.getServers().stream().forEach( s -> {
+        idServersApp.add( s.getId() );
+      } );
+
+      List<Long> removeServers = new ArrayList<>( CollectionUtils.removeAll( idServers, idServersApp ) );
+      List<Long> addServers = new ArrayList<>( CollectionUtils.removeAll( idServersApp, idServers ) );
+
+      removeServers.stream().forEach( serverId -> {
+        ServerDO server = this.serverRepository.findById( serverId )
+            .orElseThrow( SupplierBusinessException.SERVER_NOT_FOUND );
+        entity.getServers().remove( server );
+
+        server.getApplications().remove( entity );
+        this.serverRepository.save( server );
+      } );
+
+      addServers.stream().forEach( serverId -> {
+        ServerDO server = this.serverRepository.findById( serverId )
+            .orElseThrow( SupplierBusinessException.SERVER_NOT_FOUND );
+        server.getApplications().add( entity );
+        this.serverRepository.save( server );
+
+        entity.getServers().add( server );
+      } );
+    }
+
+  }
+
+  private void validateEdit( ApplicationTO application, boolean patch )
+  {
+    if( patch )
+    {
+      BaseTOValidationUtil.validateIdNotNull( application );
+    }
+    else
+    {
+      BaseTOValidationUtil.validateEdit( application );
+    }
+
+    validateApplicationSave( application, patch );
   }
 
   /**

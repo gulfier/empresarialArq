@@ -55,8 +55,9 @@ public interface ServerService
    * Edita un servidor
    * 
    * @param server
+   * @param patch 
    */
-  void edit( ServerTO server );
+  void edit( ServerTO server, boolean patch );
 
   /**
    * Elimina un servidor

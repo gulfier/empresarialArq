@@ -194,6 +194,10 @@ public class SiteServiceImpl implements SiteService
     {
       to = transform2TO( op.get() );
     }
+    else
+    {
+      throw SupplierBusinessException.SITE_NOT_FOUND.get();
+    }
     return to;
   }
 
@@ -208,6 +212,10 @@ public class SiteServiceImpl implements SiteService
     if( op.isPresent() )
     {
       to = transform2TO( op.get() );
+    }
+    else
+    {
+      throw SupplierBusinessException.SITE_NOT_FOUND.get();
     }
     return to;
   }

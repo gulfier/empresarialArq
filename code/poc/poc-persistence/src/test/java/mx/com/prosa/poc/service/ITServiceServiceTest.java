@@ -183,7 +183,7 @@ public class ITServiceServiceTest
     response.setName( "qwerty2" );
     response.setCode( code );
     
-    itServiceService.edit( response );
+    itServiceService.edit( response, false );
     
     response = itServiceService.findById(siteTO.getId() );
     
@@ -193,6 +193,65 @@ public class ITServiceServiceTest
 
     LOG.info( gson.toJson( response ) );
   }
+  
+  @Test
+  public void testEdit_patchName()
+  {
+    String code = UUID.randomUUID().toString();
+    ITServiceTO siteTO = new ITServiceTO();
+    siteTO.setUser( "user@example.com" );
+    siteTO.setName( "qwerty" );
+    siteTO.setCode( code );
+    
+    itServiceService.save( siteTO );
+    
+    code = UUID.randomUUID().toString();
+    ITServiceTO response = itServiceService.findById(siteTO.getId() );
+    Assert.assertNotNull( response );
+    response.setUser( "user2@example.com" );
+    response.setName( "qwerty2" );
+    
+    itServiceService.edit( response, true );
+    
+    response = itServiceService.findById(siteTO.getId() );
+    
+    Assert.assertNotNull( response );
+
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+    LOG.info( gson.toJson( response ) );
+  }
+
+  
+  
+  @Test
+  public void testEdit_patchCode()
+  {
+    String code = UUID.randomUUID().toString();
+    ITServiceTO siteTO = new ITServiceTO();
+    siteTO.setUser( "user@example.com" );
+    siteTO.setName( "qwerty" );
+    siteTO.setCode( code );
+    
+    itServiceService.save( siteTO );
+    
+    code = UUID.randomUUID().toString();
+    ITServiceTO response = itServiceService.findById(siteTO.getId() );
+    Assert.assertNotNull( response );
+    response.setUser( "user2@example.com" );
+    response.setCode( code );
+    
+    itServiceService.edit( response, true );
+    
+    response = itServiceService.findById(siteTO.getId() );
+    
+    Assert.assertNotNull( response );
+
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+    LOG.info( gson.toJson( response ) );
+  }
+
 
   @Test
   public void testDelete()

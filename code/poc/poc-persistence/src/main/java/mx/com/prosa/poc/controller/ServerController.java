@@ -15,58 +15,58 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import mx.com.prosa.poc.controller.aspect.BusinessExceptionInterceptor;
-import mx.com.prosa.poc.service.SiteService;
+import mx.com.prosa.poc.service.ServerService;
 import mx.com.prosa.poc.to.BaseTO;
 import mx.com.prosa.poc.to.PagingRequestTO;
 import mx.com.prosa.poc.to.PagingResponseTO;
 import mx.com.prosa.poc.to.Response;
-import mx.com.prosa.poc.to.SiteTO;
+import mx.com.prosa.poc.to.ServerTO;
 
 /**
- * Controlador para el CRUD de Sitios
+ * Controlador para el CRUD de Servidores
  * 
  * @author Guillermo Segura Olivera <guillermo.segura@axity.com>
  */
 @RestController
-@RequestMapping("/v1/sites")
+@RequestMapping("/v1/servers")
 @BusinessExceptionInterceptor
-public class SiteController extends AbstractBaseController
+public class ServerController extends AbstractBaseController
 {
 
   @Autowired
-  private SiteService siteService;
+  private ServerService serverService;
 
   private static final String QUERY_PARAM_NAME = "name";
   private static final String QUERY_PARAM_CODE = "code";
   private static final String[] QUERY_PARAMS = new String[] { QUERY_PARAM_NAME, QUERY_PARAM_CODE };
 
   /**
-   * Obtiene la consulta de los sitios
+   * Obtiene la consulta de los servidores
    * 
    * @return
    */
   // TODO agregar informacion de swagger
   @GetMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<Response<PagingResponseTO<SiteTO>>> findAll()
+  public ResponseEntity<Response<PagingResponseTO<ServerTO>>> findAll()
   {
-    PagingRequestTO<SiteTO> request = new PagingRequestTO<>();
+    PagingRequestTO<ServerTO> request = new PagingRequestTO<>();
     super.processPaging( request );
     request.setIp( super.getIpAddress() );
     request.setUser( super.getUser() );
 
-    PagingResponseTO<SiteTO> pagingResponseTO = null;
+    PagingResponseTO<ServerTO> pagingResponseTO = null;
 
     if( isQuery() )
     {
       request.setSearch( getSearch() );
-      pagingResponseTO = siteService.findByExample( request );
+      pagingResponseTO = serverService.findByExample( request );
     }
     else
     {
-      pagingResponseTO = siteService.findAll( request );
+      pagingResponseTO = serverService.findAll( request );
     }
 
-    Response<PagingResponseTO<SiteTO>> body = new Response<>();
+    Response<PagingResponseTO<ServerTO>> body = new Response<>();
     body.setResponse( pagingResponseTO );
     body.setCode( HttpStatus.OK.value() );
     body.setMessage( HttpStatus.OK.name() );
@@ -74,20 +74,20 @@ public class SiteController extends AbstractBaseController
   }
 
   /**
-   * Obtiene un sitio por id
+   * Obtiene un servidor por id
    * 
    * @param id
    * @return
    */
   // TODO agregar informacion de swagger
   @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<Response<SiteTO>> getById( @PathVariable(value = "id") Long id )
+  public ResponseEntity<Response<ServerTO>> getById( @PathVariable(value = "id") Long id )
   {
     super.validate();
 
-    SiteTO site = this.siteService.findById( id );
+    ServerTO site = this.serverService.findById( id );
 
-    Response<SiteTO> body = new Response<>();
+    Response<ServerTO> body = new Response<>();
     body.setResponse( site );
     body.setCode( HttpStatus.OK.value() );
     body.setMessage( HttpStatus.OK.name() );
@@ -96,22 +96,22 @@ public class SiteController extends AbstractBaseController
   }
 
   /**
-   * Obtiene un sitio por codigo
+   * Obtiene un servidor por codigo
    * 
    * @param code
    * @return
    */
   // TODO agregar informacion de swagger
   @GetMapping(path = "/code/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<Response<SiteTO>> getByCode( @PathVariable(value = "code") String code )
+  public ResponseEntity<Response<ServerTO>> getByCode( @PathVariable(value = "code") String code )
   {
     super.validate();
 
-    SiteTO site = this.siteService.findByCode( code );
+    ServerTO server = this.serverService.findByCode( code );
 
-    Response<SiteTO> body = new Response<>();
+    Response<ServerTO> body = new Response<>();
 
-    body.setResponse( site );
+    body.setResponse( server );
     body.setCode( HttpStatus.OK.value() );
     body.setMessage( HttpStatus.OK.name() );
 
@@ -119,21 +119,21 @@ public class SiteController extends AbstractBaseController
   }
 
   /**
-   * Guarda un sitio
+   * Guarda un servidor
    * 
    * @param request
    * @return
    */
   // TODO agregar informacion de swagger
   @PostMapping(path = "", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<Response<SiteTO>> save( @RequestBody SiteTO request )
+  public ResponseEntity<Response<ServerTO>> save( @RequestBody ServerTO request )
   {
     request.setIp( super.getIpAddress() );
     request.setUser( super.getUser() );
 
-    this.siteService.save( request );
+    this.serverService.save( request );
 
-    Response<SiteTO> response = new Response<>();
+    Response<ServerTO> response = new Response<>();
     response.setCode( HttpStatus.CREATED.value() );
     response.setMessage( HttpStatus.CREATED.name() );
     response.setResponse( request );
@@ -142,7 +142,7 @@ public class SiteController extends AbstractBaseController
   }
 
   /**
-   * Edita un sitio
+   * Edita un servidor
    * 
    * @param request
    * @param id
@@ -150,15 +150,15 @@ public class SiteController extends AbstractBaseController
    */
   // TODO agregar informacion de swagger
   @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<Response<SiteTO>> edit( @RequestBody SiteTO request, @PathVariable(value = "id") Long id )
+  public ResponseEntity<Response<ServerTO>> edit( @RequestBody ServerTO request, @PathVariable(value = "id") Long id )
   {
     request.setIp( super.getIpAddress() );
     request.setUser( super.getUser() );
     request.setId( id );
 
-    this.siteService.edit( request, false );
+    this.serverService.edit( request, false );
 
-    Response<SiteTO> response = new Response<>();
+    Response<ServerTO> response = new Response<>();
     response.setCode( HttpStatus.OK.value() );
     response.setMessage( HttpStatus.OK.name() );
     response.setResponse( request );
@@ -167,7 +167,7 @@ public class SiteController extends AbstractBaseController
   }
 
   /**
-   * Edita un sitio parcialmente
+   * Edita un servidor parcialmente
    * 
    * @param request
    * @param id
@@ -175,15 +175,16 @@ public class SiteController extends AbstractBaseController
    */
   // TODO agregar informacion de swagger
   @PatchMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<Response<SiteTO>> editPatch( @RequestBody SiteTO request, @PathVariable(value = "id") Long id )
+  public ResponseEntity<Response<ServerTO>> editPatch( @RequestBody ServerTO request,
+      @PathVariable(value = "id") Long id )
   {
     request.setIp( super.getIpAddress() );
     request.setUser( super.getUser() );
     request.setId( id );
 
-    this.siteService.edit( request, true );
+    this.serverService.edit( request, true );
 
-    Response<SiteTO> response = new Response<>();
+    Response<ServerTO> response = new Response<>();
     response.setCode( HttpStatus.OK.value() );
     response.setMessage( HttpStatus.OK.name() );
     response.setResponse( request );
@@ -192,7 +193,7 @@ public class SiteController extends AbstractBaseController
   }
 
   /**
-   * Elimina un sitio
+   * Elimina un servidor
    * 
    * @param id
    * @return
@@ -202,12 +203,12 @@ public class SiteController extends AbstractBaseController
   public ResponseEntity<Response<BaseTO>> delete( @PathVariable(value = "id") Long id )
   {
 
-    SiteTO request = new SiteTO();
+    ServerTO request = new ServerTO();
     request.setIp( super.getIpAddress() );
     request.setUser( super.getUser() );
     request.setId( id );
 
-    this.siteService.delete( request );
+    this.serverService.delete( request );
 
     Response<BaseTO> response = new Response<>();
     response.setCode( HttpStatus.OK.value() );
@@ -216,9 +217,9 @@ public class SiteController extends AbstractBaseController
     return new ResponseEntity<>( response, HttpStatus.OK );
   }
 
-  private SiteTO getSearch()
+  private ServerTO getSearch()
   {
-    SiteTO search = new SiteTO();
+    ServerTO search = new ServerTO();
     if( parameterExists( QUERY_PARAM_NAME ) )
     {
       search.setName( getParameter( QUERY_PARAM_NAME ) );

@@ -194,6 +194,10 @@ public class ITServiceServiceImpl implements ITServiceService
     {
       to = transform2TO( op.get() );
     }
+    else
+    {
+      throw SupplierBusinessException.IT_SERVICE_NOT_FOUND.get();
+    }
     return to;
   }
 
@@ -209,6 +213,10 @@ public class ITServiceServiceImpl implements ITServiceService
     {
       to = transform2TO( op.get() );
     }
+    else
+    {
+      throw SupplierBusinessException.IT_SERVICE_NOT_FOUND.get();
+    }
     return to;
   }
 
@@ -216,19 +224,30 @@ public class ITServiceServiceImpl implements ITServiceService
    * {@inheritDoc}
    */
   @Override
-  public void edit( ITServiceTO itService )
+  public void edit( ITServiceTO itService, boolean patch )
   {
-    BaseTOValidationUtil.validateEdit( itService );
+    if( patch )
+    {
+      BaseTOValidationUtil.validateIdNotNull( itService );
+    }
+    else
+    {
+      BaseTOValidationUtil.validateEdit( itService );
+    }
     ITServiceDO entity = this.itServiceRepository.findById( itService.getId() )
         .orElseThrow( SupplierBusinessException.IT_SERVICE_NOT_FOUND );
 
-    if( !entity.getCode().equals( itService.getCode().trim() ) )
+    if( ((patch && itService.getCode() != null) || !patch) && !entity.getCode().equals( itService.getCode().trim() ) )
     {
       validateExistence( itService );
       entity.setCode( itService.getCode().trim() );
     }
 
-    entity.setName( itService.getName() );
+    if( (patch && itService.getName() != null) || !patch )
+    {
+      entity.setName( itService.getName() );
+    }
+
     entity.setModified( Calendar.getInstance().getTime() );
     entity.setUserModified( itService.getUser() );
 

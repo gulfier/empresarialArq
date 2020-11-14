@@ -54,8 +54,9 @@ public interface ITServiceService
    * Edita un servicio de TI
    * 
    * @param itService
+   * @param patch 
    */
-  void edit( ITServiceTO itService );
+  void edit( ITServiceTO itService, boolean patch );
 
   /**
    * Elimina un servicio de TI

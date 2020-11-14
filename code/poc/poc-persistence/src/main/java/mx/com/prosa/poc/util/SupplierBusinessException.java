@@ -26,32 +26,32 @@ public final class SupplierBusinessException
 
   public static final Supplier<BusinessException> APPLICATION_NOT_FOUND = () -> {
     BusinessException e = new BusinessException( APPLICATION_NOT_FOUND_MESSAGE );
-    e.getError().setId( 500L );
-    e.getError().setBadRequest( false );
+    e.getError().setId( 404L );
+    e.getError().setNotFound( true );
     e.getError().setDescription( APPLICATION_NOT_FOUND_MESSAGE );
     return e;
   };
 
   public static final Supplier<BusinessException> IT_SERVICE_NOT_FOUND = () -> {
     BusinessException e = new BusinessException( IT_SERVICE_NOT_FOUND_MESSAGE );
-    e.getError().setId( 500L );
-    e.getError().setBadRequest( false );
+    e.getError().setId( 404L );
+    e.getError().setNotFound( true );
     e.getError().setDescription( IT_SERVICE_NOT_FOUND_MESSAGE );
     return e;
   };
 
   public static final Supplier<BusinessException> SERVER_NOT_FOUND = () -> {
     BusinessException e = new BusinessException( SERVER_NOT_FOUND_MESSAGE );
-    e.getError().setId( 500L );
-    e.getError().setBadRequest( false );
+    e.getError().setId( 404L );
+    e.getError().setNotFound( true );
     e.getError().setDescription( SERVER_NOT_FOUND_MESSAGE );
     return e;
   };
 
   public static final Supplier<BusinessException> SITE_NOT_FOUND = () -> {
     BusinessException e = new BusinessException( SITE_NOT_FOUND_MESSAGE );
-    e.getError().setId( 500L );
-    e.getError().setBadRequest( false );
+    e.getError().setId( 404L );
+    e.getError().setNotFound( true );
     e.getError().setDescription( SITE_NOT_FOUND_MESSAGE );
     return e;
   };

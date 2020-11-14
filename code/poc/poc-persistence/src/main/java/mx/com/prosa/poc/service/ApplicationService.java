@@ -55,8 +55,9 @@ public interface ApplicationService
    * Edita una aplicacion
    * 
    * @param application
+   * @param patch 
    */
-  void edit( ApplicationTO application );
+  void edit( ApplicationTO application, boolean patch );
 
   /**
    * Elimina una aplicacion

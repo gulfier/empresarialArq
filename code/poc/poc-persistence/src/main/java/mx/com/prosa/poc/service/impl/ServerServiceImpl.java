@@ -185,6 +185,10 @@ public class ServerServiceImpl implements ServerService
     {
       to = transform2TO( op.get() );
     }
+    else
+    {
+      throw SupplierBusinessException.SERVER_NOT_FOUND.get();
+    }
     return to;
   }
 
@@ -200,6 +204,10 @@ public class ServerServiceImpl implements ServerService
     {
       to = transform2TO( op.get() );
     }
+    else
+    {
+      throw SupplierBusinessException.SERVER_NOT_FOUND.get();
+    }
     return to;
   }
 
@@ -207,19 +215,30 @@ public class ServerServiceImpl implements ServerService
    * {@inheritDoc}
    */
   @Override
-  public void edit( ServerTO server )
+  public void edit( ServerTO server, boolean patch )
   {
-    BaseTOValidationUtil.validateEdit( server );
+    if( patch )
+    {
+      BaseTOValidationUtil.validateIdNotNull( server );
+    }
+    else
+    {
+      BaseTOValidationUtil.validateEdit( server );
+    }
     ServerDO entity = this.serverRepository.findById( server.getId() )
         .orElseThrow( SupplierBusinessException.IT_SERVICE_NOT_FOUND );
 
-    if( !entity.getCode().equals( server.getCode().trim() ) )
+    if( ((patch && server.getCode() != null) || !patch) && !entity.getCode().equals( server.getCode().trim() ) )
     {
       validateExistence( server );
       entity.setCode( server.getCode().trim() );
     }
 
-    entity.setName( server.getName() );
+    if( (patch && server.getName() != null) || !patch )
+    {
+      entity.setName( server.getName() );
+    }
+
     entity.setModified( Calendar.getInstance().getTime() );
     entity.setUserModified( server.getUser() );
 
