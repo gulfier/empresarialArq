@@ -149,8 +149,7 @@ public class ApplicationServiceTest
     LOG.info( gson.toJson( response ) );
 
   }
-  
-  
+
   @Test
   public void testFindByExample_itServiceId()
   {
@@ -158,7 +157,7 @@ public class ApplicationServiceTest
     PagingRequestTO<ApplicationTO> request = new PagingRequestTO<>();
     ApplicationTO search = new ApplicationTO();
 
-    search.setItService(  new BaseTO() );
+    search.setItService( new BaseTO() );
     search.getItService().setId( 1L );
     request.setSearch( search );
 
@@ -203,12 +202,10 @@ public class ApplicationServiceTest
     LOG.info( gson.toJson( response ) );
   }
 
-  @Test
+  @Test(expected = BusinessException.class)
   public void testFindById_notExists()
   {
-    ApplicationTO response = this.applicationService.findById( 9999L );
-
-    Assert.assertNull( response );
+    this.applicationService.findById( 9999L );
   }
 
   @Test
@@ -223,12 +220,10 @@ public class ApplicationServiceTest
     LOG.info( gson.toJson( response ) );
   }
 
-  @Test
+  @Test(expected = BusinessException.class)
   public void testFindByCode_notExists()
   {
-    ApplicationTO response = this.applicationService.findByCode( "qwertyuiop" );
-
-    Assert.assertNull( response );
+    this.applicationService.findByCode( "qwertyuiop" );
   }
 
   @Test
@@ -434,8 +429,7 @@ public class ApplicationServiceTest
 
     LOG.info( gson.toJson( applicationTO ) );
   }
-  
-  
+
   @Test
   public void testEdit_patch()
   {
@@ -484,9 +478,7 @@ public class ApplicationServiceTest
 
     LOG.info( gson.toJson( applicationTO ) );
   }
-  
-  
-  
+
   @Test
   public void testEdit_patchName()
   {
@@ -511,9 +503,9 @@ public class ApplicationServiceTest
     this.applicationService.save( applicationTO );
 
     applicationTO = this.applicationService.findByCode( code );
-    
+
     ApplicationTO app = new ApplicationTO();
-    app.setId( applicationTO.getId() ); 
+    app.setId( applicationTO.getId() );
     app.setName( "new name" );
     app.setUser( "user@test.com" );
     this.applicationService.edit( app, true );
@@ -524,8 +516,7 @@ public class ApplicationServiceTest
 
     LOG.info( gson.toJson( applicationTO ) );
   }
-  
-  
+
   @Test
   public void testEdit_patchCode()
   {
@@ -551,9 +542,9 @@ public class ApplicationServiceTest
 
     applicationTO = this.applicationService.findByCode( code );
     code = UUID.randomUUID().toString();
-    
+
     ApplicationTO app = new ApplicationTO();
-    app.setId( applicationTO.getId() ); 
+    app.setId( applicationTO.getId() );
     app.setCode( code );
     app.setUser( "user@test.com" );
     this.applicationService.edit( app, true );
@@ -564,8 +555,7 @@ public class ApplicationServiceTest
 
     LOG.info( gson.toJson( applicationTO ) );
   }
-  
-  
+
   @Test
   public void testEdit_patchComment()
   {
@@ -590,9 +580,9 @@ public class ApplicationServiceTest
     this.applicationService.save( applicationTO );
 
     applicationTO = this.applicationService.findByCode( code );
-    
+
     ApplicationTO app = new ApplicationTO();
-    app.setId( applicationTO.getId() ); 
+    app.setId( applicationTO.getId() );
     app.setComment( "Nuevo comentario" );
     app.setUser( "user@test.com" );
     this.applicationService.edit( app, true );
@@ -603,8 +593,7 @@ public class ApplicationServiceTest
 
     LOG.info( gson.toJson( applicationTO ) );
   }
-  
-  
+
   @Test
   public void testEdit_patchSite()
   {
@@ -629,9 +618,9 @@ public class ApplicationServiceTest
     this.applicationService.save( applicationTO );
 
     applicationTO = this.applicationService.findByCode( code );
-    
+
     ApplicationTO app = new ApplicationTO();
-    app.setId( applicationTO.getId() ); 
+    app.setId( applicationTO.getId() );
     app.setUser( "user@test.com" );
     app.setSite( new BaseTO() );
     app.getSite().setId( 2L );
@@ -643,8 +632,7 @@ public class ApplicationServiceTest
 
     LOG.info( gson.toJson( applicationTO ) );
   }
-  
-  
+
   @Test
   public void testEdit_patchITService()
   {
@@ -669,9 +657,9 @@ public class ApplicationServiceTest
     this.applicationService.save( applicationTO );
 
     applicationTO = this.applicationService.findByCode( code );
-    
+
     ApplicationTO app = new ApplicationTO();
-    app.setId( applicationTO.getId() ); 
+    app.setId( applicationTO.getId() );
     app.setUser( "user@test.com" );
     app.setItService( new BaseTO() );
     app.getItService().setId( 2L );
@@ -683,8 +671,7 @@ public class ApplicationServiceTest
 
     LOG.info( gson.toJson( applicationTO ) );
   }
-  
-  
+
   @Test
   public void testEdit_patchServer()
   {
@@ -709,15 +696,15 @@ public class ApplicationServiceTest
     this.applicationService.save( applicationTO );
 
     applicationTO = this.applicationService.findByCode( code );
-    
+
     ApplicationTO app = new ApplicationTO();
-    app.setId( applicationTO.getId() ); 
+    app.setId( applicationTO.getId() );
     app.setUser( "user@test.com" );
     app.setServers( new ArrayList<>() );
     s1 = new BaseTO();
     s1.setId( 1L );
     app.getServers().add( s1 );
-    
+
     this.applicationService.edit( app, true );
 
     applicationTO = this.applicationService.findByCode( code );
@@ -810,9 +797,6 @@ public class ApplicationServiceTest
     applicationTO.setServers( servers );
     this.applicationService.delete( applicationTO );
 
-    applicationTO = this.applicationService.findByCode( code );
-
-    Assert.assertNull( applicationTO );
   }
 
   @Test(expected = BusinessException.class)

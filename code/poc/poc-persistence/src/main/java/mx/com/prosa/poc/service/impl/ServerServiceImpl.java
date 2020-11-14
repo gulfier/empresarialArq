@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -61,6 +62,7 @@ public class ServerServiceImpl implements ServerService
     entity.setUserModified( server.getUser() );
     this.serverRepository.save( entity );
     this.serverRepository.flush();
+    server.setId( entity.getId() );
 
   }
 
@@ -114,13 +116,17 @@ public class ServerServiceImpl implements ServerService
     serverTO.setCode( entity.getCode() );
     serverTO.setName( entity.getName() );
     serverTO.setApplications( new ArrayList<>() );
-    entity.getApplications().stream().forEach( app -> {
-      BaseTO applicationTO = new BaseTO();
-      applicationTO.setId( app.getId() );
-      applicationTO.setCode( app.getCode() );
-      applicationTO.setName( app.getName() );
-      serverTO.getApplications().add( applicationTO );
-    } );
+    if( CollectionUtils.isNotEmpty( entity.getApplications() ) )
+    {
+      entity.getApplications().stream().forEach( app -> {
+        BaseTO applicationTO = new BaseTO();
+        applicationTO.setId( app.getId() );
+        applicationTO.setCode( app.getCode() );
+        applicationTO.setName( app.getName() );
+        serverTO.getApplications().add( applicationTO );
+      } );
+    }
+
     return serverTO;
   }
 

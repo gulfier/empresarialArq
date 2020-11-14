@@ -38,16 +38,16 @@ public class SiteServiceTest
     siteTO.setUser( "user@example.com" );
     siteTO.setName( "qwerty" );
     siteTO.setCode( code );
-    
+
     siteService.save( siteTO );
-    
-    SiteTO response = siteService.findById(siteTO.getId() );
+
+    SiteTO response = siteService.findById( siteTO.getId() );
     Assert.assertNotNull( response );
 
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     LOG.info( gson.toJson( response ) );
-    
+
   }
 
   @Test
@@ -174,27 +174,27 @@ public class SiteServiceTest
     siteTO.setUser( "user@example.com" );
     siteTO.setName( "qwerty" );
     siteTO.setCode( code );
-    
+
     siteService.save( siteTO );
-    
+
     code = UUID.randomUUID().toString();
-    SiteTO response = siteService.findById(siteTO.getId() );
+    SiteTO response = siteService.findById( siteTO.getId() );
     Assert.assertNotNull( response );
     response.setUser( "user2@example.com" );
     response.setName( "qwerty2" );
     response.setCode( code );
-    
+
     siteService.edit( response, false );
-    
-    response = siteService.findById(siteTO.getId() );
-    
+
+    response = siteService.findById( siteTO.getId() );
+
     Assert.assertNotNull( response );
 
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     LOG.info( gson.toJson( response ) );
   }
-  
+
   @Test
   public void testEdit_patchCode()
   {
@@ -203,26 +203,26 @@ public class SiteServiceTest
     siteTO.setUser( "user@example.com" );
     siteTO.setName( "qwerty" );
     siteTO.setCode( code );
-    
+
     siteService.save( siteTO );
-    
+
     code = UUID.randomUUID().toString();
-    SiteTO response = siteService.findById(siteTO.getId() );
+    SiteTO response = siteService.findById( siteTO.getId() );
     Assert.assertNotNull( response );
     response.setUser( "user2@example.com" );
     response.setCode( code );
-    
+
     siteService.edit( response, true );
-    
-    response = siteService.findById(siteTO.getId() );
-    
+
+    response = siteService.findById( siteTO.getId() );
+
     Assert.assertNotNull( response );
 
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     LOG.info( gson.toJson( response ) );
   }
-  
+
   @Test
   public void testEdit_patchName()
   {
@@ -231,19 +231,19 @@ public class SiteServiceTest
     siteTO.setUser( "user@example.com" );
     siteTO.setName( "qwerty" );
     siteTO.setCode( code );
-    
+
     siteService.save( siteTO );
-    
+
     code = UUID.randomUUID().toString();
-    SiteTO response = siteService.findById(siteTO.getId() );
+    SiteTO response = siteService.findById( siteTO.getId() );
     Assert.assertNotNull( response );
     response.setUser( "user2@example.com" );
     response.setName( "qwerty2" );
-    
+
     siteService.edit( response, true );
-    
-    response = siteService.findById(siteTO.getId() );
-    
+
+    response = siteService.findById( siteTO.getId() );
+
     Assert.assertNotNull( response );
 
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -259,25 +259,21 @@ public class SiteServiceTest
     siteTO.setUser( "user@example.com" );
     siteTO.setName( "qwerty" );
     siteTO.setCode( code );
-    
+
     siteService.save( siteTO );
-    
-    Long id = siteTO.getId();
+
     siteService.delete( siteTO );
-    
-    SiteTO response = siteService.findById(id );
-    Assert.assertNull( response );
+
   }
-  
-  
-  @Test(expected =  BusinessException.class)
+
+  @Test(expected = BusinessException.class)
   public void testDelete_withApplications()
   {
     SiteTO siteTO = new SiteTO();
     siteTO.setUser( "user@example.com" );
     siteTO.setId( 1L );
-    
-    siteService.delete( siteTO ); 
+
+    siteService.delete( siteTO );
   }
 
 }

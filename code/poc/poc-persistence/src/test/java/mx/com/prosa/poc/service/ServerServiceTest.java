@@ -16,43 +16,44 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import mx.com.prosa.poc.to.BusinessException;
-import mx.com.prosa.poc.to.ITServiceTO;
 import mx.com.prosa.poc.to.PagingRequestTO;
 import mx.com.prosa.poc.to.PagingResponseTO;
+import mx.com.prosa.poc.to.ServerTO;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest()
 @Transactional
-public class ITServiceServiceTest
+public class ServerServiceTest
 {
-  private static final Logger LOG = LoggerFactory.getLogger( ITServiceServiceTest.class );
+  private static final Logger LOG = LoggerFactory.getLogger( ServerServiceTest.class );
 
   @Autowired
-  private ITServiceService itServiceService;
+  private ServerService serverService;
 
   @Test
   public void testSave()
   {
     String code = UUID.randomUUID().toString();
-    ITServiceTO to = new ITServiceTO();
-    to.setUser( "user@example.com" );
-    to.setName( "qwerty" );
-    to.setCode( code );
+    ServerTO serverTO = new ServerTO();
+    serverTO.setUser( "user@example.com" );
+    serverTO.setName( "qwerty" );
+    serverTO.setCode( code );
 
-    itServiceService.save( to );
+    serverService.save( serverTO );
 
-    ITServiceTO response = itServiceService.findById( to.getId() );
+    ServerTO response = serverService.findById( serverTO.getId() );
     Assert.assertNotNull( response );
 
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     LOG.info( gson.toJson( response ) );
+
   }
 
   @Test
   public void testFindAll_empty()
   {
-    PagingResponseTO<ITServiceTO> response = itServiceService.findAll( null );
+    PagingResponseTO<ServerTO> response = serverService.findAll( null );
     Assert.assertNotNull( response );
 
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -63,11 +64,11 @@ public class ITServiceServiceTest
   @Test
   public void testFindAll_page()
   {
-    PagingRequestTO<ITServiceTO> request = new PagingRequestTO<>();
+    PagingRequestTO<ServerTO> request = new PagingRequestTO<>();
     request.setPage( 0 );
     request.setSize( 5 );
 
-    PagingResponseTO<ITServiceTO> response = itServiceService.findAll( request );
+    PagingResponseTO<ServerTO> response = serverService.findAll( request );
     Assert.assertNotNull( response );
 
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -78,13 +79,13 @@ public class ITServiceServiceTest
   @Test
   public void testFindAll_pageSort()
   {
-    PagingRequestTO<ITServiceTO> request = new PagingRequestTO<>();
+    PagingRequestTO<ServerTO> request = new PagingRequestTO<>();
     request.setPage( 0 );
     request.setSize( 5 );
     request.setSortBy( "name" );
     request.setDirection( PagingRequestTO.Direction.ASC );
 
-    PagingResponseTO<ITServiceTO> response = itServiceService.findAll( request );
+    PagingResponseTO<ServerTO> response = serverService.findAll( request );
     Assert.assertNotNull( response );
 
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -96,7 +97,7 @@ public class ITServiceServiceTest
   public void testFindByExample_empty()
   {
 
-    PagingResponseTO<ITServiceTO> response = itServiceService.findByExample( null );
+    PagingResponseTO<ServerTO> response = serverService.findByExample( null );
     Assert.assertNotNull( response );
 
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -108,14 +109,14 @@ public class ITServiceServiceTest
   public void testFindByExample_name()
   {
 
-    PagingRequestTO<ITServiceTO> request = new PagingRequestTO<>();
+    PagingRequestTO<ServerTO> request = new PagingRequestTO<>();
     request.setPage( 0 );
     request.setSize( 5 );
-    ITServiceTO search = new ITServiceTO();
+    ServerTO search = new ServerTO();
     search.setName( "Sitio B" );
     request.setSearch( search );
 
-    PagingResponseTO<ITServiceTO> response = itServiceService.findByExample( request );
+    PagingResponseTO<ServerTO> response = serverService.findByExample( request );
     Assert.assertNotNull( response );
 
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -127,15 +128,15 @@ public class ITServiceServiceTest
   public void testFindByExample_nameAndCode()
   {
 
-    PagingRequestTO<ITServiceTO> request = new PagingRequestTO<>();
+    PagingRequestTO<ServerTO> request = new PagingRequestTO<>();
     request.setPage( 0 );
     request.setSize( 5 );
-    ITServiceTO search = new ITServiceTO();
+    ServerTO search = new ServerTO();
     search.setName( "Sitio B" );
     search.setCode( "002" );
     request.setSearch( search );
 
-    PagingResponseTO<ITServiceTO> response = itServiceService.findByExample( request );
+    PagingResponseTO<ServerTO> response = serverService.findByExample( request );
     Assert.assertNotNull( response );
 
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -146,7 +147,7 @@ public class ITServiceServiceTest
   @Test
   public void testFindById()
   {
-    ITServiceTO response = itServiceService.findById( 1L );
+    ServerTO response = serverService.findById( 1L );
     Assert.assertNotNull( response );
 
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -157,7 +158,7 @@ public class ITServiceServiceTest
   @Test
   public void testFindByCode()
   {
-    ITServiceTO response = itServiceService.findByCode( "ITS001" );
+    ServerTO response = serverService.findByCode( "SERV001" );
     Assert.assertNotNull( response );
 
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -169,51 +170,23 @@ public class ITServiceServiceTest
   public void testEdit()
   {
     String code = UUID.randomUUID().toString();
-    ITServiceTO siteTO = new ITServiceTO();
-    siteTO.setUser( "user@example.com" );
-    siteTO.setName( "qwerty" );
-    siteTO.setCode( code );
+    ServerTO serverTO = new ServerTO();
+    serverTO.setUser( "user@example.com" );
+    serverTO.setName( "qwerty" );
+    serverTO.setCode( code );
 
-    itServiceService.save( siteTO );
+    serverService.save( serverTO );
 
     code = UUID.randomUUID().toString();
-    ITServiceTO response = itServiceService.findById( siteTO.getId() );
+    ServerTO response = serverService.findById( serverTO.getId() );
     Assert.assertNotNull( response );
     response.setUser( "user2@example.com" );
     response.setName( "qwerty2" );
     response.setCode( code );
 
-    itServiceService.edit( response, false );
+    serverService.edit( response, false );
 
-    response = itServiceService.findById( siteTO.getId() );
-
-    Assert.assertNotNull( response );
-
-    Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
-    LOG.info( gson.toJson( response ) );
-  }
-
-  @Test
-  public void testEdit_patchName()
-  {
-    String code = UUID.randomUUID().toString();
-    ITServiceTO siteTO = new ITServiceTO();
-    siteTO.setUser( "user@example.com" );
-    siteTO.setName( "qwerty" );
-    siteTO.setCode( code );
-
-    itServiceService.save( siteTO );
-
-    code = UUID.randomUUID().toString();
-    ITServiceTO response = itServiceService.findById( siteTO.getId() );
-    Assert.assertNotNull( response );
-    response.setUser( "user2@example.com" );
-    response.setName( "qwerty2" );
-
-    itServiceService.edit( response, true );
-
-    response = itServiceService.findById( siteTO.getId() );
+    response = serverService.findById( serverTO.getId() );
 
     Assert.assertNotNull( response );
 
@@ -226,22 +199,50 @@ public class ITServiceServiceTest
   public void testEdit_patchCode()
   {
     String code = UUID.randomUUID().toString();
-    ITServiceTO siteTO = new ITServiceTO();
-    siteTO.setUser( "user@example.com" );
-    siteTO.setName( "qwerty" );
-    siteTO.setCode( code );
+    ServerTO serverTO = new ServerTO();
+    serverTO.setUser( "user@example.com" );
+    serverTO.setName( "qwerty" );
+    serverTO.setCode( code );
 
-    itServiceService.save( siteTO );
+    serverService.save( serverTO );
 
     code = UUID.randomUUID().toString();
-    ITServiceTO response = itServiceService.findById( siteTO.getId() );
+    ServerTO response = serverService.findById( serverTO.getId() );
     Assert.assertNotNull( response );
     response.setUser( "user2@example.com" );
     response.setCode( code );
 
-    itServiceService.edit( response, true );
+    serverService.edit( response, true );
 
-    response = itServiceService.findById( siteTO.getId() );
+    response = serverService.findById( serverTO.getId() );
+
+    Assert.assertNotNull( response );
+
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+    LOG.info( gson.toJson( response ) );
+  }
+
+  @Test
+  public void testEdit_patchName()
+  {
+    String code = UUID.randomUUID().toString();
+    ServerTO serverTO = new ServerTO();
+    serverTO.setUser( "user@example.com" );
+    serverTO.setName( "qwerty" );
+    serverTO.setCode( code );
+
+    serverService.save( serverTO );
+
+    code = UUID.randomUUID().toString();
+    ServerTO response = serverService.findById( serverTO.getId() );
+    Assert.assertNotNull( response );
+    response.setUser( "user2@example.com" );
+    response.setName( "qwerty2" );
+
+    serverService.edit( response, true );
+
+    response = serverService.findById( serverTO.getId() );
 
     Assert.assertNotNull( response );
 
@@ -254,24 +255,25 @@ public class ITServiceServiceTest
   public void testDelete()
   {
     String code = UUID.randomUUID().toString();
-    ITServiceTO siteTO = new ITServiceTO();
-    siteTO.setUser( "user@example.com" );
-    siteTO.setName( "qwerty" );
-    siteTO.setCode( code );
+    ServerTO serverTO = new ServerTO();
+    serverTO.setUser( "user@example.com" );
+    serverTO.setName( "qwerty" );
+    serverTO.setCode( code );
 
-    itServiceService.save( siteTO );
+    serverService.save( serverTO );
 
-    itServiceService.delete( siteTO );
+    serverService.delete( serverTO );
+
   }
 
   @Test(expected = BusinessException.class)
   public void testDelete_withApplications()
   {
-    ITServiceTO siteTO = new ITServiceTO();
-    siteTO.setUser( "user@example.com" );
-    siteTO.setId( 1L );
+    ServerTO serverTO = new ServerTO();
+    serverTO.setUser( "user@example.com" );
+    serverTO.setId( 1L );
 
-    itServiceService.delete( siteTO );
+    serverService.delete( serverTO );
   }
 
 }
