@@ -29,3 +29,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+### NPM ###
+/front/node_modules/
