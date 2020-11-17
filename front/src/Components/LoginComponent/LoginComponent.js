@@ -1,6 +1,11 @@
 import './LoginComponent.css';
 
 function LoginComponent() {
+
+  function login(){
+    window.localStorage.setItem("login",true);
+  }
+
   return (
     <div className="Login d-flex align-items-center justify-content-center">
       <div className="card">
@@ -18,7 +23,7 @@ function LoginComponent() {
             </div>
             <small id="emailHelp" className="form-text text-muted">Ingresar con sus credenciales de PROSA</small>
             <div className="mt-4 d-flex justify-content-end">
-              <button type="submit" className="btn btn-primary">Inicio</button>
+              <button className="btn btn-primary" onClick={login}>Inicio</button>
             </div>
           </form>
         </div>

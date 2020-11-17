@@ -9,6 +9,11 @@ import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import Typography from '@material-ui/core/Typography';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+
+export function logOut(){
+  window.localStorage.removeItem("login");
+}
 
 export const mainListItems = (
   <div>
@@ -47,6 +52,12 @@ export const secondaryListItems = (
         <AssignmentIcon color="primary"/>
       </ListItemIcon>
       <ListItemText primary={<Typography style={{color: "#FFF"}}>Reporte 17/Nov/20</Typography>}/>
+    </ListItem>
+    <ListItem button onClick={logOut}>
+      <ListItemIcon>
+        <ExitToAppIcon color="primary"/>
+      </ListItemIcon> 
+      <ListItemText primary={<Typography style={{color: "#FFF"}}>LogOut</Typography>}/>
     </ListItem>
   </div>
 );

@@ -1,23 +1,23 @@
 import './App.css';
 import React, {useState} from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-import LoginComponent from './Components/LoginComponent/LoginComponent/LoginComponent';
+import LoginComponent from './Components/LoginComponent/LoginComponent';
 import ConsoleComponent from './Components/ConsoleComponent/ConsoleComponent';
 import Dashboard from './Components/ConsoleComponent/Dashboard';
 
 function App() {
 
-  const [redirect, setRedirect] = useState(false);
+  const [redirect, setRedirect] = React.useState(window.localStorage.getItem("login"));
 
   function renderRedirect(){
-    if (redirect === true) {
-      return <Redirect
-            from="/"
-            to="/login" />;
-    }else{
+    if (redirect == "true") {
       return <Redirect
             from="/"
             to="/console" />;
+    }else{
+      return <Redirect
+            from="/"
+            to="/login" />;
     }
   }
 
