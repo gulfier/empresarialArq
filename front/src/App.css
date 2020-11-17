@@ -1,0 +1,7 @@
+.Login {
+  width: 100%;
+  height: 100vh;
+  background-image: url("/src/prosa.png");
+  background-repeat: no-repeat, repeat;
+  background-color: transparent;
+}
