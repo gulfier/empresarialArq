@@ -1,9 +1,9 @@
-import './App.css';
+import './AppComponent.css';
 import React, {useState} from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-import LoginComponent from './Components/LoginComponent/LoginComponent';
-import ConsoleComponent from './Components/ConsoleComponent/ConsoleComponent';
-import Dashboard from './Components/ConsoleComponent/Dashboard';
+import LoginComponent from '../Login/LoginComponent';
+import HistoryComponent from '../History/HistoryComponent';
+import Dashboard from '../Console/Dashboard';
 
 function App() {
 
@@ -28,6 +28,7 @@ function App() {
         <Switch>
           <Route path='/login' component={LoginComponent} />
           <Route path='/console' component={Dashboard} />
+          <Route path='/history' component={HistoryComponent} />
         </Switch>
       </div>
     </BrowserRouter>
