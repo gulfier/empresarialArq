@@ -21,8 +21,6 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems, secondaryListItems } from './listItems';
 import Chart from './Chart';
 import Deposits from './Deposits';
-import Orders from './Orders';
-import ConsoleComponent from "./ConsoleComponent"
 
 function Copyright() {
   return (
@@ -123,7 +121,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Dashboard() {
+export default function Dashboard(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
@@ -149,7 +147,7 @@ export default function Dashboard() {
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" noWrap className={classes.title}>
-            Cambios HOPEX
+            {props.title}
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
@@ -182,7 +180,8 @@ export default function Dashboard() {
             {/* Console component */}
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <ConsoleComponent />
+                {/* <ConsoleComponent /> */}
+                {props.children}
               </Paper>
             </Grid>
             {/* Chart */}

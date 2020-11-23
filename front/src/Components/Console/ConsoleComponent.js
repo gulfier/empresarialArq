@@ -8,6 +8,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import DialogPopup from '../../Dialogs/Dialog/DialogPopup';
+import FrameComponent from '../Frame/FrameComponent';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -99,98 +100,100 @@ function ConsoleComponent() {
   };
 
   return (
-    <div className="Console">
-        <div className="row">
-            <div className="col">
-                <Form.Control placeholder="Aplicativo" />
-            </div>
-            <div className="col">
-                <Form.Control placeholder="Base de datos" />
-            </div>
-            <div className="col">
-                <Form.Label className="mr-sm-2" htmlFor="inlineFormCustomSelect" srOnly>
-                    Preference
-                </Form.Label>
-                <Form.Control
-                    as="select"
-                    className="mr-sm-2"
-                    id="inlineFormCustomSelect"
-                    custom
-                >
-                    <option value="0">Site</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </Form.Control>
-            </div>
-            <div className="col">
-                <form className={classes.container} noValidate>
-                    <TextField
-                        id="date"
-                        label=""
-                        type="date"
-                        defaultValue="2017-05-24"
-                        className={classes.textField}
-                        InputLabelProps={{
-                        shrink: true,
-                        }}
-                    />
-                </form>
-            </div>
-            <div className="col-auto">
-                <SearchIcon/>
-            </div>
-        </div>
-        <DataTable
-            columns={columns}
-            data={data}
-            theme="Table"
-            pagination
-            selectableRows
-            fixedHeader
-            fixedHeaderScrollHeight="50vh"
-            onRowClicked={handleRowClicked}
-        />
-        <DialogPopup onClose={handleClose} open={open} dialogTitle="ID 72129398">
-          <div className="Detail-Component row">
-            <div className="col-11 m-2">
-              <div className="Detail p-0">
-                  <div className="Title-Detail d-flex justify-content-center">
-                    Detalle
-                  </div>
-                  <div className="">
-                    Este es un cambio para el servidor X para promocionarlo a producción
-                  </div>
+    <FrameComponent title="Cambios HOPEX">
+      <div className="Console">
+          <div className="row">
+              <div className="col">
+                  <Form.Control placeholder="Aplicativo" />
               </div>
-            </div>
-            <div className="col-5 m-2">
-              <div className="Detail card p-0">
-                  <div className="Title-Detail d-flex justify-content-center">
-                    Base de datos
-                  </div>
-                  <div className="row">
-                      <div className="col pr-0">
-                            <div className="row d-flex justify-content-center">
-                              Antes
-                            </div>
-                            <div className="d-flex justify-content-center p-3 Detail-Before">
-                              SQL lite
-                            </div>
-                      </div>
-                      <div className="col pl-0">
-                            <div className="row d-flex justify-content-center">
-                              Despues
-                            </div>
-                            <div className="d-flex justify-content-center p-3 Detail-After">
-                              Oracle
-                            </div>
-                      </div>
-                  </div>
+              <div className="col">
+                  <Form.Control placeholder="Base de datos" />
               </div>
-            </div>
+              <div className="col">
+                  <Form.Label className="mr-sm-2" htmlFor="inlineFormCustomSelect" srOnly>
+                      Preference
+                  </Form.Label>
+                  <Form.Control
+                      as="select"
+                      className="mr-sm-2"
+                      id="inlineFormCustomSelect"
+                      custom
+                  >
+                      <option value="0">Site</option>
+                      <option value="1">One</option>
+                      <option value="2">Two</option>
+                      <option value="3">Three</option>
+                  </Form.Control>
+              </div>
+              <div className="col">
+                  <form className={classes.container} noValidate>
+                      <TextField
+                          id="date"
+                          label=""
+                          type="date"
+                          defaultValue="2017-05-24"
+                          className={classes.textField}
+                          InputLabelProps={{
+                          shrink: true,
+                          }}
+                      />
+                  </form>
+              </div>
+              <div className="col-auto">
+                  <SearchIcon/>
+              </div>
           </div>
-        </DialogPopup>
-    </div>
+          <DataTable
+              columns={columns}
+              data={data}
+              theme="Table"
+              pagination
+              selectableRows
+              fixedHeader
+              fixedHeaderScrollHeight="50vh"
+              onRowClicked={handleRowClicked}
+          />
+          <DialogPopup onClose={handleClose} open={open} dialogTitle="ID 72129398">
+            <div className="Detail-Component row">
+              <div className="col-11 m-2">
+                <div className="Detail p-0">
+                    <div className="Title-Detail d-flex justify-content-center">
+                      Detalle
+                    </div>
+                    <div className="">
+                      Este es un cambio para el servidor X para promocionarlo a producción
+                    </div>
+                </div>
+              </div>
+              <div className="col-5 m-2">
+                <div className="Detail card p-0">
+                    <div className="Title-Detail d-flex justify-content-center">
+                      Base de datos
+                    </div>
+                    <div className="row">
+                        <div className="col pr-0">
+                              <div className="row d-flex justify-content-center">
+                                Antes
+                              </div>
+                              <div className="d-flex justify-content-center p-3 Detail-Before">
+                                SQL lite
+                              </div>
+                        </div>
+                        <div className="col pl-0">
+                              <div className="row d-flex justify-content-center">
+                                Despues
+                              </div>
+                              <div className="d-flex justify-content-center p-3 Detail-After">
+                                Oracle
+                              </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </DialogPopup>
+      </div>
+    </FrameComponent>
   );
 }
 

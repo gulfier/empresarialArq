@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import LoginComponent from '../Login/LoginComponent';
 import HistoryComponent from '../History/HistoryComponent';
-import Dashboard from '../Console/Dashboard';
+import ConsoleComponent from '../Console/ConsoleComponent';
 
 function App() {
 
@@ -13,7 +13,7 @@ function App() {
     if (redirect == "true") {
       return <Redirect
             from="/"
-            to="/console" />;
+            to="/history" />;
     }else{
       return <Redirect
             from="/"
@@ -27,7 +27,7 @@ function App() {
         {renderRedirect()}
         <Switch>
           <Route path='/login' component={LoginComponent} />
-          <Route path='/console' component={Dashboard} />
+          <Route path='/console' component={ConsoleComponent} />
           <Route path='/history' component={HistoryComponent} />
         </Switch>
       </div>
