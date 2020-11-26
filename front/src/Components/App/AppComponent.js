@@ -24,7 +24,7 @@ function App() {
   return (
     <BrowserRouter>
       <div>
-        {renderRedirect()}
+        {/* {renderRedirect()} */}
         <Switch>
           <Route path='/login' component={LoginComponent} />
           <Route path='/console' component={ConsoleComponent} />

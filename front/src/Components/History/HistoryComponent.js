@@ -94,7 +94,7 @@ function HistoryComponent() {
       <div className="Console">
         <div className="row">
             <div className="col">
-                <Form.Control placeholder="Aplicativo" />
+                <Form.Control placeholder="Persona aurotizó" />
             </div>
             <div className="col">
                 <Form.Control placeholder="Base de datos" />
