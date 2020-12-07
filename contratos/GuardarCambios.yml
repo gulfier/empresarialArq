@@ -1,0 +1,224 @@
+swagger: "2.0"
+info:
+  description: Guarda los cambios del sistema Mega en la base de datos Oracle(CMDB)
+  version: "1.0.0"
+  title: API Guarda Cambios
+host: hopex-api-prod.cloudapp.qa.prosa.lat:8080
+basePath: /hopex-api/v1/
+
+securityDefinitions:
+  Bearer:
+    description: >
+      Para acceder a la API se debe pasar un token válido en todas las consultas.
+      La siguiente sintaxis se debe utilizar en el encabezado 'Authorization' :
+        Bearer: 2zzLJmBAtTNIU8nF8e8XbmDvaNGs
+    type: apiKey
+    name: Authorization
+    in: header
+    
+security:
+  - Bearer: []
+
+
+paths:
+ 
+  /save:
+    post:
+      tags:
+        - Cambios
+      summary: Guarda los cambios hechos en MEGA - HOPEX
+      description: |-
+        Guarda todos los registros que se hicieron en la aplicación Mega 
+      consumes:
+      - "application/json"
+      produces:
+        - application/json
+
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "the HOPEX update object"
+        required: true
+        schema:
+          $ref: "#/definitions/HopexObject"
+      - name: Context-type
+        in: "header"
+        description: "Tipo de objeto enviado"
+        required: true
+        type: string
+        format: utf-8
+      - name: Authorization
+        in: "header"
+        description: "Contiene las credenciales para identificar a el usuario en un servidor."
+        required: true
+        type: string
+        format: string
+      - name: X-Forwarded-For
+        in: "header"
+        description: "Indica la dirección IP original del cliente, para cuando hay un enrutador y cambia la dirección de quien es la petición o la respuesta originalmente"
+        required: true
+        type: string
+        format: ip-address
+      - name: X_Fowareded-Host
+        in: "header"
+        description: "El nombre de dominio del servidor reenviado."
+        required: true
+        type: string
+        format: http-url
+
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "#/definitions/DefaultObject"
+          examples:
+            application/json:
+              {
+                "code": 200,
+                "message": "OK",
+                "response": {}
+              }
+        400:
+          description: Entrada incorrecta
+          schema:
+            $ref: "#/definitions/ResponseBadRequest"
+          examples:
+            application/json:
+              {
+                "code": "400",
+                "message": "Error con los datos de entrada",
+                "information": {}
+              }
+        404:
+          description: No encontrado
+          schema:
+            $ref: "#/definitions/ResponseNotFound"
+          examples:
+            application/json:
+              {
+                "code": "404",
+                "message": "No se encontró información",
+                "information": {}
+              }
+        500:
+          description: Operación Inesperada
+          schema:
+            $ref: "#/definitions/ResponseInternalServerError"
+          examples:
+            application/json:
+              {
+                "code": "500",
+                "message": "Ocurrió un error al procesar su petición",
+                "information": {}
+              }
+      security:
+        - Bearer: []
+definitions:
+
+  HopexObject:
+    type: object
+    properties:
+      instances:
+        type: array
+        description: Instancias de servidores que han cambiado en la plataforma MEGA HOPEX
+        items:
+          $ref: "#/definitions/ChangesTO"
+
+  DefaultObject:
+    type: object
+    properties:
+      code: 
+        type: integer
+        description: Código de éxito que significa que se guardaron los cambios de MEGA
+        example: 200
+      message:
+        type: string
+        description: Mensaje de éxito de la petición
+        example: "OK"
+      response:
+        type: object
+        description: Objeto que tiene la respuesta de la petición.
+        example: "{}"
+  
+  ChangesTO:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Identificador único del componente modificado
+        example: 2
+      dsCode:
+        type: string
+        description: descripción del código
+        example: 16876
+      dsName:
+        type: string
+        description: Nombre del componente
+        example: "BUSINESSPROCESS"
+      dtCreation:
+        type: string
+        description: fecha en que se creo el componente en el sistema Mega
+        example: '2018-06-20T07:22:09Z'
+      dtModified:
+        type: string
+        description: fecha en que se modifico el componente en el sistema Mega
+        example: '2018-06-20T07:22:09Z'
+      userCreation:
+        type: string
+        description: Usuario que creo el documento
+        example: "Mario Balbuena Juarez"
+      userModification:
+        type: string
+        description: Usuario que modifico el documento
+        example: "Mario Balbuena Juarez"
+      cambios:
+        type: string
+        description: Nombre de campos y datos de los elementos que se modificaron
+        example: "{nombreSite: Santa Fe, estatus: 1, descripcion: Se actualizo licencia de server  }"
+         
+  ResponseBadRequest:
+    title: Response Bad Request
+    type: object
+    properties:
+      code:
+        type: integer
+        description: Codigo de error de la petición
+        example: 400
+      message:
+        type: string
+        description: Mensaje de error para el desarrollador
+        example: "Datos incorrectos"
+      information:
+        type: object
+        description: Objeto que contiene mas información acerca del error.
+                  
+  ResponseInternalServerError:
+    type: object
+    properties:
+      code:
+        type: integer
+        description: Codigo de error de la petición
+        example: 500
+      message:
+        type: string
+        description: Mensaje de error para el desarrollador
+        example: "Ocurrió un error al procesar su petición"
+      information:
+        type: object
+        description: Objeto que contiene mas información acerca del error.
+       
+  ResponseNotFound:
+    type: object
+    properties:
+      code:
+        type: integer
+        description: Codigo de error de la petición
+        example: 404
+      message:
+        type: string
+        description: Mensaje de error para el desarrollador
+        example: "No se encontró información"
+      information:
+        type: object
+        description: Objeto que contiene mas información acerca del error.
+              

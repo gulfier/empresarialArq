@@ -23,7 +23,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div>
+      <div className="App">
         {/* {renderRedirect()} */}
         <Switch>
           <Route path='/login' component={LoginComponent} />

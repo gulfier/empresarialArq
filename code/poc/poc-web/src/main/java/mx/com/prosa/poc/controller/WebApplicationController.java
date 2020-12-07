@@ -55,6 +55,29 @@ public class WebApplicationController extends AbstractBaseController
 
     return new ResponseEntity<>( response, HttpStatus.OK );
   }
+  
+  /**
+   * Obtener token
+   * 
+   * @param request
+   * @return
+   */
+  // TODO agregar informacion de swagger
+  @PostMapping(path = "/search", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<Response<TokenTO>> search( @RequestBody CredentialTO request )
+  {
+//    request.setIp( super.getIpAddress() );
+//    request.setUser( super.getUser() );
+
+    TokenTO token = this.consoleService.createToken( request );
+
+    Response<TokenTO> response = new Response<>();
+    response.setCode( HttpStatus.OK.value() );
+    response.setMessage( HttpStatus.OK.name() );
+    response.setResponse( token );
+
+    return new ResponseEntity<>( response, HttpStatus.OK );
+  }
 
   /**
    * {@inheritDoc}
