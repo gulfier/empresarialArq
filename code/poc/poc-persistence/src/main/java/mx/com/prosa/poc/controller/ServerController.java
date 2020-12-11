@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import mx.com.prosa.poc.controller.aspect.BusinessExceptionInterceptor;
-import mx.com.prosa.poc.service.ServerService;
 import mx.com.prosa.poc.to.BaseTO;
 import mx.com.prosa.poc.to.PagingRequestTO;
 import mx.com.prosa.poc.to.PagingResponseTO;
@@ -33,8 +32,6 @@ import mx.com.prosa.poc.to.ServerTO;
 public class ServerController extends AbstractBaseController
 {
 
-  @Autowired
-  private ServerService serverService;
 
   private static final String QUERY_PARAM_NAME = "name";
   private static final String QUERY_PARAM_CODE = "code";
@@ -49,28 +46,7 @@ public class ServerController extends AbstractBaseController
   @GetMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Response<PagingResponseTO<ServerTO>>> findAll()
   {
-    PagingRequestTO<ServerTO> request = new PagingRequestTO<>();
-    super.processPaging( request );
-    request.setIp( super.getIpAddress() );
-    request.setUser( super.getUser() );
-
-    PagingResponseTO<ServerTO> pagingResponseTO = null;
-
-    if( isQuery() )
-    {
-      request.setSearch( getSearch() );
-      pagingResponseTO = serverService.findByExample( request );
-    }
-    else
-    {
-      pagingResponseTO = serverService.findAll( request );
-    }
-
-    Response<PagingResponseTO<ServerTO>> body = new Response<>();
-    body.setResponse( pagingResponseTO );
-    body.setCode( HttpStatus.OK.value() );
-    body.setMessage( HttpStatus.OK.name() );
-    return new ResponseEntity<>( body, HttpStatus.OK );
+	  return null;
   }
 
   /**
@@ -83,16 +59,7 @@ public class ServerController extends AbstractBaseController
   @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Response<ServerTO>> getById( @PathVariable(value = "id") Long id )
   {
-    super.validate();
-
-    ServerTO site = this.serverService.findById( id );
-
-    Response<ServerTO> body = new Response<>();
-    body.setResponse( site );
-    body.setCode( HttpStatus.OK.value() );
-    body.setMessage( HttpStatus.OK.name() );
-
-    return new ResponseEntity<>( body, HttpStatus.OK );
+	  return null;
   }
 
   /**
@@ -105,17 +72,7 @@ public class ServerController extends AbstractBaseController
   @GetMapping(path = "/code/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Response<ServerTO>> getByCode( @PathVariable(value = "code") String code )
   {
-    super.validate();
-
-    ServerTO server = this.serverService.findByCode( code );
-
-    Response<ServerTO> body = new Response<>();
-
-    body.setResponse( server );
-    body.setCode( HttpStatus.OK.value() );
-    body.setMessage( HttpStatus.OK.name() );
-
-    return new ResponseEntity<>( body, HttpStatus.OK );
+	  return null;
   }
 
   /**
@@ -128,17 +85,7 @@ public class ServerController extends AbstractBaseController
   @PostMapping(path = "", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Response<ServerTO>> save( @RequestBody ServerTO request )
   {
-    request.setIp( super.getIpAddress() );
-    request.setUser( super.getUser() );
-
-    this.serverService.save( request );
-
-    Response<ServerTO> response = new Response<>();
-    response.setCode( HttpStatus.CREATED.value() );
-    response.setMessage( HttpStatus.CREATED.name() );
-    response.setResponse( request );
-
-    return new ResponseEntity<>( response, HttpStatus.CREATED );
+	  return null;
   }
 
   /**
@@ -152,18 +99,7 @@ public class ServerController extends AbstractBaseController
   @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Response<ServerTO>> edit( @RequestBody ServerTO request, @PathVariable(value = "id") Long id )
   {
-    request.setIp( super.getIpAddress() );
-    request.setUser( super.getUser() );
-    request.setId( id );
-
-    this.serverService.edit( request, false );
-
-    Response<ServerTO> response = new Response<>();
-    response.setCode( HttpStatus.OK.value() );
-    response.setMessage( HttpStatus.OK.name() );
-    response.setResponse( request );
-
-    return new ResponseEntity<>( response, HttpStatus.OK );
+	  return null;
   }
 
   /**
@@ -178,18 +114,7 @@ public class ServerController extends AbstractBaseController
   public ResponseEntity<Response<ServerTO>> editPatch( @RequestBody ServerTO request,
       @PathVariable(value = "id") Long id )
   {
-    request.setIp( super.getIpAddress() );
-    request.setUser( super.getUser() );
-    request.setId( id );
-
-    this.serverService.edit( request, true );
-
-    Response<ServerTO> response = new Response<>();
-    response.setCode( HttpStatus.OK.value() );
-    response.setMessage( HttpStatus.OK.name() );
-    response.setResponse( request );
-
-    return new ResponseEntity<>( response, HttpStatus.OK );
+	  return null;
   }
 
   /**
@@ -203,32 +128,12 @@ public class ServerController extends AbstractBaseController
   public ResponseEntity<Response<BaseTO>> delete( @PathVariable(value = "id") Long id )
   {
 
-    ServerTO request = new ServerTO();
-    request.setIp( super.getIpAddress() );
-    request.setUser( super.getUser() );
-    request.setId( id );
-
-    this.serverService.delete( request );
-
-    Response<BaseTO> response = new Response<>();
-    response.setCode( HttpStatus.OK.value() );
-    response.setMessage( HttpStatus.OK.name() );
-
-    return new ResponseEntity<>( response, HttpStatus.OK );
+	  return null;
   }
 
   private ServerTO getSearch()
   {
-    ServerTO search = new ServerTO();
-    if( parameterExists( QUERY_PARAM_NAME ) )
-    {
-      search.setName( getParameter( QUERY_PARAM_NAME ) );
-    }
-    if( parameterExists( QUERY_PARAM_CODE ) )
-    {
-      search.setName( getParameter( QUERY_PARAM_CODE ) );
-    }
-    return search;
+	  return null;
   }
 
   /**

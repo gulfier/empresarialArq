@@ -35,14 +35,12 @@ public class BaseTO implements Serializable
   @JsonInclude(Include.NON_NULL)
   protected Date creation;
 
-  @JsonInclude(Include.NON_NULL)
-  protected Date modified;
+
 
   @JsonInclude(Include.NON_NULL)
   protected String userCreation;
 
-  @JsonInclude(Include.NON_NULL)
-  protected String userModified;
+
 
   @JsonInclude(Include.NON_NULL)
   protected String ip;

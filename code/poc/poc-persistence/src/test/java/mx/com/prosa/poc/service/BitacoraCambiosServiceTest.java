@@ -18,30 +18,30 @@ import com.google.gson.GsonBuilder;
 import mx.com.prosa.poc.to.BusinessException;
 import mx.com.prosa.poc.to.PagingRequestTO;
 import mx.com.prosa.poc.to.PagingResponseTO;
-import mx.com.prosa.poc.to.SiteTO;
+import mx.com.prosa.poc.to.BitacoraCambiosTO;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest()
 @Transactional
-public class SiteServiceTest
+public class BitacoraCambiosServiceTest
 {
-  private static final Logger LOG = LoggerFactory.getLogger( SiteServiceTest.class );
+  private static final Logger LOG = LoggerFactory.getLogger( BitacoraCambiosServiceTest.class );
 
   @Autowired
-  private SiteService siteService;
+  private BitacoraCambiosService siteService;
 
   @Test
   public void testSave()
   {
     String code = UUID.randomUUID().toString();
-    SiteTO siteTO = new SiteTO();
+    BitacoraCambiosTO siteTO = new BitacoraCambiosTO();
     siteTO.setUser( "user@example.com" );
     siteTO.setName( "qwerty" );
     siteTO.setCode( code );
 
     siteService.save( siteTO );
 
-    SiteTO response = siteService.findById( siteTO.getId() );
+    BitacoraCambiosTO response = siteService.findById( siteTO.getId() );
     Assert.assertNotNull( response );
 
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -53,7 +53,7 @@ public class SiteServiceTest
   @Test
   public void testFindAll_empty()
   {
-    PagingResponseTO<SiteTO> response = siteService.findAll( null );
+    PagingResponseTO<BitacoraCambiosTO> response = siteService.findAll( null );
     Assert.assertNotNull( response );
 
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -64,11 +64,11 @@ public class SiteServiceTest
   @Test
   public void testFindAll_page()
   {
-    PagingRequestTO<SiteTO> request = new PagingRequestTO<>();
+    PagingRequestTO<BitacoraCambiosTO> request = new PagingRequestTO<>();
     request.setPage( 0 );
     request.setSize( 5 );
 
-    PagingResponseTO<SiteTO> response = siteService.findAll( request );
+    PagingResponseTO<BitacoraCambiosTO> response = siteService.findAll( request );
     Assert.assertNotNull( response );
 
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -79,13 +79,13 @@ public class SiteServiceTest
   @Test
   public void testFindAll_pageSort()
   {
-    PagingRequestTO<SiteTO> request = new PagingRequestTO<>();
+    PagingRequestTO<BitacoraCambiosTO> request = new PagingRequestTO<>();
     request.setPage( 0 );
     request.setSize( 5 );
     request.setSortBy( "name" );
     request.setDirection( PagingRequestTO.Direction.ASC );
 
-    PagingResponseTO<SiteTO> response = siteService.findAll( request );
+    PagingResponseTO<BitacoraCambiosTO> response = siteService.findAll( request );
     Assert.assertNotNull( response );
 
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -97,7 +97,7 @@ public class SiteServiceTest
   public void testFindByExample_empty()
   {
 
-    PagingResponseTO<SiteTO> response = siteService.findByExample( null );
+    PagingResponseTO<BitacoraCambiosTO> response = siteService.findByExample( null );
     Assert.assertNotNull( response );
 
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -109,14 +109,14 @@ public class SiteServiceTest
   public void testFindByExample_name()
   {
 
-    PagingRequestTO<SiteTO> request = new PagingRequestTO<>();
+    PagingRequestTO<BitacoraCambiosTO> request = new PagingRequestTO<>();
     request.setPage( 0 );
     request.setSize( 5 );
-    SiteTO search = new SiteTO();
+    BitacoraCambiosTO search = new BitacoraCambiosTO();
     search.setName( "Sitio B" );
     request.setSearch( search );
 
-    PagingResponseTO<SiteTO> response = siteService.findByExample( request );
+    PagingResponseTO<BitacoraCambiosTO> response = siteService.findByExample( request );
     Assert.assertNotNull( response );
 
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -128,15 +128,15 @@ public class SiteServiceTest
   public void testFindByExample_nameAndCode()
   {
 
-    PagingRequestTO<SiteTO> request = new PagingRequestTO<>();
+    PagingRequestTO<BitacoraCambiosTO> request = new PagingRequestTO<>();
     request.setPage( 0 );
     request.setSize( 5 );
-    SiteTO search = new SiteTO();
+    BitacoraCambiosTO search = new BitacoraCambiosTO();
     search.setName( "Sitio B" );
     search.setCode( "002" );
     request.setSearch( search );
 
-    PagingResponseTO<SiteTO> response = siteService.findByExample( request );
+    PagingResponseTO<BitacoraCambiosTO> response = siteService.findByExample( request );
     Assert.assertNotNull( response );
 
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -147,7 +147,7 @@ public class SiteServiceTest
   @Test
   public void testFindById()
   {
-    SiteTO response = siteService.findById( 1L );
+    BitacoraCambiosTO response = siteService.findById( 1L );
     Assert.assertNotNull( response );
 
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -158,7 +158,7 @@ public class SiteServiceTest
   @Test
   public void testFindByCode()
   {
-    SiteTO response = siteService.findByCode( "SITE001" );
+    BitacoraCambiosTO response = siteService.findByCode( "SITE001" );
     Assert.assertNotNull( response );
 
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -170,7 +170,7 @@ public class SiteServiceTest
   public void testEdit()
   {
     String code = UUID.randomUUID().toString();
-    SiteTO siteTO = new SiteTO();
+    BitacoraCambiosTO siteTO = new BitacoraCambiosTO();
     siteTO.setUser( "user@example.com" );
     siteTO.setName( "qwerty" );
     siteTO.setCode( code );
@@ -178,7 +178,7 @@ public class SiteServiceTest
     siteService.save( siteTO );
 
     code = UUID.randomUUID().toString();
-    SiteTO response = siteService.findById( siteTO.getId() );
+    BitacoraCambiosTO response = siteService.findById( siteTO.getId() );
     Assert.assertNotNull( response );
     response.setUser( "user2@example.com" );
     response.setName( "qwerty2" );
@@ -199,7 +199,7 @@ public class SiteServiceTest
   public void testEdit_patchCode()
   {
     String code = UUID.randomUUID().toString();
-    SiteTO siteTO = new SiteTO();
+    BitacoraCambiosTO siteTO = new BitacoraCambiosTO();
     siteTO.setUser( "user@example.com" );
     siteTO.setName( "qwerty" );
     siteTO.setCode( code );
@@ -207,7 +207,7 @@ public class SiteServiceTest
     siteService.save( siteTO );
 
     code = UUID.randomUUID().toString();
-    SiteTO response = siteService.findById( siteTO.getId() );
+    BitacoraCambiosTO response = siteService.findById( siteTO.getId() );
     Assert.assertNotNull( response );
     response.setUser( "user2@example.com" );
     response.setCode( code );
@@ -227,7 +227,7 @@ public class SiteServiceTest
   public void testEdit_patchName()
   {
     String code = UUID.randomUUID().toString();
-    SiteTO siteTO = new SiteTO();
+    BitacoraCambiosTO siteTO = new BitacoraCambiosTO();
     siteTO.setUser( "user@example.com" );
     siteTO.setName( "qwerty" );
     siteTO.setCode( code );
@@ -235,7 +235,7 @@ public class SiteServiceTest
     siteService.save( siteTO );
 
     code = UUID.randomUUID().toString();
-    SiteTO response = siteService.findById( siteTO.getId() );
+    BitacoraCambiosTO response = siteService.findById( siteTO.getId() );
     Assert.assertNotNull( response );
     response.setUser( "user2@example.com" );
     response.setName( "qwerty2" );
@@ -255,7 +255,7 @@ public class SiteServiceTest
   public void testDelete()
   {
     String code = UUID.randomUUID().toString();
-    SiteTO siteTO = new SiteTO();
+    BitacoraCambiosTO siteTO = new BitacoraCambiosTO();
     siteTO.setUser( "user@example.com" );
     siteTO.setName( "qwerty" );
     siteTO.setCode( code );
@@ -269,7 +269,7 @@ public class SiteServiceTest
   @Test(expected = BusinessException.class)
   public void testDelete_withApplications()
   {
-    SiteTO siteTO = new SiteTO();
+    BitacoraCambiosTO siteTO = new BitacoraCambiosTO();
     siteTO.setUser( "user@example.com" );
     siteTO.setId( 1L );
 

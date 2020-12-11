@@ -2,14 +2,14 @@ package mx.com.prosa.poc.service;
 
 import mx.com.prosa.poc.to.PagingRequestTO;
 import mx.com.prosa.poc.to.PagingResponseTO;
-import mx.com.prosa.poc.to.SiteTO;
+import mx.com.prosa.poc.to.BitacoraCambiosTO;
 
 /**
  * Interface para la manipulacion de la persistencia de los sitios
  * 
  * @author Guillermo Segura Olivera <guillermo.segura@axity.com>
  */
-public interface SiteService
+public interface BitacoraCambiosService
 {
 
   /**
@@ -17,7 +17,7 @@ public interface SiteService
    * 
    * @param site
    */
-  void save( SiteTO site );
+  void save( BitacoraCambiosTO site );
 
   /**
    * Busca todos los sitios
@@ -25,7 +25,7 @@ public interface SiteService
    * @param request parametros de busqueda paginada
    * @return
    */
-  PagingResponseTO<SiteTO> findAll( PagingRequestTO<SiteTO> request );
+  PagingResponseTO<BitacoraCambiosTO> findAll( PagingRequestTO<BitacoraCambiosTO> request );
 
   /**
    * Busca los sitios por medio de los parametros de consulta
@@ -33,7 +33,7 @@ public interface SiteService
    * @param request parametros de busqueda paginada
    * @return
    */
-  PagingResponseTO<SiteTO> findByExample( PagingRequestTO<SiteTO> request );
+  PagingResponseTO<BitacoraCambiosTO> findByExample( PagingRequestTO<BitacoraCambiosTO> request );
 
   /**
    * Busca un sitio por id
@@ -41,7 +41,7 @@ public interface SiteService
    * @param id
    * @return
    */
-  SiteTO findById( Long id );
+  BitacoraCambiosTO findById( Long id );
 
   /**
    * Busca un sitio por su codigos
@@ -49,7 +49,7 @@ public interface SiteService
    * @param code
    * @return
    */
-  SiteTO findByCode( String code );
+  BitacoraCambiosTO findByCode( String code );
 
   /**
    * Edita un sitio
@@ -57,12 +57,12 @@ public interface SiteService
    * @param site
    * @param patch  Indica si es parcial
    */
-  void edit( SiteTO site, boolean patch );
+  void edit( BitacoraCambiosTO site, boolean patch );
 
   /**
    * Elimina un sitio
    * 
    * @param site
    */
-  void delete( SiteTO site );
+  void delete( BitacoraCambiosTO site );
 }
