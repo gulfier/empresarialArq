@@ -1,0 +1,48 @@
+.Detail{
+    font-weight: 18px;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.Detail-object{
+    font-weight: 18px;
+    border-style: solid;
+    border-width: 1px;
+    max-width: 300px;
+}
+
+.Detail-Before{
+    background-color: dodgerblue !important;
+}
+
+.Detail-After{
+    background-color: limegreen !important;
+}
+
+.Detail-Component{
+}
+
+.Title-Detail{
+    background-color: #c62828;
+    width: 100% !important;
+    font-weight: bold;
+    color: cornsilk;
+}
+
+.Object-table{
+    border-style: groove;
+}
+
+.blue-square{
+    width: 30px; 
+    height: 30px; 
+    border: 1px solid #555;
+    background: dodgerblue;
+}
+
+.green-square{
+    width: 30px; 
+    height: 30px; 
+    border: 1px solid #555;
+    background: limegreen;
+}

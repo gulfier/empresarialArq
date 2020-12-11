@@ -7,7 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import SearchIcon from '@material-ui/icons/Search';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
-import DialogPopup from '../../Dialogs/Dialog/DialogPopup';
+import DetailChangePopup from '../../Dialogs/DetailChange/DetailChangePopup';
 import FrameComponent from '../Frame/FrameComponent';
 
 const useStyles = makeStyles((theme) =>
@@ -99,11 +99,56 @@ function ConsoleComponent() {
     setOpen(false);
   };
 
+  let response = {
+    applications: {
+      id_app: 178283,
+      ds_code: "HY648",
+      ds_name: "Applicativo D",
+      data_base: [
+        {
+          id: 378239,
+          ds_code: "asdjdh8",
+          ds_name: "Base 1",
+          ds_algoritmo: "First",
+          ds_algoritmo_change: "Second",
+        },
+        {
+          id: 378239,
+          ds_code: "asdjdh8",
+          ds_name: "Base 1",
+          ds_algoritmo: "First",
+          ds_algoritmo_change: "Second",
+        }
+      ],
+      servers: [
+        {
+          id: 38923,
+          DS_CODE: "FKF78",
+          DS_NAME: "APl 2",
+          DT_CREATION: "27/09/19",
+          DT_MODIFIED: "10/12/20",
+          DS_USER_CREATION: "Jorge",
+          DS_USER_MODIFICATION: "Jorge",
+          DS_AMBIENTE: "Productivo",
+          DS_HOST_NAME: "local",
+          DS_DESCRIPCION: "LDDFNFf FIONIOFH",
+          DS_PROPOSITO: "373",
+          DS_MARCA_MODELO: "Microsoft",
+          DS_VIRTUALIZACION: "4",
+          DS_TIPO: "4",
+          DS_PCI: "JDFI",
+          FK_ID_RESPONSABLE: "32",
+          FK_ID_UBICACION: "2",
+        }
+      ]
+    }
+  };
+
   return (
     <FrameComponent title="Cambios HOPEX">
       <div className="Console">
           <div className="row">
-              <div className="col">
+              <div className="col ml-4 pr-0">
                   <Form.Control placeholder="Aplicativo" />
               </div>
               <div className="col">
@@ -153,45 +198,7 @@ function ConsoleComponent() {
               fixedHeaderScrollHeight="50vh"
               onRowClicked={handleRowClicked}
           />
-          <DialogPopup onClose={handleClose} open={open} dialogTitle="ID 72129398">
-            <div className="Detail-Component row">
-              <div className="col-11 m-2">
-                <div className="Detail p-0">
-                    <div className="Title-Detail d-flex justify-content-center">
-                      Detalle
-                    </div>
-                    <div className="">
-                      Este es un cambio para el servidor X para promocionarlo a producción
-                    </div>
-                </div>
-              </div>
-              <div className="col-5 m-2">
-                <div className="Detail card p-0">
-                    <div className="Title-Detail d-flex justify-content-center">
-                      Base de datos
-                    </div>
-                    <div className="row">
-                        <div className="col pr-0">
-                              <div className="row d-flex justify-content-center">
-                                Antes
-                              </div>
-                              <div className="d-flex justify-content-center p-3 Detail-Before">
-                                SQL lite
-                              </div>
-                        </div>
-                        <div className="col pl-0">
-                              <div className="row d-flex justify-content-center">
-                                Despues
-                              </div>
-                              <div className="d-flex justify-content-center p-3 Detail-After">
-                                Oracle
-                              </div>
-                        </div>
-                    </div>
-                </div>
-              </div>
-            </div>
-          </DialogPopup>
+          <DetailChangePopup onClose={handleClose} open={open} id="ID 72129398" response={response}/>
       </div>
     </FrameComponent>
   );

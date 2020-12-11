@@ -64,7 +64,7 @@ export default function DialogPopup(props) {
 
   return (
     <div>
-      <Dialog onClose={handleClose} fullWidth={true} aria-labelledby="customized-dialog-title" open={open}>
+      <Dialog onClose={handleClose} maxWidth="xl" fullWidth={true} aria-labelledby="customized-dialog-title" open={open}>
         {props.dialogTitle && <DialogTitle id="customized-dialog-title" onClose={handleClose}>
           {props.dialogTitle}
         </DialogTitle>}
