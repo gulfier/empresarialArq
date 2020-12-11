@@ -34,14 +34,11 @@ public abstract class AbstractMegaEntity<T> extends AbstractEntity<T>
   @Temporal(TemporalType.TIMESTAMP)
   protected Date creation;
 
-  @Column(name = "DT_MODIFIED", nullable = false)
-  @Temporal(TemporalType.TIMESTAMP)
-  protected Date modified;
+
 
   @Column(name = "DS_USER_CREATION", nullable = false)
   protected String userCreation;
 
-  @Column(name = "DS_USER_MODIFIED", nullable = false)
-  protected String userModified;
+
 
 }

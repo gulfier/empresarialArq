@@ -28,7 +28,7 @@ public final class PagingRequestUtil
     int page = 0;
     int size = 10;
     Sort sotById = Sort.by( Sort.Direction.DESC, "id" );
-    Sort sort = Sort.by( Sort.Direction.DESC, "modified" ).and( sotById );
+    Sort sort = Sort.by( Sort.Direction.DESC, "id" );
 
     if( request != null )
     {
