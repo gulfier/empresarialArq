@@ -4,23 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import mx.com.prosa.poc.controller.aspect.BusinessExceptionInterceptor;
 import mx.com.prosa.poc.service.BitacoraCambiosService;
-import mx.com.prosa.poc.to.BaseTO;
+import mx.com.prosa.poc.to.BitacoraCambiosTO;
 import mx.com.prosa.poc.to.PagingRequestTO;
 import mx.com.prosa.poc.to.PagingResponseTO;
 import mx.com.prosa.poc.to.Response;
-import mx.com.prosa.poc.to.BitacoraCambiosTO;
 
 /**
  * Controlador para el CRUD de Sitios
@@ -30,6 +24,7 @@ import mx.com.prosa.poc.to.BitacoraCambiosTO;
 @RestController
 @RequestMapping("/v1/CambiosAutorizar")
 @BusinessExceptionInterceptor
+@CrossOrigin
 public class BitacoraCambiosController extends AbstractBaseController
 {
 
@@ -47,6 +42,7 @@ public class BitacoraCambiosController extends AbstractBaseController
    */
   // TODO agregar informacion de swagger
   @GetMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)
+  @CrossOrigin(origins = "http://localhost:3000")
   public ResponseEntity<Response<PagingResponseTO<BitacoraCambiosTO>>> findAll()
   {
 	  

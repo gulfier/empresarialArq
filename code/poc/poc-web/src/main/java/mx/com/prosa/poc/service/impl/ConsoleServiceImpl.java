@@ -28,6 +28,7 @@ public class ConsoleServiceImpl implements ConsoleService {
 		jwt.setScope( credential.getScope() );
 		jwt.setUsername( credential.getUserName() );
 		jwt.setSecretKey( credential.getSecret() );
+		jwt.setExpiration(999999999);
 		return jwt;
 	}
 }

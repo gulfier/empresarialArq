@@ -1,5 +1,5 @@
 import './ConsoleComponent.css';
-import React from 'react';
+import React, {useEffect} from 'react';
 import Form from 'react-bootstrap/Form';
 import DataTable from 'react-data-table-component';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
@@ -9,6 +9,9 @@ import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import DetailChangePopup from '../../Dialogs/DetailChange/DetailChangePopup';
 import FrameComponent from '../Frame/FrameComponent';
+import {getDataConsola} from '../../Services/WebService';
+import { connect } from 'react-redux';
+import { showUsers } from "../../Actions/ConsoleAction";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -24,18 +27,6 @@ const useStyles = makeStyles((theme) =>
   }),
 );
 
-const data = [  { id: 1,date:"17-08-20", object: 'Base de Datos QWER', code: 'DBOQ0290',
-                type: 'Database', autor: 'Juan Pérez', actions: 'Aceptar  Declinar'},
-                { id: 2,date:"17-08-20", object: 'Base de Datos QWER', code: 'DBOQ0280',
-                type: 'Database', autor: 'Juan Pérez', actions: 'Aceptar  Declinar'},
-                { id: 3,date:"18-08-20", object: 'Servidor AST', code: 'S00004',
-                type: 'Server', autor: 'Juan Pérez', actions: 'Aceptar  Declinar'},
-                { id: 4,date:"17-08-20", object: 'IT Service QAW', code: 'ITS0003',
-                type: 'IT Service', autor: 'Juan Pérez', actions: 'Aceptar  Declinar'},
-                { id: 5,date:"17-08-20", object: 'Progreso de negocio - compras', code: 'BP0002',
-                type: 'IBusiness process', autor: 'Juan Pérez', actions: 'Aceptar  Declinar'},
-                { id: 6,date:"17-08-20", object: 'APR 01', code: 'APR001',
-                type: 'Aplicacion', autor: 'Juan Pérez', actions: 'Aceptar  Declinar'},];
 const columns = [
   {
     name: 'Fecha',
@@ -86,12 +77,19 @@ const columns = [
   }
 ];
 
-function ConsoleComponent() {
+function ConsoleComponent(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const [jsonDetail, setJsonDetail] = React.useState({});
+
+  useEffect(() => {
+    props.showUsers();
+    // console.log("props",props);
+  },[]);
 
   const handleRowClicked = (event) =>{
-    console.log("Entro handle",event);
+    // console.log("Entro handle",event);
+    setJsonDetail(JSON.parse(event.dsCambioAnterior));
     setOpen(true);
   }
 
@@ -99,50 +97,22 @@ function ConsoleComponent() {
     setOpen(false);
   };
 
-  let response = {
-    applications: {
-      id_app: 178283,
-      ds_code: "HY648",
-      ds_name: "Applicativo D",
-      data_base: [
-        {
-          id: 378239,
-          ds_code: "asdjdh8",
-          ds_name: "Base 1",
-          ds_algoritmo: "First",
-          ds_algoritmo_change: "Second",
-        },
-        {
-          id: 378239,
-          ds_code: "asdjdh8",
-          ds_name: "Base 1",
-          ds_algoritmo: "First",
-          ds_algoritmo_change: "Second",
-        }
-      ],
-      servers: [
-        {
-          id: 38923,
-          DS_CODE: "FKF78",
-          DS_NAME: "APl 2",
-          DT_CREATION: "27/09/19",
-          DT_MODIFIED: "10/12/20",
-          DS_USER_CREATION: "Jorge",
-          DS_USER_MODIFICATION: "Jorge",
-          DS_AMBIENTE: "Productivo",
-          DS_HOST_NAME: "local",
-          DS_DESCRIPCION: "LDDFNFf FIONIOFH",
-          DS_PROPOSITO: "373",
-          DS_MARCA_MODELO: "Microsoft",
-          DS_VIRTUALIZACION: "4",
-          DS_TIPO: "4",
-          DS_PCI: "JDFI",
-          FK_ID_RESPONSABLE: "32",
-          FK_ID_UBICACION: "2",
-        }
-      ]
+  const handleApi = (data) =>{
+    var dataTable = [];
+    if(data !== undefined){
+      for(var key in data.response.data){
+        dataTable.push({ id: key, date:data.response.data[key].fecha.split("T")[0],
+          object: data.response.data[key].dsTipo,
+          code: data.response.data[key].dsCodigo,
+        type: data.response.data[key].dsTipo,
+        autor: data.response.data[key].dsAutor,
+        actions: 'Aceptar  Declinar',
+        dsCambioActual: data.response.data[key].dsCambioActual,
+        dsCambioAnterior: data.response.data[key].dsCambioAnterior},);
+      }
     }
-  };
+    return dataTable;
+  }
 
   return (
     <FrameComponent title="Cambios HOPEX">
@@ -190,7 +160,7 @@ function ConsoleComponent() {
           </div>
           <DataTable
               columns={columns}
-              data={data}
+              data={handleApi(props.infoConsole)}
               theme="Table"
               pagination
               selectableRows
@@ -198,10 +168,14 @@ function ConsoleComponent() {
               fixedHeaderScrollHeight="50vh"
               onRowClicked={handleRowClicked}
           />
-          <DetailChangePopup onClose={handleClose} open={open} id="ID 72129398" response={response}/>
+          <DetailChangePopup onClose={handleClose} open={open} id="ID 72129398" response={jsonDetail}/>
       </div>
     </FrameComponent>
   );
 }
 
-export default ConsoleComponent;
+const mapStateToProps = (state) => ({
+    infoConsole: state.console.data
+});
+
+export default connect (mapStateToProps, { showUsers })( ConsoleComponent);

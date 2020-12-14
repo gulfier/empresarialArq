@@ -54,7 +54,7 @@ export default function DialogPopup(props) {
   const [open, setOpen] = React.useState(false);
 
   useEffect(() => {
-    console.log("props",props);
+    // console.log("props",props);
     setOpen(props.open);
   });
 

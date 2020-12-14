@@ -1,9 +1,8 @@
 package mx.com.prosa.poc.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import mx.com.prosa.poc.controller.aspect.BusinessExceptionInterceptor;
 import mx.com.prosa.poc.to.ApplicationTO;
 import mx.com.prosa.poc.to.BaseTO;
-import mx.com.prosa.poc.to.PagingRequestTO;
 import mx.com.prosa.poc.to.PagingResponseTO;
 import mx.com.prosa.poc.to.Response;
 
@@ -29,6 +27,7 @@ import mx.com.prosa.poc.to.Response;
 @RestController
 @RequestMapping("/v1/applications")
 @BusinessExceptionInterceptor
+@CrossOrigin
 public class ApplicationController extends AbstractBaseController
 {
 

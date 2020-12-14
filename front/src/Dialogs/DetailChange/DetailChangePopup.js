@@ -19,7 +19,6 @@ function DetailChangePopup(props) {
     function createFields(data){
         var fields = [];
         for(var clave in data){
-            // console.log(data[clave]);
             if(clave+"" !== "id"){
                 fields.push( <div className="row Object-table ml-1 mr-1">
                                 <div className="col-5 pr-0">
