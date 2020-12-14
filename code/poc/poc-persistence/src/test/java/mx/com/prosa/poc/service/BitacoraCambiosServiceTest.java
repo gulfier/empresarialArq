@@ -3,6 +3,7 @@ package mx.com.prosa.poc.service;
 import java.util.UUID;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -15,14 +16,15 @@ import org.springframework.transaction.annotation.Transactional;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import mx.com.prosa.poc.to.BitacoraCambiosTO;
 import mx.com.prosa.poc.to.BusinessException;
 import mx.com.prosa.poc.to.PagingRequestTO;
 import mx.com.prosa.poc.to.PagingResponseTO;
-import mx.com.prosa.poc.to.BitacoraCambiosTO;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest()
 @Transactional
+@Ignore
 public class BitacoraCambiosServiceTest
 {
   private static final Logger LOG = LoggerFactory.getLogger( BitacoraCambiosServiceTest.class );
