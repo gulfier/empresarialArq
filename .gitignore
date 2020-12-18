@@ -33,3 +33,5 @@ build/
 
 ### NPM ###
 /front/node_modules/
+/front/build/
+/front/dist/

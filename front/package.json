@@ -16,7 +16,7 @@
     "react-dom": "^17.0.1",
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.0",
+    "react-scripts": "^4.0.0",
     "react-test-renderer": "^17.0.1",
     "recharts": "^1.8.5",
     "redux": "^4.0.5",
@@ -29,7 +29,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "docker:build": "sudo docker build -t jorgeortega30/web-prosa:latest -f Dockerfile-web .",
+    "docker:run": "sudo docker run -p 3000:3000 jorgeortega30/web-prosa --name web-prosa",
+    "docker:stop": "docker rm -f react"
   },
   "eslintConfig": {
     "extends": [

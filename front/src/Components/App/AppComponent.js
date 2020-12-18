@@ -13,22 +13,22 @@ function App() {
     if (redirect == "true") {
       return <Redirect
             from="/"
-            to="/history" />;
+            to="/console" />;
     }else{
       return <Redirect
             from="/"
-            to="/login" />;
+            to="/console" />;
     }
   }
 
   return (
     <BrowserRouter>
       <div className="App">
-        {/* {renderRedirect()} */}
+        {renderRedirect()}
         <Switch>
-          <Route path='/login' component={LoginComponent} />
-          <Route path='/console' component={ConsoleComponent} />
-          <Route path='/history' component={HistoryComponent} />
+          <Route exact path='/login' component={LoginComponent} />
+          <Route exact path='/console' component={ConsoleComponent} />
+          <Route exact path='/history' component={HistoryComponent} />
         </Switch>
       </div>
     </BrowserRouter>
