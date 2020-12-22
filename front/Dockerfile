@@ -6,7 +6,7 @@ RUN node -v
 
 WORKDIR /usr/src/app
 COPY ./package.json ./
-COPY ../
+COPY . ./
 RUN npm install
 RUN npm i react-scripts
 RUN npm run build
