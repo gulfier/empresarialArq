@@ -1,0 +1,25 @@
+kind: DeploymentConfig
+apiVersion: v1
+metadata:
+  name: arquitectura-empresarial
+spec:
+  template:
+    metadata:
+      labels:
+        name: arquitectura-empresarial
+    spec:
+      securityContext:
+      containers:
+        - name: arquitectura-empresarial
+          image: elmorgendorffer/arquitectura-empresarial:master-1.1
+          ports:
+            - containerPort: 6002
+              protocol: TCP
+  replicas: 1
+  selector:
+   name: arquitectura-empresarial
+  triggers:
+   - type: ConfigChange
+  strategy:
+   type: Rolling
+
