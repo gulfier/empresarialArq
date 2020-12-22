@@ -17,7 +17,7 @@ function App() {
     }else{
       return <Redirect
             from="/"
-            to="/console" />;
+            to="/login" />;
     }
   }
 

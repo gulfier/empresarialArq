@@ -1,9 +1,29 @@
 import './LoginComponent.css';
+import React, {useEffect, useState} from 'react';
+import { connect } from 'react-redux';
+import { getToken } from "../../Actions/LoginAction";
 
-function LoginComponent() {
+function LoginComponent(props) {
+
+  const [dataLogin, setData] = useState({
+    user: '',
+    password: ''
+  });
+
+  useEffect(() => {
+  },[]);
+
+  const handleInputChange = (event) => {
+    // console.log(event.target.name)
+    // console.log(event.target.value)
+    setData({
+        ...dataLogin,
+        [event.target.name] : event.target.value
+    })
+}
 
   function login(){
-    window.localStorage.setItem("login",true);
+    props.getToken(dataLogin.user,dataLogin.password);
   }
 
   return (
@@ -15,11 +35,11 @@ function LoginComponent() {
           <form>
             <div className="form-group">
               <label for="exampleInputEmail1">Nombre de usuario</label>
-              <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder=""/>
+              <input type="email" className="form-control" id="exampleInputEmail1" onChange={handleInputChange} name="name" aria-describedby="emailHelp" placeholder=""/>
             </div>
             <div className="form-group">
               <label for="exampleInputPassword1">Contraseña</label>
-              <input type="password" className="form-control" id="exampleInputPassword1" placeholder=""/>
+              <input type="password" className="form-control" id="exampleInputPassword1" onChange={handleInputChange} name="password" placeholder=""/>
             </div>
             <small id="emailHelp" className="form-text text-muted">Ingresar con sus credenciales de PROSA</small>
             <div className="mt-4 d-flex justify-content-end">
@@ -32,4 +52,12 @@ function LoginComponent() {
   );
 }
 
-export default LoginComponent;
+function mapStateToProps (state) {
+  console.log("token",state);
+  return{
+    ...state,
+    token: state.login.data
+  };
+}
+
+export default connect (mapStateToProps, { getToken })( LoginComponent);

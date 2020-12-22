@@ -9,9 +9,8 @@ import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import DetailChangePopup from '../../Dialogs/DetailChange/DetailChangePopup';
 import FrameComponent from '../Frame/FrameComponent';
-import {getDataConsola} from '../../Services/WebService';
 import { connect } from 'react-redux';
-import { showUsers } from "../../Actions/ConsoleAction";
+import { getDataConsole } from "../../Actions/ConsoleAction";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -83,7 +82,7 @@ function ConsoleComponent(props) {
   const [jsonDetail, setJsonDetail] = React.useState({});
 
   useEffect(() => {
-    props.showUsers();
+    props.getDataConsole();
     // console.log("props",props);
   },[]);
 
@@ -178,4 +177,4 @@ const mapStateToProps = (state) => ({
     infoConsole: state.console.data
 });
 
-export default connect (mapStateToProps, { showUsers })( ConsoleComponent);
+export default connect (mapStateToProps, { getDataConsole })( ConsoleComponent);

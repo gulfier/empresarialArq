@@ -1,2 +1,3 @@
 export const GET_DATA_CONSOLE = "GET_DATA_CONSOLE";
-export const TERMINAR_REQUEST = "TERMINAR_REQUEST";
+export const ERROR_REQUEST = "ERROR_REQUEST";
+export const GET_LOGIN = 'GET_LOGIN';
