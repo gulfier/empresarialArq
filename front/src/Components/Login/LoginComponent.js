@@ -23,7 +23,9 @@ function LoginComponent(props) {
 }
 
   function login(){
-    props.getToken(dataLogin.user,dataLogin.password);
+    // props.getToken(dataLogin.user,dataLogin.password);
+    window.localStorage.setItem("token","Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3JnZS5vcnRlZ2FoQGF4aXR5LmNvbSIsImF1ZCI6IkludGVyZmF6Ok1lZ2EvUmVtZWR5Iiwic2NwIjoiYXBpL3BlcnNpc3RlbmNlIiwiaXNzIjoiaHR0cHM6Ly93d3cucHJvc2FtZXhpY28ubXgvIiwiZXhwIjo2MTYwOTI3MTUxMSwiaWF0IjoxNjA5MjcxNTcxfQ.jqgGECc06AavD95RgImqzFmRAPLEgVwLi5Hxn2Aqixs");
+    window.localStorage.setItem("login",true);
   }
 
   return (

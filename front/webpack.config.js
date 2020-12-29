@@ -1,6 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 
 const config = {
     entry: './src/index.js',
@@ -15,20 +15,18 @@ const config = {
     devServer: {
         historyApiFallback: true,
     },
+    optimization: {
+        minimize: true,
+        minimizer: [new TerserPlugin()],
+    },
     module: {
+        noParse: [/bootstrap.min.css/],
         rules: [
             {
                 test: /\.(js)$/,
                 use: ['babel-loader'],
                 exclude: /node_modules/
             },
-            // {
-            //     test: /.(css|less|scss|sass)$/,
-            //     use: ExtractTextPlugin.extract({
-            //       fallback: 'style-loader',
-            //       use: ["style-loader", 'css-loader', 'postcss-loader', 'less-loader', 'sass-loader'], // This doesn't work
-            //     })
-            // },
             {
                 test: /\.(css)$/,
                 use: [
@@ -38,21 +36,6 @@ const config = {
                     {
                         loader: "css-loader"
                     },
-                    // {
-                    //     loader: 'postcss-loader', // Run post css actions
-                    //     options: {
-                    //         postcssOptions: {
-                    //             plugins: [
-                    //                 require('precss'),
-                    //                 require('autoprefixer')
-                    //               ]
-                            
-                    //         }
-                    //     }
-                    // },
-                    // {
-                    //     loader: "sass-loader"
-                    // }
                 ],
                 exclude: /node_modules/
             },
