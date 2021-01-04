@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -26,6 +27,7 @@ import mx.com.prosa.poc.to.PagingResponseTO;
 @RunWith(SpringRunner.class)
 @SpringBootTest()
 @Transactional
+@Ignore
 public class ApplicationServiceTest
 {
 

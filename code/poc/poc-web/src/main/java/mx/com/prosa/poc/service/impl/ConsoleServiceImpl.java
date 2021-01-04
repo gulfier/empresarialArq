@@ -61,8 +61,6 @@ public class ConsoleServiceImpl implements ConsoleService {
 	
 	public String findUniqueMember(final String username) throws Exception {
         final ConnectionFactory connection = loginLdap();
-        
-        String ldapGroups = "ou=People,dc=example,dc=com";
 
         String user = "";
         Connection conn = null;
@@ -70,18 +68,18 @@ public class ConsoleServiceImpl implements ConsoleService {
             logger.info(" connection [{}]", connection);
             logger.info(" connection [{}]", connection.getConnection());
             conn = connection.getConnection();
-            logger.info(" conn [{}]", conn);
+            logger.info("conn: [{}]", conn);
             conn.open();
             logger.info(" conn  open [{}]", conn);
             final SearchFilter filter = new SearchFilter("(cn=*)");
             logger.info(" filter [{}]", filter);
-            logger.info(" conn [{}]", conn.isOpen());
+            logger.info("conn [{}]", conn.isOpen());
             final SearchOperation search = new SearchOperation(conn);
             logger.info(" search [{}]", search);
             logger.info("ldapGroups [{}]", ldapGroups);
-            final Response searchRequest = search.execute(new SearchRequest(ldapGroups, filter));
+            final Response<SearchResult> searchRequest = search.execute(new SearchRequest(ldapGroups, filter));
             logger.info("response [{}]", searchRequest);
-            final SearchResult result = (SearchResult) searchRequest.getResult();
+            final SearchResult result = searchRequest.getResult();
             logger.info(" result [{}]", result);
 
             for (final LdapEntry entry : result.getEntries()) { // if you're expecting multiple entries
@@ -117,6 +115,10 @@ public class ConsoleServiceImpl implements ConsoleService {
         }
         catch (final LdapException e) {
             logger.error(e.getMessage());
+            logger.error(e.getMatchedDn());
+            logger.error(e.getResultCode().toString());
+            logger.error(e.getStackTrace().toString());
+            logger.error(e.getSuppressed().toString());
             return "";
         } finally {
             conn.close();
@@ -130,7 +132,7 @@ public class ConsoleServiceImpl implements ConsoleService {
 		String user = "";
         Connection conn = null;
         try {
-        	validPasswordUser(credential.getUserName(),credential.getPassword());
+        	validPasswordUser(credential.getPassword(),credential.getUserName());
         	String base = "";
             conn = connection.getConnection();
             logger.info(" conn [{}]", conn);
@@ -142,9 +144,9 @@ public class ConsoleServiceImpl implements ConsoleService {
             logger.info(" conn [{}]", conn.isOpen());
             final SearchOperation search = new SearchOperation(conn);
             logger.info(" search [{}]", search);
-            final Response searchRequest = search.execute(new SearchRequest(base, filter));
+            final Response<SearchResult> searchRequest = search.execute(new SearchRequest(base, filter));
             logger.info("response [{}]", searchRequest);
-            final SearchResult result = (SearchResult) searchRequest.getResult();
+            final SearchResult result = searchRequest.getResult();
             logger.info(" result [{}]", result);
             for (final LdapEntry entry : result.getEntries()) { // if you're expecting multiple entries
                 logger.info(" entry [{}]", entry);
@@ -189,13 +191,17 @@ public class ConsoleServiceImpl implements ConsoleService {
             final AuthenticationResponse response2 = auth2.authenticate(authenticationRequest2);
             if (response2 == null || response2
                     .getAuthenticationResultCode() != AuthenticationResultCode.AUTHENTICATION_HANDLER_SUCCESS) {
-                logger.error(response2.toString());
-//                throw new GeneralException(ErrorCode.INCORRECT_PASS, "Usuario y/o contraseña incorrecto");
-            }
+		                logger.error(response2.toString());
+		            	logger.error("Usuario y/o contraseña incorrecto");
+		            }
 
         } catch (final LdapException e) {
             logger.error(e.getMessage());
-//            throw new GeneralException(ErrorCode.INCORRECT_PASS, "Usuario y/o contraseña incorrecto");
+            logger.error(e.getMatchedDn());
+            logger.error(e.getResultCode().toString());
+            logger.error(e.getStackTrace().toString());
+            logger.error(e.getSuppressed().toString());
+        	logger.error("Usuario y/o contraseña incorrecto");
         }
     }
 	
@@ -210,8 +216,7 @@ public class ConsoleServiceImpl implements ConsoleService {
     	cc.setSslConfig(sslconf);
     	cc.setUseSSL(true);
     	cc.setUseStartTLS(true);
-    	final ConnectionFactory connection = new DefaultConnectionFactory(cc);
-    	return connection;
+    	return new DefaultConnectionFactory(cc);
 	}
 	
 	private Jwt createJwt(CredentialTO credential){
