@@ -38,27 +38,48 @@ import mx.com.prosa.poc.to.TokenTO;
 import mx.com.prosa.poc.util.Jwt;
 import mx.com.prosa.poc.util.JwtUtil;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ConsoleServiceImpl.
+ */
 @Service
 public class ConsoleServiceImpl implements ConsoleService {
 	
+	/** The logger. */
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
+	/** The ldap params. */
 	@Value("${ldap.key.params}")
     private String ldapParams;
 
+    /** The ldap url. */
     @Value("${ldap.key.url}")
     private String ldapUrl;
+    
+    /** The ldapsecurity principal. */
     @Value("${ldap.key.security.principal}")
     private String ldapsecurityPrincipal;
+    
+    /** The ldapsecurity credencial. */
     @Value("${ldap.key.security.credencial}")
     private String ldapsecurityCredencial;
+    
+    /** The ldap base. */
     @Value("${ldap.key.base}")
     private String ldapBase;
 
 
+    /** The ldap groups. */
     @Value("${ldap.key.params.groups}")
     private String ldapGroups;
 	
+	/**
+	 * Find unique member.
+	 *
+	 * @param username the username
+	 * @return the string
+	 * @throws Exception the exception
+	 */
 	public String findUniqueMember(final String username) throws Exception {
         final ConnectionFactory connection = loginLdap();
 
@@ -125,6 +146,12 @@ public class ConsoleServiceImpl implements ConsoleService {
         }
     }
 	
+	/**
+	 * Creates the token.
+	 *
+	 * @param credential the credential
+	 * @return the token TO
+	 */
 	public TokenTO createToken(CredentialTO credential) {
 		final ConnectionFactory connection = loginLdap();
 		;
@@ -171,6 +198,12 @@ public class ConsoleServiceImpl implements ConsoleService {
 		return response;
 	}
 	
+	/**
+	 * Valid password user.
+	 *
+	 * @param password the password
+	 * @param user the user
+	 */
 	private void validPasswordUser(final String password, final String user) {
 		ConnectionFactory connection = loginLdap();
 		try {
@@ -205,6 +238,11 @@ public class ConsoleServiceImpl implements ConsoleService {
         }
     }
 	
+	/**
+	 * Login ldap.
+	 *
+	 * @return the connection factory
+	 */
 	private ConnectionFactory loginLdap() {
 		ConnectionConfig cc = new ConnectionConfig(ldapUrl);
     	cc.setConnectionInitializer(new BindConnectionInitializer(ldapParams, new Credential(ldapsecurityCredencial)));
@@ -219,6 +257,12 @@ public class ConsoleServiceImpl implements ConsoleService {
     	return new DefaultConnectionFactory(cc);
 	}
 	
+	/**
+	 * Creates the jwt.
+	 *
+	 * @param credential the credential
+	 * @return the jwt
+	 */
 	private Jwt createJwt(CredentialTO credential){
 		Jwt jwt = new Jwt();
 		jwt.setAudience( credential.getAudience() );
