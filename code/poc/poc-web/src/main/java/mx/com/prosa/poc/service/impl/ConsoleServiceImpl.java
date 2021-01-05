@@ -38,31 +38,50 @@ import mx.com.prosa.poc.to.TokenTO;
 import mx.com.prosa.poc.util.Jwt;
 import mx.com.prosa.poc.util.JwtUtil;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ConsoleServiceImpl.
+ */
 @Service
 public class ConsoleServiceImpl implements ConsoleService {
 	
+	/** The logger. */
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
+	/** The ldap params. */
 	@Value("${ldap.key.params}")
     private String ldapParams;
 
+    /** The ldap url. */
     @Value("${ldap.key.url}")
     private String ldapUrl;
+    
+    /** The ldapsecurity principal. */
     @Value("${ldap.key.security.principal}")
     private String ldapsecurityPrincipal;
+    
+    /** The ldapsecurity credencial. */
     @Value("${ldap.key.security.credencial}")
     private String ldapsecurityCredencial;
+    
+    /** The ldap base. */
     @Value("${ldap.key.base}")
     private String ldapBase;
 
 
+    /** The ldap groups. */
     @Value("${ldap.key.params.groups}")
     private String ldapGroups;
 	
+	/**
+	 * Find unique member.
+	 *
+	 * @param username the username
+	 * @return the string
+	 * @throws Exception the exception
+	 */
 	public String findUniqueMember(final String username) throws Exception {
         final ConnectionFactory connection = loginLdap();
-        
-        String ldapGroups = "ou=People,dc=example,dc=com";
 
         String user = "";
         Connection conn = null;
@@ -70,18 +89,18 @@ public class ConsoleServiceImpl implements ConsoleService {
             logger.info(" connection [{}]", connection);
             logger.info(" connection [{}]", connection.getConnection());
             conn = connection.getConnection();
-            logger.info(" conn [{}]", conn);
+            logger.info("conn: [{}]", conn);
             conn.open();
             logger.info(" conn  open [{}]", conn);
             final SearchFilter filter = new SearchFilter("(cn=*)");
             logger.info(" filter [{}]", filter);
-            logger.info(" conn [{}]", conn.isOpen());
+            logger.info("conn [{}]", conn.isOpen());
             final SearchOperation search = new SearchOperation(conn);
             logger.info(" search [{}]", search);
             logger.info("ldapGroups [{}]", ldapGroups);
-            final Response searchRequest = search.execute(new SearchRequest(ldapGroups, filter));
+            final Response<SearchResult> searchRequest = search.execute(new SearchRequest(ldapGroups, filter));
             logger.info("response [{}]", searchRequest);
-            final SearchResult result = (SearchResult) searchRequest.getResult();
+            final SearchResult result = searchRequest.getResult();
             logger.info(" result [{}]", result);
 
             for (final LdapEntry entry : result.getEntries()) { // if you're expecting multiple entries
@@ -117,12 +136,22 @@ public class ConsoleServiceImpl implements ConsoleService {
         }
         catch (final LdapException e) {
             logger.error(e.getMessage());
+            logger.error(e.getMatchedDn());
+            logger.error(e.getResultCode().toString());
+            logger.error(e.getStackTrace().toString());
+            logger.error(e.getSuppressed().toString());
             return "";
         } finally {
             conn.close();
         }
     }
 	
+	/**
+	 * Creates the token.
+	 *
+	 * @param credential the credential
+	 * @return the token TO
+	 */
 	public TokenTO createToken(CredentialTO credential) {
 		final ConnectionFactory connection = loginLdap();
 		;
@@ -130,7 +159,7 @@ public class ConsoleServiceImpl implements ConsoleService {
 		String user = "";
         Connection conn = null;
         try {
-        	validPasswordUser(credential.getUserName(),credential.getPassword());
+        	validPasswordUser(credential.getPassword(),credential.getUserName());
         	String base = "";
             conn = connection.getConnection();
             logger.info(" conn [{}]", conn);
@@ -142,9 +171,9 @@ public class ConsoleServiceImpl implements ConsoleService {
             logger.info(" conn [{}]", conn.isOpen());
             final SearchOperation search = new SearchOperation(conn);
             logger.info(" search [{}]", search);
-            final Response searchRequest = search.execute(new SearchRequest(base, filter));
+            final Response<SearchResult> searchRequest = search.execute(new SearchRequest(base, filter));
             logger.info("response [{}]", searchRequest);
-            final SearchResult result = (SearchResult) searchRequest.getResult();
+            final SearchResult result = searchRequest.getResult();
             logger.info(" result [{}]", result);
             for (final LdapEntry entry : result.getEntries()) { // if you're expecting multiple entries
                 logger.info(" entry [{}]", entry);
@@ -169,6 +198,12 @@ public class ConsoleServiceImpl implements ConsoleService {
 		return response;
 	}
 	
+	/**
+	 * Valid password user.
+	 *
+	 * @param password the password
+	 * @param user the user
+	 */
 	private void validPasswordUser(final String password, final String user) {
 		ConnectionFactory connection = loginLdap();
 		try {
@@ -189,16 +224,25 @@ public class ConsoleServiceImpl implements ConsoleService {
             final AuthenticationResponse response2 = auth2.authenticate(authenticationRequest2);
             if (response2 == null || response2
                     .getAuthenticationResultCode() != AuthenticationResultCode.AUTHENTICATION_HANDLER_SUCCESS) {
-                logger.error(response2.toString());
-//                throw new GeneralException(ErrorCode.INCORRECT_PASS, "Usuario y/o contraseña incorrecto");
-            }
+		                logger.error(response2.toString());
+		            	logger.error("Usuario y/o contraseña incorrecto");
+		            }
 
         } catch (final LdapException e) {
             logger.error(e.getMessage());
-//            throw new GeneralException(ErrorCode.INCORRECT_PASS, "Usuario y/o contraseña incorrecto");
+            logger.error(e.getMatchedDn());
+            logger.error(e.getResultCode().toString());
+            logger.error(e.getStackTrace().toString());
+            logger.error(e.getSuppressed().toString());
+        	logger.error("Usuario y/o contraseña incorrecto");
         }
     }
 	
+	/**
+	 * Login ldap.
+	 *
+	 * @return the connection factory
+	 */
 	private ConnectionFactory loginLdap() {
 		ConnectionConfig cc = new ConnectionConfig(ldapUrl);
     	cc.setConnectionInitializer(new BindConnectionInitializer(ldapParams, new Credential(ldapsecurityCredencial)));
@@ -210,10 +254,15 @@ public class ConsoleServiceImpl implements ConsoleService {
     	cc.setSslConfig(sslconf);
     	cc.setUseSSL(true);
     	cc.setUseStartTLS(true);
-    	final ConnectionFactory connection = new DefaultConnectionFactory(cc);
-    	return connection;
+    	return new DefaultConnectionFactory(cc);
 	}
 	
+	/**
+	 * Creates the jwt.
+	 *
+	 * @param credential the credential
+	 * @return the jwt
+	 */
 	private Jwt createJwt(CredentialTO credential){
 		Jwt jwt = new Jwt();
 		jwt.setAudience( credential.getAudience() );

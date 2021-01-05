@@ -18,12 +18,22 @@ public final class SupplierBusinessException
   private static final String IT_SERVICE_NOT_FOUND_MESSAGE = "IT Service not found";
 
   private static final String APPLICATION_NOT_FOUND_MESSAGE = "Application not found";
+  
+  private static final String ACTOR_NOT_FOUND_MESSAGE = "Actor not found";
 
   private SupplierBusinessException()
   {
     // Se ofusca el constructor
   }
 
+  public static final Supplier<BusinessException> ACTOR_NOT_FOUND = () -> {
+	BusinessException e = new BusinessException( ACTOR_NOT_FOUND_MESSAGE );
+	e.getError().setId( 404L );
+	e.getError().setNotFound( true );
+	e.getError().setDescription( ACTOR_NOT_FOUND_MESSAGE );
+	return e;
+  };
+  
   public static final Supplier<BusinessException> APPLICATION_NOT_FOUND = () -> {
     BusinessException e = new BusinessException( APPLICATION_NOT_FOUND_MESSAGE );
     e.getError().setId( 404L );

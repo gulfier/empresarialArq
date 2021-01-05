@@ -1,9 +1,17 @@
 package mx.com.prosa.poc.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import java.math.BigDecimal;
 import java.sql.Timestamp;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 
 /**
@@ -63,8 +71,9 @@ public class TblUbicaciones implements Serializable {
 	@Column(name="DT_MODIFIED")
 	private Timestamp dtModified;
 
-	@Column(name="FK_ID_RESPONSABLE")
-	private BigDecimal fkIdResponsable;
+	@ManyToOne
+	@JoinColumn(name="FK_ID_RESPONSABLE", referencedColumnName = "PK_ID_ACTOR", nullable = false, insertable = true, updatable = true)
+	private TblActore fkIdResponsable;
 
 	public TblUbicaciones() {
 	}
@@ -189,11 +198,11 @@ public class TblUbicaciones implements Serializable {
 		this.dtModified = dtModified;
 	}
 
-	public BigDecimal getFkIdResponsable() {
+	public TblActore getFkIdResponsable() {
 		return this.fkIdResponsable;
 	}
 
-	public void setFkIdResponsable(BigDecimal fkIdResponsable) {
+	public void setFkIdResponsable(TblActore fkIdResponsable) {
 		this.fkIdResponsable = fkIdResponsable;
 	}
 
