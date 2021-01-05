@@ -17,7 +17,7 @@ public class TblBaseDatos implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@SequenceGenerator(name="SEQ_BASE_DATOS", sequenceName="SEQ_BASE_DATOS")
 	@Column(name="PK_ID_BASE")
 	private long pkIdBase;
 

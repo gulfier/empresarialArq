@@ -1,8 +1,9 @@
 package mx.com.prosa.poc.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.sql.Timestamp;
+
+import javax.persistence.*;
 
 
 /**
@@ -16,9 +17,8 @@ public class TblAplicaciones implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="PK_ID_APLICACION")
-	private long pkIdAplicacion;
+	private Long pkIdAplicacion;
 
 	@Column(name="DS_CLASIFICACION")
 	private String dsClasificacion;
@@ -62,6 +62,8 @@ public class TblAplicaciones implements Serializable {
 
 	@Column(name="DT_MODIFIED")
 	private Timestamp dtModified;
+	
+
 
 	public TblAplicaciones() {
 	}

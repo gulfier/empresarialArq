@@ -30,7 +30,7 @@ public class BitacoraCambiosDO  implements Serializable
 	 */
 	private static final long serialVersionUID = 1L;
 
-@Id
+  @Id
   @Column(name = "PK_ID_BITACORA")
   private Long id;
   

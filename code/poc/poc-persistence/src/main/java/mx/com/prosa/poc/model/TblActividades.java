@@ -11,7 +11,6 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="TBL_ACTIVIDADES")
-@NamedQuery(name="TblActividades.findAll", query="SELECT t FROM TblActividades t")
 public class TblActividades implements Serializable {
 	private static final long serialVersionUID = 1L;
 

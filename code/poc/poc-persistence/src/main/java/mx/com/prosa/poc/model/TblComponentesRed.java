@@ -11,7 +11,6 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name="TBL_COMPONENTES_RED")
-@NamedQuery(name="TblComponentesRed.findAll", query="SELECT t FROM TblComponentesRed t")
 public class TblComponentesRed implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -24,6 +23,7 @@ public class TblComponentesRed implements Serializable {
 	@Column(name="DS_SERVICIO")
 	private String dsServicio;
 
+	@Id
 	@Column(name="FK_ID_IP")
 	private BigDecimal fkIdIp;
 

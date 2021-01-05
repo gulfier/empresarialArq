@@ -52,7 +52,6 @@ public class BitacoraCambiosController extends AbstractBaseController
     request.setUser( super.getUser() );
     
     boolean as = isQuery();
-    System.out.println("SSS__________________" + as);
 
     PagingResponseTO<BitacoraCambiosTO> pagingResponseTO = null;
 
