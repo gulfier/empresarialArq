@@ -1,7 +1,5 @@
 package mx.com.prosa.poc.service.impl;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +18,6 @@ import mx.com.prosa.poc.util.SupplierBusinessException;
  */
 @Service
 public class UbicacionesServiceImpl implements UbicacionesService {
-	
-	/** The logger. */
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	/** The ubicaciones repository. */
 	@Autowired

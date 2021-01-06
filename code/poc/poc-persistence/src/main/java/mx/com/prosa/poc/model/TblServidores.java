@@ -1,9 +1,15 @@
 package mx.com.prosa.poc.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import java.math.BigDecimal;
 import java.sql.Timestamp;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 
 /**
@@ -64,10 +70,10 @@ public class TblServidores implements Serializable {
 	private Timestamp dtModified;
 
 	@Column(name="FK_ID_RESPONSABLE")
-	private BigDecimal fkIdResponsable;
+	private TblActores fkIdResponsable;
 
 	@Column(name="FK_ID_UBICACION")
-	private BigDecimal fkIdUbicacion;
+	private TblUbicaciones fkIdUbicacion;
 
 	public TblServidores() {
 	}
@@ -192,19 +198,19 @@ public class TblServidores implements Serializable {
 		this.dtModified = dtModified;
 	}
 
-	public BigDecimal getFkIdResponsable() {
+	public TblActores getFkIdResponsable() {
 		return this.fkIdResponsable;
 	}
 
-	public void setFkIdResponsable(BigDecimal fkIdResponsable) {
+	public void setFkIdResponsable(TblActores fkIdResponsable) {
 		this.fkIdResponsable = fkIdResponsable;
 	}
 
-	public BigDecimal getFkIdUbicacion() {
+	public TblUbicaciones getFkIdUbicacion() {
 		return this.fkIdUbicacion;
 	}
 
-	public void setFkIdUbicacion(BigDecimal fkIdUbicacion) {
+	public void setFkIdUbicacion(TblUbicaciones fkIdUbicacion) {
 		this.fkIdUbicacion = fkIdUbicacion;
 	}
 
