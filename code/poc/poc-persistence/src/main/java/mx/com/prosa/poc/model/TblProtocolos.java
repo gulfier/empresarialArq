@@ -16,7 +16,8 @@ public class TblProtocolos implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@SequenceGenerator(name = "SEQ_PROTOCOLO", sequenceName = "SEQ_PROTOCOLO", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(generator = "SEQ_PROTOCOLO")
 	@Column(name="PK_ID_PROTOCOLO")
 	private long pkIdProtocolo;
 
@@ -26,8 +27,9 @@ public class TblProtocolos implements Serializable {
 	@Column(name="DS_VERSION")
 	private String dsVersion;
 
-	@Column(name="FK_ID_CIFRADO")
-	private BigDecimal fkIdCifrado;
+	@ManyToOne
+	@JoinColumn(name="FK_ID_CIFRADO", referencedColumnName = "PK_ID_CIFRADO", nullable = false, insertable = true, updatable = true)
+	private TblNivelesCifrado TblNivelesCifrado;
 
 	public TblProtocolos() {
 	}
@@ -56,12 +58,14 @@ public class TblProtocolos implements Serializable {
 		this.dsVersion = dsVersion;
 	}
 
-	public BigDecimal getFkIdCifrado() {
-		return this.fkIdCifrado;
+	public TblNivelesCifrado getTblNivelesCifrado() {
+		return TblNivelesCifrado;
 	}
 
-	public void setFkIdCifrado(BigDecimal fkIdCifrado) {
-		this.fkIdCifrado = fkIdCifrado;
+	public void setTblNivelesCifrado(TblNivelesCifrado tblNivelesCifrado) {
+		TblNivelesCifrado = tblNivelesCifrado;
 	}
+
+
 
 }
