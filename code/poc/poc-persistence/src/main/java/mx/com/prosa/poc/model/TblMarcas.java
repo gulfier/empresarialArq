@@ -15,7 +15,8 @@ public class TblMarcas implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@SequenceGenerator(name = "SEQ_MARCAS", sequenceName = "SEQ_MARCAS", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(generator = "SEQ_MARCAS")
 	@Column(name="PK_ID_MARCA")
 	private long pkIdMarca;
 
