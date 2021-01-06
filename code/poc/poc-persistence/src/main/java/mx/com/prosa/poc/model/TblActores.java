@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 @Entity
 @Table(name="TBL_ACTORES")
 @NamedQuery(name="TblActore.findAll", query="SELECT t FROM TblActore t")
-public class TblActore implements Serializable {
+public class TblActores implements Serializable {
 	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
@@ -63,7 +63,7 @@ public class TblActore implements Serializable {
 	/**
 	 * Instantiates a new tbl actore.
 	 */
-	public TblActore() {
+	public TblActores() {
 	}
 
 	/**

@@ -6,14 +6,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import mx.com.prosa.poc.model.TblActore;
+import mx.com.prosa.poc.model.TblActores;
 import mx.com.prosa.poc.model.TblUbicaciones;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Interface TblActorRepository.
  */
-public interface TblActorRepository extends JpaRepository<TblActore, Long>  {
+public interface TblActorRepository extends JpaRepository<TblActores, Long>  {
 	
 	/**
 	 * Gets the by fiid.

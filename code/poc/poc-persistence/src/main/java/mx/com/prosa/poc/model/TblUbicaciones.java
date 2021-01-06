@@ -73,7 +73,7 @@ public class TblUbicaciones implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name="FK_ID_RESPONSABLE", referencedColumnName = "PK_ID_ACTOR", nullable = false, insertable = true, updatable = true)
-	private TblActore fkIdResponsable;
+	private TblActores fkIdResponsable;
 
 	public TblUbicaciones() {
 	}
@@ -198,11 +198,11 @@ public class TblUbicaciones implements Serializable {
 		this.dtModified = dtModified;
 	}
 
-	public TblActore getFkIdResponsable() {
+	public TblActores getFkIdResponsable() {
 		return this.fkIdResponsable;
 	}
 
-	public void setFkIdResponsable(TblActore fkIdResponsable) {
+	public void setFkIdResponsable(TblActores fkIdResponsable) {
 		this.fkIdResponsable = fkIdResponsable;
 	}
 
