@@ -21,6 +21,6 @@ public interface TblActorRepository extends JpaRepository<TblActores, Long>  {
 	 * @param fiid the fiid
 	 * @return the by fiid
 	 */
-	@Query(value = "select e from TblActore e where e.pkIdActor = :fiid")
+	@Query(value = "select e from TblActores e where e.pkIdActor = :fiid")
 	List<TblUbicaciones> getByFiid(@Param("fiid") String fiid);
 }

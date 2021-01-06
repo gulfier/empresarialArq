@@ -1,6 +1,7 @@
 package mx.com.prosa.poc.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import mx.com.prosa.poc.model.TblBaseDatos;
 import mx.com.prosa.poc.model.TblTablas;
@@ -14,6 +15,7 @@ import mx.com.prosa.poc.util.SupplierBusinessException;
 /**
  * The Class TablasServiceImpl.
  */
+@Service
 public class TablasServiceImpl implements TablasService {
 
 	/** The tbl tablas repository. */

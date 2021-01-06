@@ -20,6 +20,6 @@ public interface TblUbicacionesRepository extends JpaRepository<TblUbicaciones, 
 	 * @param fiid the fiid
 	 * @return the by fiid
 	 */
-	@Query(value = "select e from TBL_UBICACIONES e where e.pkIdUbicacion = :fiid")
+	@Query(value = "select e from TblUbicaciones e where e.pkIdUbicacion = :fiid")
 	List<TblUbicaciones> getByFiid(@Param("fiid") String fiid);
 }

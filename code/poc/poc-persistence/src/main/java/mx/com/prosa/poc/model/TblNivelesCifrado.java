@@ -12,10 +12,15 @@ import javax.persistence.*;
 @Table(name="TBL_NIVELES_CIFRADO")
 @NamedQuery(name="TblNivelesCifrado.findAll", query="SELECT t FROM TblNivelesCifrado t")
 public class TblNivelesCifrado implements Serializable {
-	private static final long serialVersionUID = 1L;
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3698407235004657237L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@SequenceGenerator(name = "SEQ_NIVEL_CIFRADO", sequenceName = "SEQ_NIVEL_CIFRADO", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(generator = "SEQ_NIVEL_CIFRADO")
 	@Column(name="PK_ID_CIFRADO")
 	private long pkIdCifrado;
 
