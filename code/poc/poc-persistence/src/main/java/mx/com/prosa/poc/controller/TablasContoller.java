@@ -11,24 +11,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import mx.com.prosa.poc.controller.aspect.BusinessExceptionInterceptor;
-import mx.com.prosa.poc.service.UbicacionesService;
+import mx.com.prosa.poc.service.TablasService;
 import mx.com.prosa.poc.to.Response;
-import mx.com.prosa.poc.to.UbicacionTO;
+import mx.com.prosa.poc.to.TablasTO;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class UbicacionesController.
+ * The Class TablasContoller.
  */
 @RestController
-@RequestMapping("/v1/location")
+@RequestMapping("/v1/table")
 @BusinessExceptionInterceptor
 @CrossOrigin
-public class UbicacionesController extends AbstractBaseController {
+public class TablasContoller extends AbstractBaseController {
 	
-	/** The ubicaciones service. */
+	/** The tablas servie. */
 	@Autowired
-	private UbicacionesService ubicacionesService;
-
+	private TablasService tablasServie;
+	
 	/**
 	 * Save.
 	 *
@@ -36,14 +36,14 @@ public class UbicacionesController extends AbstractBaseController {
 	 * @return the response entity
 	 */
 	@PostMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Response<UbicacionTO>> save(  @RequestBody UbicacionTO request) {
+	public ResponseEntity<Response<TablasTO>> save(  @RequestBody TablasTO request) {
 
 		request.setIp( super.getIpAddress() );
 	    request.setUser( super.getUser() );
 	    
-	    this.ubicacionesService.save( request );
+	    this.tablasServie.save( request );
 
-	    Response<UbicacionTO> response = new Response<>();
+	    Response<TablasTO> response = new Response<>();
 	    response.setCode( HttpStatus.CREATED.value() );
 	    response.setMessage( HttpStatus.CREATED.name() );
 	    response.setResponse( request );
