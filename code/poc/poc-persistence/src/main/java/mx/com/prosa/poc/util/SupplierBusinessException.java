@@ -22,11 +22,21 @@ public final class SupplierBusinessException
   private static final String ACTOR_NOT_FOUND_MESSAGE = "Actor not found";
   
   private static final String DATA_BASE_NOT_FOUND_MESSAGE = "Data Base not found";
+  
+  private static final String BRAND_NOT_FOUND_MESSAGE = "Marca not found";
 
   private SupplierBusinessException()
   {
     // Se ofusca el constructor
   }
+  
+  public static final Supplier<BusinessException> BRAND_NOT_FOUND = () -> {
+		BusinessException e = new BusinessException( BRAND_NOT_FOUND_MESSAGE );
+		e.getError().setId( 404L );
+		e.getError().setNotFound( true );
+		e.getError().setDescription( BRAND_NOT_FOUND_MESSAGE );
+		return e;
+  };
 
   public static final Supplier<BusinessException> DATA_BASE_NOT_FOUND = () -> {
 		BusinessException e = new BusinessException( DATA_BASE_NOT_FOUND_MESSAGE );
