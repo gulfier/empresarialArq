@@ -2,7 +2,6 @@ package mx.com.prosa.poc.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.math.BigDecimal;
 
 
 /**
@@ -16,7 +15,8 @@ public class TblIp implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@SequenceGenerator(name = "SEQ_IPS", sequenceName = "SEQ_IPS", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(generator = "SEQ_IPS")
 	@Column(name="PK_ID_IP")
 	private long pkIdIp;
 
@@ -26,8 +26,9 @@ public class TblIp implements Serializable {
 	@Column(name="DS_TIPO")
 	private String dsTipo;
 
-	@Column(name="FK_ID_SEGMENTO")
-	private BigDecimal fkIdSegmento;
+	@ManyToOne
+	@JoinColumn(name="FK_ID_SEGMENTO", referencedColumnName = "PK_ID_SEGMENTO", nullable = false, insertable = true, updatable = true)
+	private TblSegmentos tblSegmentos;
 
 	public TblIp() {
 	}
@@ -56,12 +57,14 @@ public class TblIp implements Serializable {
 		this.dsTipo = dsTipo;
 	}
 
-	public BigDecimal getFkIdSegmento() {
-		return this.fkIdSegmento;
+	public TblSegmentos getTblSegmentos() {
+		return tblSegmentos;
 	}
 
-	public void setFkIdSegmento(BigDecimal fkIdSegmento) {
-		this.fkIdSegmento = fkIdSegmento;
+	public void setTblSegmentos(TblSegmentos tblSegmentos) {
+		this.tblSegmentos = tblSegmentos;
 	}
+
+
 
 }

@@ -2,7 +2,6 @@ package mx.com.prosa.poc.to;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 
 
 public class BaseDatosTO implements Serializable{

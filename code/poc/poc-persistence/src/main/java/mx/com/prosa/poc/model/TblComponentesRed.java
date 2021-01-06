@@ -2,7 +2,6 @@ package mx.com.prosa.poc.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.math.BigDecimal;
 
 
 /**
@@ -13,6 +12,13 @@ import java.math.BigDecimal;
 @Table(name="TBL_COMPONENTES_RED")
 public class TblComponentesRed implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@SequenceGenerator(name = "SEQ_COMPONENTE_RED", sequenceName = "SEQ_COMPONENTE_RED", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(generator = "SEQ_COMPONENTE_RED")
+	@Column(name="PK_ID_COMPONENTE")
+	private Long pkIdComponente;
+
 
 	@Column(name="DS_DESCRIPCION")
 	private String dsDescripcion;
@@ -23,12 +29,11 @@ public class TblComponentesRed implements Serializable {
 	@Column(name="DS_SERVICIO")
 	private String dsServicio;
 
-	@Id
-	@Column(name="FK_ID_IP")
-	private BigDecimal fkIdIp;
+	
+	@ManyToOne
+	@JoinColumn(name="FK_ID_IP", referencedColumnName = "PK_ID_IP", nullable = false, insertable = true, updatable = true)
+	private TblIp tblIp;
 
-	@Column(name="PK_ID_COMPONENTE")
-	private BigDecimal pkIdComponente;
 
 	public TblComponentesRed() {
 	}
@@ -57,19 +62,19 @@ public class TblComponentesRed implements Serializable {
 		this.dsServicio = dsServicio;
 	}
 
-	public BigDecimal getFkIdIp() {
-		return this.fkIdIp;
-	}
-
-	public void setFkIdIp(BigDecimal fkIdIp) {
-		this.fkIdIp = fkIdIp;
-	}
-
-	public BigDecimal getPkIdComponente() {
+	public Long getPkIdComponente() {
 		return this.pkIdComponente;
 	}
 
-	public void setPkIdComponente(BigDecimal pkIdComponente) {
+	public TblIp getTblIp() {
+		return tblIp;
+	}
+
+	public void setTblIp(TblIp tblIp) {
+		this.tblIp = tblIp;
+	}
+
+	public void setPkIdComponente(Long pkIdComponente) {
 		this.pkIdComponente = pkIdComponente;
 	}
 
