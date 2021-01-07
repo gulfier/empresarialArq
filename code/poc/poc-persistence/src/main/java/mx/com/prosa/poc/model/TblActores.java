@@ -14,9 +14,11 @@ import java.sql.Timestamp;
 @Table(name="TBL_ACTORES")
 @NamedQuery(name="TblActore.findAll", query="SELECT t FROM TblActores t")
 public class TblActores implements Serializable {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6681662216760783690L;
 
 	/** The pk id actor. */
 	@Id

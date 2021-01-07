@@ -5,9 +5,12 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
@@ -73,10 +76,12 @@ public class TblServidores implements Serializable {
 	@Column(name="DT_MODIFIED")
 	private Timestamp dtModified;
 
-	@Column(name="FK_ID_RESPONSABLE")
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="FK_ID_RESPONSABLE", referencedColumnName = "PK_ID_ACTOR", unique=false, nullable=false, insertable=true, updatable=true)
 	private TblActores fkIdResponsable;
 
-	@Column(name="FK_ID_UBICACION")
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="FK_ID_UBICACION", referencedColumnName = "PK_ID_UBICACION", unique=false, nullable=false, insertable=true, updatable=true)
 	private TblUbicaciones fkIdUbicacion;
 
 	public TblServidores() {
