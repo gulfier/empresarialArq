@@ -1,7 +1,5 @@
 package mx.com.prosa.poc.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,13 +29,14 @@ public class SoftwarescomXServidorServiceImpl implements SoftwarescomXServidorSe
 	@Override
 	public void save(SoftwarescomXServidorTO object) {
 		TblSoftwarescomXServidor entity = new TblSoftwarescomXServidor();
-		List<TblSoftwareComercial> softwareList = tblSoftwareComercial.findAll();
 		TblServidores server = tblServidoresRepository.findById(object.getFkIdServer())
 				.orElseThrow(SupplierBusinessException.SERVER_NOT_FOUND);
 		entity.setTblServidores(server);
+		entity.setFkIdServer(server.getPkIdServidor());
 		TblSoftwareComercial software = tblSoftwareComercial.findById(object.getFkIdSoftware())
 				.orElseThrow(SupplierBusinessException.SOFTWARE_NOT_FOUND);
 		entity.setTblSoftwareComercial(software);
+		entity.setFkIdSoftware(software.getPkIdSoftware());
 		softwarescpmXServidorRepository.save(entity);
 	}
 	

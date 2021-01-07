@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 
@@ -20,6 +21,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="TBL_SOFTWARE_COMERCIAL")
+@NamedQuery(name="TblSoftwareComercial.findAll", query="SELECT t FROM TblSoftwareComercial t")
 public class TblSoftwareComercial implements Serializable {
 
 	/**
