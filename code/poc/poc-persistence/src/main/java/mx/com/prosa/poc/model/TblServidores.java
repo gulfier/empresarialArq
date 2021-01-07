@@ -20,7 +20,11 @@ import javax.persistence.Table;
 @Table(name="TBL_SERVIDORES")
 @NamedQuery(name="TblServidores.findAll", query="SELECT t FROM TblServidores t")
 public class TblServidores implements Serializable {
-	private static final long serialVersionUID = 1L;
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3210099599331010531L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

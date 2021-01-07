@@ -20,7 +20,7 @@ import mx.com.prosa.poc.to.SoftwarescomXServidorTO;
  * The Class SoftwarescpmXServidorController.
  */
 @RestController
-@RequestMapping("/v1/server")
+@RequestMapping("/v1/softwareServer")
 @BusinessExceptionInterceptor
 @CrossOrigin
 public class SoftwarescpmXServidorController extends AbstractBaseController {

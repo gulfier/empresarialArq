@@ -23,7 +23,7 @@ public class SoftwareComercialTO extends BaseTO {
 	private static final long serialVersionUID = -2689197375636951668L;
 	
 	/** The pk id software. */
-	private String pkIdSoftware;
+	private Long pkIdSoftware;
 	
 	/** The ds nombre. */
 	private String dsNombre;

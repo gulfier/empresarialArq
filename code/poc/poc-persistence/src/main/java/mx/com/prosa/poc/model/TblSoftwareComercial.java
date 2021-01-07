@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 
@@ -18,7 +17,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="TBL_SOFTWARE_COMERCIAL")
-@NamedQuery(name="TblSoftwareComercial.findAll", query="SELECT t FROM TblSoftwareComercial t")
 public class TblSoftwareComercial implements Serializable {
 	
 	/** The Constant serialVersionUID. */
@@ -28,7 +26,7 @@ public class TblSoftwareComercial implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="PK_ID_SOFTWARE")
-	private String pkIdSoftware;
+	private Long pkIdSoftware;
 
 	/** The ds nombre. */
 	@Column(name="DS_NOMBRE")
@@ -57,7 +55,7 @@ public class TblSoftwareComercial implements Serializable {
 	 *
 	 * @return the pk id software
 	 */
-	public String getPkIdSoftware() {
+	public Long getPkIdSoftware() {
 		return this.pkIdSoftware;
 	}
 
@@ -66,7 +64,7 @@ public class TblSoftwareComercial implements Serializable {
 	 *
 	 * @param pkIdSoftware the new pk id software
 	 */
-	public void setPkIdSoftware(String pkIdSoftware) {
+	public void setPkIdSoftware(Long pkIdSoftware) {
 		this.pkIdSoftware = pkIdSoftware;
 	}
 
