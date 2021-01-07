@@ -1,57 +1,60 @@
 package mx.com.prosa.poc.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 
+import javax.persistence.Column;
+
+// TODO: Auto-generated Javadoc
 /**
- * The primary key class for the TBL_SOFTWARESCOM_X_SERVIDOR database table.
- * 
+ * The Class CustomerDetailPk.
  */
-@Embeddable
 public class TblSoftwarescomXServidorPK implements Serializable {
-	//default serial version id, required for serializable classes.
-	private static final long serialVersionUID = 1L;
 
-	@Column(name="FK_ID_SOFTWARE")
-	private long fkIdSoftware;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 4604912464734807317L;
 
-	@Column(name="FK_ID_SERVER")
-	private long fkIdServer;
+	/** The fk id software. */
+	@Column(name = "FK_ID_SOFTWARE", nullable = false)
+	private Long fkIdSoftware;
+	
+	/** The fk id server. */
+	@Column(name = "FK_ID_SERVER", nullable = false)
+	private Long fkIdServer;
 
-	public TblSoftwarescomXServidorPK() {
+	/**
+	 * Gets the fk id software.
+	 *
+	 * @return the fk id software
+	 */
+	public Long getFkIdSoftware() {
+		return fkIdSoftware;
 	}
-	public long getFkIdSoftware() {
-		return this.fkIdSoftware;
-	}
-	public void setFkIdSoftware(long fkIdSoftware) {
+
+	/**
+	 * Sets the fk id software.
+	 *
+	 * @param fkIdSoftware the new fk id software
+	 */
+	public void setFkIdSoftware(Long fkIdSoftware) {
 		this.fkIdSoftware = fkIdSoftware;
 	}
-	public long getFkIdServer() {
-		return this.fkIdServer;
+
+	/**
+	 * Gets the fk id server.
+	 *
+	 * @return the fk id server
+	 */
+	public Long getFkIdServer() {
+		return fkIdServer;
 	}
-	public void setFkIdServer(long fkIdServer) {
+
+	/**
+	 * Sets the fk id server.
+	 *
+	 * @param fkIdServer the new fk id server
+	 */
+	public void setFkIdServer(Long fkIdServer) {
 		this.fkIdServer = fkIdServer;
 	}
 
-	public boolean equals(Object other) {
-		if (this == other) {
-			return true;
-		}
-		if (!(other instanceof TblSoftwarescomXServidorPK)) {
-			return false;
-		}
-		TblSoftwarescomXServidorPK castOther = (TblSoftwarescomXServidorPK)other;
-		return 
-			(this.fkIdSoftware == castOther.fkIdSoftware)
-			&& (this.fkIdServer == castOther.fkIdServer);
-	}
-
-	public int hashCode() {
-		final int prime = 31;
-		int hash = 17;
-		hash = hash * prime + ((int) (this.fkIdSoftware ^ (this.fkIdSoftware >>> 32)));
-		hash = hash * prime + ((int) (this.fkIdServer ^ (this.fkIdServer >>> 32)));
-		
-		return hash;
-	}
 }
