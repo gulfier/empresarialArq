@@ -7,6 +7,7 @@ package mx.com.prosa.poc.service.impl;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,6 +37,7 @@ public class AplicacionesServiceImpl implements AplicacionesService {
 		// TODO Auto-generated method stub
 
 		tblAplicacionesRepository.save(transformTO(aplicacion));
+		
 	}
 
 	
