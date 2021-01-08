@@ -36,6 +36,7 @@ public class AplicacionesServiceImpl implements AplicacionesService {
 		// TODO Auto-generated method stub
 
 		tblAplicacionesRepository.save(transformTO(aplicacion));
+		
 	}
 
 	
