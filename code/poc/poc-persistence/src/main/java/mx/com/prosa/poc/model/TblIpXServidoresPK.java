@@ -1,38 +1,75 @@
 package mx.com.prosa.poc.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 
+import javax.persistence.Column;
+
+// TODO: Auto-generated Javadoc
 /**
  * The primary key class for the TBL_IP_X_SERVIDORES database table.
  * 
  */
-@Embeddable
 public class TblIpXServidoresPK implements Serializable {
-	//default serial version id, required for serializable classes.
-	private static final long serialVersionUID = 1L;
 
-	@Column(name="FK_ID_IP")
-	private long fkIdIp;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 4893550957062722084L;
 
-	@Column(name="FK_ID_SERVIDOR")
-	private long fkIdServidor;
+	/** The fk id ip. */
+	@Column(name="FK_ID_IP", nullable = false)
+	private Long fkIdIp;
 
+	/** The fk id servidor. */
+	@Column(name="FK_ID_SERVIDOR", nullable = false)
+	private Long fkIdServidor;
+
+	/**
+	 * Instantiates a new tbl ip X servidores PK.
+	 */
 	public TblIpXServidoresPK() {
 	}
-	public long getFkIdIp() {
+	
+	/**
+	 * Gets the fk id ip.
+	 *
+	 * @return the fk id ip
+	 */
+	public Long getFkIdIp() {
 		return this.fkIdIp;
 	}
-	public void setFkIdIp(long fkIdIp) {
+	
+	/**
+	 * Sets the fk id ip.
+	 *
+	 * @param fkIdIp the new fk id ip
+	 */
+	public void setFkIdIp(Long fkIdIp) {
 		this.fkIdIp = fkIdIp;
 	}
-	public long getFkIdServidor() {
+	
+	/**
+	 * Gets the fk id servidor.
+	 *
+	 * @return the fk id servidor
+	 */
+	public Long getFkIdServidor() {
 		return this.fkIdServidor;
 	}
-	public void setFkIdServidor(long fkIdServidor) {
+	
+	/**
+	 * Sets the fk id servidor.
+	 *
+	 * @param fkIdServidor the new fk id servidor
+	 */
+	public void setFkIdServidor(Long fkIdServidor) {
 		this.fkIdServidor = fkIdServidor;
 	}
 
+	/**
+	 * Equals.
+	 *
+	 * @param other the other
+	 * @return true, if successful
+	 */
 	public boolean equals(Object other) {
 		if (this == other) {
 			return true;
@@ -46,6 +83,11 @@ public class TblIpXServidoresPK implements Serializable {
 			&& (this.fkIdServidor == castOther.fkIdServidor);
 	}
 
+	/**
+	 * Hash code.
+	 *
+	 * @return the int
+	 */
 	public int hashCode() {
 		final int prime = 31;
 		int hash = 17;

@@ -32,7 +32,7 @@ public class TblSoftwarescomXServidor implements Serializable {
 	
 	/** The fk id server. */
 	@Id
-	@Column(name = "FK_ID_SERVER",insertable=false, updatable=false)
+	@Column(name = "FK_ID_SERVER",nullable = false,insertable=false, updatable=false)
 	private Long fkIdServer;
 
 	/** The tbl software comercial. */
