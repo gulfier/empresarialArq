@@ -7,7 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
@@ -37,7 +39,8 @@ public class TblTablas implements Serializable {
 	private String dsTabla;
 
 	/** The fk id base. */
-	@Column(name="FK_ID_BASE")
+	@ManyToOne
+	@JoinColumn(name="FK_ID_BASE", referencedColumnName = "PK_ID_BASE", nullable = false, insertable = true, updatable = true)
 	private TblBaseDatos fkIdBase;
 
 	/**

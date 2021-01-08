@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
@@ -44,7 +46,8 @@ public class TblSegmentos implements Serializable {
 	@Column(name="DS_TIPO")
 	private String dsTipo;
 
-	@Column(name="FK_ID_UBICACION")
+	@ManyToOne
+	@JoinColumn(name="FK_ID_UBICACION", referencedColumnName = "PK_ID_UBICACION", nullable = false, insertable = true, updatable = true)
 	private TblUbicaciones fkIdUbicacion;
 
 	public TblSegmentos() {

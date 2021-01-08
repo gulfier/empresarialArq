@@ -1,38 +1,76 @@
 package mx.com.prosa.poc.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 
+import javax.persistence.Column;
+
+// TODO: Auto-generated Javadoc
 /**
  * The primary key class for the TBL_BD_SERVIDORES database table.
  * 
  */
-@Embeddable
 public class TblBdServidoresPK implements Serializable {
+	
+	/** The Constant serialVersionUID. */
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="FK_ID_BASE_DATOS")
-	private long fkIdBaseDatos;
+	/** The fk id base datos. */
+	@Column(name="FK_ID_BASE_DATOS", nullable = false)
+	private Long fkIdBaseDatos;
 
-	@Column(name="FK_ID_SERVIDOR")
-	private long fkIdServidor;
+	/** The fk id servidor. */
+	@Column(name="FK_ID_SERVIDOR", nullable = false)
+	private Long fkIdServidor;
 
+	/**
+	 * Instantiates a new tbl bd servidores PK.
+	 */
 	public TblBdServidoresPK() {
 	}
-	public long getFkIdBaseDatos() {
+	
+	/**
+	 * Gets the fk id base datos.
+	 *
+	 * @return the fk id base datos
+	 */
+	public Long getFkIdBaseDatos() {
 		return this.fkIdBaseDatos;
 	}
-	public void setFkIdBaseDatos(long fkIdBaseDatos) {
+	
+	/**
+	 * Sets the fk id base datos.
+	 *
+	 * @param fkIdBaseDatos the new fk id base datos
+	 */
+	public void setFkIdBaseDatos(Long fkIdBaseDatos) {
 		this.fkIdBaseDatos = fkIdBaseDatos;
 	}
-	public long getFkIdServidor() {
+	
+	/**
+	 * Gets the fk id servidor.
+	 *
+	 * @return the fk id servidor
+	 */
+	public Long getFkIdServidor() {
 		return this.fkIdServidor;
 	}
-	public void setFkIdServidor(long fkIdServidor) {
+	
+	/**
+	 * Sets the fk id servidor.
+	 *
+	 * @param fkIdServidor the new fk id servidor
+	 */
+	public void setFkIdServidor(Long fkIdServidor) {
 		this.fkIdServidor = fkIdServidor;
 	}
 
+	/**
+	 * Equals.
+	 *
+	 * @param other the other
+	 * @return true, if successful
+	 */
 	public boolean equals(Object other) {
 		if (this == other) {
 			return true;
@@ -46,6 +84,11 @@ public class TblBdServidoresPK implements Serializable {
 			&& (this.fkIdServidor == castOther.fkIdServidor);
 	}
 
+	/**
+	 * Hash code.
+	 *
+	 * @return the int
+	 */
 	public int hashCode() {
 		final int prime = 31;
 		int hash = 17;
