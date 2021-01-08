@@ -11,21 +11,63 @@ import javax.persistence.*;
 @Entity
 @Table(name="TBL_APLICACIONES_X_SERVIDOR")
 @NamedQuery(name="TblAplicacionesXServidor.findAll", query="SELECT t FROM TblAplicacionesXServidor t")
+@IdClass(TblAplicacionesXServidorPK.class)
 public class TblAplicacionesXServidor implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@Column(name="FK_ID_SERVIDOR")
+	private long fkIdServidor;
+   
+	@Id
+	@Column(name="FK_ID_APLICACION")
+	private long fkIdAplicacion;
+	
+	
+	/** The tbl software comercial. */
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="FK_ID_SERVIDOR",referencedColumnName = "PK_ID_SERVIDOR", updatable=false,insertable=false)
+	private TblServidores  tblServidores;
 
-	@EmbeddedId
-	private TblAplicacionesXServidorPK id;
+	/** The tbl servidores. */
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="FK_ID_APLICACION",referencedColumnName = "PK_ID_APLICACION", updatable=false,insertable=false)
+	private TblAplicaciones  tblAplicaciones;
 
-	public TblAplicacionesXServidor() {
+	public long getFkIdServidor() {
+		return fkIdServidor;
 	}
 
-	public TblAplicacionesXServidorPK getId() {
-		return this.id;
+	public void setFkIdServidor(long fkIdServidor) {
+		this.fkIdServidor = fkIdServidor;
 	}
 
-	public void setId(TblAplicacionesXServidorPK id) {
-		this.id = id;
+	public long getFkIdAplicacion() {
+		return fkIdAplicacion;
 	}
 
+	public void setFkIdAplicacion(long fkIdAplicacion) {
+		this.fkIdAplicacion = fkIdAplicacion;
+	}
+
+	public TblServidores getTblServidores() {
+		return tblServidores;
+	}
+
+	public void setTblServidores(TblServidores tblServidores) {
+		this.tblServidores = tblServidores;
+	}
+
+	public TblAplicaciones getTblAplicaciones() {
+		return tblAplicaciones;
+	}
+
+	public void setTblAplicaciones(TblAplicaciones tblAplicaciones) {
+		this.tblAplicaciones = tblAplicaciones;
+	}
+	
+	
+	
+	
+	
 }
