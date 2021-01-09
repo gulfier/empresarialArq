@@ -7,7 +7,6 @@ import javax.persistence.*;
  * The primary key class for the TBL_APLICACIONES_X_SERVIDOR database table.
  * 
  */
-@Embeddable
 public class TblAplicacionesXServidorPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
