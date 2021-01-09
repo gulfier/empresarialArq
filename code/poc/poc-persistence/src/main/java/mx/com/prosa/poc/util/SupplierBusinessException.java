@@ -30,11 +30,21 @@ public final class SupplierBusinessException
   private static final String SOFTWARE_NOT_FOUND_MESSAGE = "Software not found";
   
   private static final String IP_NOT_FOUND_MESSAGE = "IP not found";
+  
+  private static final String APP_NOT_FOUND_MESSAGE = "Aplication not found";
 
   private SupplierBusinessException()
   {
     // Se ofusca el constructor
   }
+  
+  public static final Supplier<BusinessException> APP_NOT_FOUND = () -> {
+		BusinessException e = new BusinessException( APP_NOT_FOUND_MESSAGE );
+		e.getError().setId( 404L );
+		e.getError().setNotFound( true );
+		e.getError().setDescription( APP_NOT_FOUND_MESSAGE );
+		return e;
+  };
   
   public static final Supplier<BusinessException> IP_NOT_FOUND = () -> {
 		BusinessException e = new BusinessException( IP_NOT_FOUND_MESSAGE );

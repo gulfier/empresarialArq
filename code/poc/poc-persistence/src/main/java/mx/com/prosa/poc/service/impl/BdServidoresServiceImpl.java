@@ -13,9 +13,14 @@ import mx.com.prosa.poc.service.BdServidoresService;
 import mx.com.prosa.poc.to.BdServidoresTO;
 import mx.com.prosa.poc.util.SupplierBusinessException;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BdServidoresServiceImpl.
+ */
 @Service
 public class BdServidoresServiceImpl implements BdServidoresService {
 	
+	/** The tbl bd servidores repository. */
 	@Autowired
 	private TblBdServidoresRepository tblBdServidoresRepository;
 	
@@ -23,9 +28,15 @@ public class BdServidoresServiceImpl implements BdServidoresService {
 	@Autowired
 	private TblServidoresRepository tblServidoresRepository;
 	
+	/** The tbl base datos repository. */
 	@Autowired
 	private TblBaseDatosRepository tblBaseDatosRepository;
 
+	/**
+	 * Save.
+	 *
+	 * @param bdServer the bd server
+	 */
 	@Override
 	public void save(BdServidoresTO bdServer) {
 		TblBdServidores entity = new TblBdServidores();
