@@ -11,22 +11,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import mx.com.prosa.poc.controller.aspect.BusinessExceptionInterceptor;
-import mx.com.prosa.poc.service.AppXBaseDatosService;
-import mx.com.prosa.poc.to.AppXBaseDatosTO;
+import mx.com.prosa.poc.service.AppsXServAppService;
+import mx.com.prosa.poc.to.AppsXServAppTO;
 import mx.com.prosa.poc.to.Response;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class AppXBaseDatosController.
+ * The Class AppsXServAppController.
  */
 @RestController
-@RequestMapping("/v1/app-x-data-base")
+@RequestMapping("/v1/apps-x-service-app")
 @BusinessExceptionInterceptor
 @CrossOrigin
-public class AppXBaseDatosController extends AbstractBaseController {
+public class AppsXServAppController extends AbstractBaseController {
 	/** The ubicaciones service. */
 	@Autowired
-	private AppXBaseDatosService appXBaseDatosService;
+	private AppsXServAppService appsXServAppService;
 
 	/**
 	 * Save.
@@ -35,14 +35,14 @@ public class AppXBaseDatosController extends AbstractBaseController {
 	 * @return the response entity
 	 */
 	@PostMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Response<AppXBaseDatosTO>> save(  @RequestBody AppXBaseDatosTO request) {
+	public ResponseEntity<Response<AppsXServAppTO>> save(  @RequestBody AppsXServAppTO request) {
 
 		request.setIp( super.getIpAddress() );
 	    request.setUser( super.getUser() );
 	    
-	    this.appXBaseDatosService.save( request );
+	    this.appsXServAppService.save( request );
 
-	    Response<AppXBaseDatosTO> response = new Response<>();
+	    Response<AppsXServAppTO> response = new Response<>();
 	    response.setCode( HttpStatus.CREATED.value() );
 	    response.setMessage( HttpStatus.CREATED.name() );
 	    response.setResponse( request );
