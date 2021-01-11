@@ -11,6 +11,7 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import mx.com.prosa.poc.model.TblActores;
 import mx.com.prosa.poc.model.TblBaseDatos;
 import mx.com.prosa.poc.persistence.TblBaseDatosRepository;
 import mx.com.prosa.poc.service.BaseDatosService;
@@ -50,6 +51,11 @@ public class BaseDatosServiceImpl implements BaseDatosService {
 			baseDatos.setDsPci(base.getDsPci());
 			baseDatos.setDsUserCreation(base.getDsUserCreation());
 			baseDatos.setDsUserModification(base.getDsUserModification());
+			
+			TblActores tblActores = new TblActores();
+			tblActores.setPkIdActor(base.getFkIdResponsable());
+			baseDatos.setFkIdResponsable(tblActores);
+			
 			
 			baseDatos.setDtCreation(getDate(base.getDtCreation()));
 			baseDatos.setDtModified(getDate(base.getDtModified()));

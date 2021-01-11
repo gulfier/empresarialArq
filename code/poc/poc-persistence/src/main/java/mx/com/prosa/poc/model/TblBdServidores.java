@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -25,10 +26,12 @@ public class TblBdServidores implements Serializable {
 	private static final long serialVersionUID = -6850165839078711328L;
 
 	/** The fk id base datos. */
+	@Id
 	@Column(name="FK_ID_BASE_DATOS")
 	private Long fkIdBaseDatos;
 
 	/** The fk id servidor. */
+	@Id
 	@Column(name="FK_ID_SERVIDOR")
 	private Long fkIdServidor;
 	

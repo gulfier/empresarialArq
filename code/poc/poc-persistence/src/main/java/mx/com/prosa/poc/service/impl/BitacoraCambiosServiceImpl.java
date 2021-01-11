@@ -104,41 +104,41 @@ public class BitacoraCambiosServiceImpl implements BitacoraCambiosService
     return siteTO;
   }
 
-@Override
-public void save(BitacoraCambiosTO site) {
-	// TODO Auto-generated method stub
-	
-}
+	@Override
+	public void save(BitacoraCambiosTO site) {
+		// TODO Auto-generated method stub
+		
+	}
 
-@Override
-public PagingResponseTO<BitacoraCambiosTO> findByExample(PagingRequestTO<BitacoraCambiosTO> request) {
-	// TODO Auto-generated method stub
-	return null;
-}
+	@Override
+	public PagingResponseTO<BitacoraCambiosTO> findByExample(PagingRequestTO<BitacoraCambiosTO> request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-@Override
-public BitacoraCambiosTO findById(Long id) {
-	// TODO Auto-generated method stub
-	return null;
-}
+	@Override
+	public BitacoraCambiosTO findById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-@Override
-public BitacoraCambiosTO findByCode(String code) {
-	// TODO Auto-generated method stub
-	return null;
-}
+	@Override
+	public BitacoraCambiosTO findByCode(String code) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-@Override
-public void edit(BitacoraCambiosTO site, boolean patch) {
-	// TODO Auto-generated method stub
-	
-}
+	@Override
+	public void edit(BitacoraCambiosTO site, boolean patch) {
+		// TODO Auto-generated method stub
+		
+	}
 
-@Override
-public void delete(BitacoraCambiosTO site) {
-	// TODO Auto-generated method stub
-	
-}
+	@Override
+	public void delete(BitacoraCambiosTO site) {
+		// TODO Auto-generated method stub
+		
+	}
 
 
 

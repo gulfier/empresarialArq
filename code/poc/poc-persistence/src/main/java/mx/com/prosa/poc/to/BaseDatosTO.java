@@ -39,7 +39,7 @@ public class BaseDatosTO implements Serializable{
 
 	private BigDecimal fkIdModeloDatos;
 
-	private BigDecimal fkIdResponsable;
+	private Long fkIdResponsable;
 
 	public long getPkIdBase() {
 		return pkIdBase;
@@ -138,16 +138,13 @@ public class BaseDatosTO implements Serializable{
 		this.fkIdModeloDatos = fkIdModeloDatos;
 	}
 
-	public BigDecimal getFkIdResponsable() {
+	public Long getFkIdResponsable() {
 		return fkIdResponsable;
 	}
 
-	public void setFkIdResponsable(BigDecimal fkIdResponsable) {
+	public void setFkIdResponsable(Long fkIdResponsable) {
 		this.fkIdResponsable = fkIdResponsable;
 	}
-	
-	
-	
 
 
 }
