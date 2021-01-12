@@ -1,38 +1,75 @@
 package mx.com.prosa.poc.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 
+import javax.persistence.Column;
+
+// TODO: Auto-generated Javadoc
 /**
  * The primary key class for the TBL_APP_X_BASE_DATOS database table.
  * 
  */
-@Embeddable
 public class TblAppXBaseDatosPK implements Serializable {
-	//default serial version id, required for serializable classes.
-	private static final long serialVersionUID = 1L;
 
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 3182145542051338456L;
+
+	/** The fk id aplicacion. */
 	@Column(name="FK_ID_APLICACION")
-	private long fkIdAplicacion;
+	private Long fkIdAplicacion;
 
+	/** The fk id base. */
 	@Column(name="FK_ID_BASE")
-	private long fkIdBase;
+	private Long fkIdBase;
 
+	/**
+	 * Instantiates a new tbl app X base datos PK.
+	 */
 	public TblAppXBaseDatosPK() {
 	}
-	public long getFkIdAplicacion() {
+	
+	/**
+	 * Gets the fk id aplicacion.
+	 *
+	 * @return the fk id aplicacion
+	 */
+	public Long getFkIdAplicacion() {
 		return this.fkIdAplicacion;
 	}
-	public void setFkIdAplicacion(long fkIdAplicacion) {
+	
+	/**
+	 * Sets the fk id aplicacion.
+	 *
+	 * @param fkIdAplicacion the new fk id aplicacion
+	 */
+	public void setFkIdAplicacion(Long fkIdAplicacion) {
 		this.fkIdAplicacion = fkIdAplicacion;
 	}
-	public long getFkIdBase() {
+	
+	/**
+	 * Gets the fk id base.
+	 *
+	 * @return the fk id base
+	 */
+	public Long getFkIdBase() {
 		return this.fkIdBase;
 	}
-	public void setFkIdBase(long fkIdBase) {
+	
+	/**
+	 * Sets the fk id base.
+	 *
+	 * @param fkIdBase the new fk id base
+	 */
+	public void setFkIdBase(Long fkIdBase) {
 		this.fkIdBase = fkIdBase;
 	}
 
+	/**
+	 * Equals.
+	 *
+	 * @param other the other
+	 * @return true, if successful
+	 */
 	public boolean equals(Object other) {
 		if (this == other) {
 			return true;
@@ -46,6 +83,11 @@ public class TblAppXBaseDatosPK implements Serializable {
 			&& (this.fkIdBase == castOther.fkIdBase);
 	}
 
+	/**
+	 * Hash code.
+	 *
+	 * @return the int
+	 */
 	public int hashCode() {
 		final int prime = 31;
 		int hash = 17;

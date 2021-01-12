@@ -3,36 +3,72 @@ package mx.com.prosa.poc.model;
 import java.io.Serializable;
 import javax.persistence.*;
 
+// TODO: Auto-generated Javadoc
 /**
  * The primary key class for the TBL_APPS_X_SERV_APP database table.
  * 
  */
-@Embeddable
 public class TblAppsXServAppPK implements Serializable {
-	//default serial version id, required for serializable classes.
-	private static final long serialVersionUID = 1L;
 
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 8510434032679110757L;
+
+	/** The fk id aplicacion. */
 	@Column(name="FK_ID_APLICACION")
-	private long fkIdAplicacion;
+	private Long fkIdAplicacion;
 
+	/** The fk id servicio. */
 	@Column(name="FK_ID_SERVICIO")
-	private long fkIdServicio;
+	private Long fkIdServicio;
 
+	/**
+	 * Instantiates a new tbl apps X serv app PK.
+	 */
 	public TblAppsXServAppPK() {
 	}
-	public long getFkIdAplicacion() {
+	
+	/**
+	 * Gets the fk id aplicacion.
+	 *
+	 * @return the fk id aplicacion
+	 */
+	public Long getFkIdAplicacion() {
 		return this.fkIdAplicacion;
 	}
-	public void setFkIdAplicacion(long fkIdAplicacion) {
+	
+	/**
+	 * Sets the fk id aplicacion.
+	 *
+	 * @param fkIdAplicacion the new fk id aplicacion
+	 */
+	public void setFkIdAplicacion(Long fkIdAplicacion) {
 		this.fkIdAplicacion = fkIdAplicacion;
 	}
-	public long getFkIdServicio() {
+	
+	/**
+	 * Gets the fk id servicio.
+	 *
+	 * @return the fk id servicio
+	 */
+	public Long getFkIdServicio() {
 		return this.fkIdServicio;
 	}
-	public void setFkIdServicio(long fkIdServicio) {
+	
+	/**
+	 * Sets the fk id servicio.
+	 *
+	 * @param fkIdServicio the new fk id servicio
+	 */
+	public void setFkIdServicio(Long fkIdServicio) {
 		this.fkIdServicio = fkIdServicio;
 	}
 
+	/**
+	 * Equals.
+	 *
+	 * @param other the other
+	 * @return true, if successful
+	 */
 	public boolean equals(Object other) {
 		if (this == other) {
 			return true;
@@ -46,6 +82,11 @@ public class TblAppsXServAppPK implements Serializable {
 			&& (this.fkIdServicio == castOther.fkIdServicio);
 	}
 
+	/**
+	 * Hash code.
+	 *
+	 * @return the int
+	 */
 	public int hashCode() {
 		final int prime = 31;
 		int hash = 17;

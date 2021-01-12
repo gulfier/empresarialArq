@@ -17,7 +17,6 @@ import org.ldaptive.SearchFilter;
 import org.ldaptive.SearchOperation;
 import org.ldaptive.SearchRequest;
 import org.ldaptive.SearchResult;
-import org.ldaptive.auth.AuthenticationCriteria;
 import org.ldaptive.auth.AuthenticationRequest;
 import org.ldaptive.auth.AuthenticationResponse;
 import org.ldaptive.auth.AuthenticationResultCode;
@@ -153,42 +152,25 @@ public class ConsoleServiceImpl implements ConsoleService {
 	 * @return the token TO
 	 */
 	public TokenTO createToken(CredentialTO credential) {
-		final ConnectionFactory connection = loginLdap();
-		;
-		
-		String user = "";
+		final ConnectionFactory connection = loginLdap(credential.getUserName(),credential.getPassword());
         Connection conn = null;
+        logger.info(credential.getUserName());
         try {
-        	validPasswordUser(credential.getPassword(),credential.getUserName());
-        	String base = "";
+//        	validPasswordUser(credential.getPassword(),credential.getUserName());
             conn = connection.getConnection();
             logger.info(" conn [{}]", conn);
             conn.open();
-            logger.info(" conn  open [{}]", conn);
-            final SearchFilter filter = new SearchFilter("(uid={uid})");
-            filter.setParameter("uid", "Barbara Jensen");
-            logger.info(" filter [{}]", filter);
-            logger.info(" conn [{}]", conn.isOpen());
-            final SearchOperation search = new SearchOperation(conn);
-            logger.info(" search [{}]", search);
-            final Response<SearchResult> searchRequest = search.execute(new SearchRequest(base, filter));
-            logger.info("response [{}]", searchRequest);
-            final SearchResult result = searchRequest.getResult();
-            logger.info(" result [{}]", result);
-            for (final LdapEntry entry : result.getEntries()) { // if you're expecting multiple entries
-                logger.info(" entry [{}]", entry);
-                logger.info(" userPassword [{}]", entry.getAttribute("userPassword").getStringValue());
-                user = entry.getAttribute("userPassword").getStringValue();
-                logger.info(" user [{}]", user);
-            }
+            logger.info("Login correcto!!!");
         }
         catch (final LdapException e) {
+        	logger.info("Login incorrecto!!!");
             logger.error(e.getMessage());
         } catch (Exception e) {
+        	logger.info("Login incorrecto!!!");
         	logger.error(e.getMessage());
+		}finally {
+			conn.close();
 		}
-        
-		logger.info(user);
 		JwtUtil jwUtil = new JwtUtil();
 		logger.info(credential.toString());
 		String token = jwUtil.createToken(createJwt(credential));
@@ -204,7 +186,7 @@ public class ConsoleServiceImpl implements ConsoleService {
 	 * @param password the password
 	 * @param user the user
 	 */
-	private void validPasswordUser(final String password, final String user) {
+	public void validPasswordUser(final String password, final String user) {
 		ConnectionFactory connection = loginLdap();
 		try {
         	
@@ -212,15 +194,10 @@ public class ConsoleServiceImpl implements ConsoleService {
             dnResolver.setBaseDn(ldapParams);
             dnResolver.setUserFilter("uid={user}");
             final CompareAuthenticationHandler authenticationHandler = new CompareAuthenticationHandler(connection);
-            final AuthenticationCriteria authenticationCriteria = new AuthenticationCriteria();
-            authenticationCriteria.setDn(ldapParams);
             final Credential cred = new Credential(password);
-            final AuthenticationRequest authenticationRequest = new AuthenticationRequest(user, cred);
-            authenticationCriteria.setAuthenticationRequest(authenticationRequest);
             final Authenticator auth2 = new Authenticator(dnResolver, authenticationHandler);
             auth2.setAuthenticationResponseHandlers(new PasswordPolicyAuthenticationResponseHandler());
-            final Credential credential = new Credential(password);
-            final AuthenticationRequest authenticationRequest2 = new AuthenticationRequest(user, credential);
+            final AuthenticationRequest authenticationRequest2 = new AuthenticationRequest(user, cred);
             final AuthenticationResponse response2 = auth2.authenticate(authenticationRequest2);
             if (response2 == null || response2
                     .getAuthenticationResultCode() != AuthenticationResultCode.AUTHENTICATION_HANDLER_SUCCESS) {
@@ -251,9 +228,26 @@ public class ConsoleServiceImpl implements ConsoleService {
     	keystore.setKeyStore("classpath:/cacerts");
     	keystore.setKeyStorePassword("changeit");
     	sslconf.setCredentialConfig(keystore);
-    	cc.setSslConfig(sslconf);
-    	cc.setUseSSL(true);
-    	cc.setUseStartTLS(true);
+//    	cc.setSslConfig(sslconf);
+//    	cc.setUseSSL(true);
+    	return new DefaultConnectionFactory(cc);
+	}
+	
+	/**
+	 * Login ldap.
+	 *
+	 * @return the connection factory
+	 */
+	private ConnectionFactory loginLdap(String userName, String password) {
+		ConnectionConfig cc = new ConnectionConfig(ldapUrl);
+    	cc.setConnectionInitializer(new BindConnectionInitializer("uid="+userName+",ou=People,dc=example,dc=com", new Credential(password)));
+    	SslConfig sslconf = new SslConfig();
+    	KeyStoreCredentialConfig keystore = new KeyStoreCredentialConfig();
+    	keystore.setKeyStore("classpath:/cacerts");
+    	keystore.setKeyStorePassword("changeit");
+    	sslconf.setCredentialConfig(keystore);
+//    	cc.setSslConfig(sslconf);
+//    	cc.setUseSSL(true);
     	return new DefaultConnectionFactory(cc);
 	}
 	
