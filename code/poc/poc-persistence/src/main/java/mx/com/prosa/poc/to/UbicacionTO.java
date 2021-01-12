@@ -25,7 +25,7 @@ public class UbicacionTO extends BaseTO {
 	private static final long serialVersionUID = 361235339134489640L;
 
 	/** The pk id ubicacion. */
-	private long pkIdUbicacion;
+	private Long pkIdUbicacion;
 	
 	/** The ds ciudad. */
 	private String dsCiudad;
@@ -70,5 +70,5 @@ public class UbicacionTO extends BaseTO {
 	private String dtModified;
 	
 	/** The fk id responsable. */
-	private long fkIdResponsable;
+	private Long fkIdResponsable;
 }
