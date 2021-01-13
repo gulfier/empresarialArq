@@ -5,8 +5,8 @@ RUN npm -v
 RUN node -v
 
 WORKDIR /usr/src/app
-COPY ./front/package.json ./
-COPY ./front ./
+COPY ./package.json ./
+COPY . ./
 RUN npm install
 RUN npm i react-scripts
 RUN npm run build
