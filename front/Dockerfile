@@ -5,6 +5,7 @@ USER root
 # Versions
 RUN npm -v
 RUN node -v
+RUN sudo chmod -R 766 /var/log/nginx/
 
 WORKDIR /usr/src/app
 COPY ./package.json ./
