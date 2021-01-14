@@ -43,20 +43,6 @@ public class ActoresServiceTest
 	actoresService.save(entity);
     Assert.assertNotNull( entity );
     
-    /**
-     * 		TblActores entity = new TblActores();
-		entity.setPkIdActor(actor.getPkIdActor());
-		entity.setDsCode(actor.getDsCode());
-		entity.setDsDescripcion(actor.getDsDescripcion());
-		entity.setDsName(actor.getDsName());
-		entity.setDsNombre(actor.getDsNombre());
-		entity.setDsPci(actor.getDsPci());
-		entity.setDsUserCreation(actor.getDsUserCreation());
-		entity.setDsUserModification(actor.getDsUserModification());
-		entity.setDtCreation(CommonsUtil.toTimestamp(actor.getDtCreation()));
-		entity.setDtModified(CommonsUtil.toTimestamp(actor.getDtModified()));
-     * */
-
   }
 
 

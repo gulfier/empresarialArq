@@ -1,6 +1,7 @@
 package mx.com.prosa.poc.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import mx.com.prosa.poc.model.TblIp;
 import mx.com.prosa.poc.model.TblIpXServidores;
@@ -12,6 +13,7 @@ import mx.com.prosa.poc.service.TblIpXServidoresService;
 import mx.com.prosa.poc.to.TblIpXServidoresTO;
 import mx.com.prosa.poc.util.SupplierBusinessException;
 
+@Service
 public class TblIpXServidoresServiceImpl implements TblIpXServidoresService {
 
 	@Autowired

@@ -1,6 +1,7 @@
 package mx.com.prosa.poc.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import mx.com.prosa.poc.model.TblSegmentos;
 import mx.com.prosa.poc.model.TblUbicaciones;
@@ -14,6 +15,7 @@ import mx.com.prosa.poc.util.SupplierBusinessException;
 /**
  * The Class SegmentosServiceImpl.
  */
+@Service
 public class SegmentosServiceImpl implements SegmentosService {
 
 	/** The tbl segmentos repository. */
