@@ -10,7 +10,7 @@ WORKDIR /usr/src/app
 COPY ./package.json ./
 COPY . ./
 RUN npm install
-RUN npm i react-scripts
+RUN npm i react-scripts@4.0.0
 RUN npm run build
 
 # Stage 2 - the production environment
