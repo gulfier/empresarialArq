@@ -6,7 +6,7 @@ USER root
 RUN npm -v
 RUN node -v
 RUN cat /etc/issue
-RUN chmod -R 766 /var/log/nginx/
+##RUN chmod -R 766 /var/log/nginx/
 
 WORKDIR /usr/src/app
 COPY ./package.json ./
