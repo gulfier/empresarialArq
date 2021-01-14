@@ -12,6 +12,7 @@ COPY . ./
 RUN npm install
 RUN npm i react-scripts@4.0.0
 RUN npm run build
+RUN sudo su
 
 # Stage 2 - the production environment
 FROM nginx:1.12-alpine
