@@ -1,5 +1,7 @@
 # Stage 1 - the build process
 FROM node:10.15.3 as build-deps
+LABEL Author="Jorge Ortega"
+USER root
 # Versions
 RUN npm -v
 RUN node -v
