@@ -8,19 +8,24 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './Reducers/RootReducer';
 import thunk from 'redux-thunk';
-import {composeWithDevTools} from 'redux-devtools-extension'
+import {composeWithDevTools} from 'redux-devtools-extension';
+import { hydrate } from 'react-dom';
 
-const initialState = {};
+// Grab the state from a global variable injected into the server-generated HTML
+const preloadedState = window.__PRELOADED_STATE__
+
+// Allow the passed state to be garbage-collected
+delete window.__PRELOADED_STATE__
 
 const middleware = [thunk]
 
 const store = createStore(
   rootReducer,
-  initialState,
+  preloadedState,
   composeWithDevTools(applyMiddleware(...middleware))
 );
 
-ReactDOM.render(
+hydrate(
   <Provider store={store}>
     <App />
   </Provider>,
