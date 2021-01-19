@@ -52,6 +52,11 @@ public class IpsController
 	    return new ResponseEntity<>( response, HttpStatus.CREATED );
 	  
   }
+  
+	@RequestMapping("/helli")
+	public String helloDocker() {
+		return "Hello Docker!";
+	}
 
 
 
