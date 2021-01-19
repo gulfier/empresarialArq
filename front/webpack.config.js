@@ -1,9 +1,14 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require("terser-webpack-plugin");
+const nodeExternals = require('webpack-node-externals');
 
 const config = {
     entry: './src/index.js',
+    target: 'node',
+
+    externals: [nodeExternals()],
+
     output: {
         filename: 'app.min.js',
         path: path.join(__dirname, 'dist'),
@@ -20,7 +25,7 @@ const config = {
         minimizer: [new TerserPlugin()],
     },
     module: {
-        noParse: [/bootstrap.min.css/],
+        // noParse: [/bootstrap.min.css/],
         rules: [
             {
                 test: /\.(js)$/,
