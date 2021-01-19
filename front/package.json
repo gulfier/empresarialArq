@@ -34,7 +34,6 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "docker:build": "sudo docker build -t jorgeortega30/web-prosa:latest -f Dockerfile-web .",
@@ -42,7 +41,7 @@
     "docker:stop": "docker rm -f react",
     "dev-build-server": "NODE_ENV=development webpack --config webpack.config.js --mode=development -w",
     "dev-start": "nodemon ./server-build/index.js",
-    "dev": "npm-run-all --parallel build dev-*"
+    "build": "npm-run-all --parallel build dev-*"
   },
   "eslintConfig": {
     "extends": [
