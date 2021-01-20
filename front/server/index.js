@@ -8,7 +8,7 @@ import rootReducer from './Reducers/RootReducer';
 import ReactDOMServer from 'react-dom/server';
 import App from '../src/Components/App/AppComponent';
 
-const PORT = process.env.PORT || 3006;
+const PORT = process.env.PORT || 8080;
 const app = express();
 
 //Serve static files
