@@ -33,16 +33,16 @@
     "webpack-dev-server": ">=3.1.11"
   },
   "scripts": {
-    "build": "webpack",
+    "build-1": "webpack",
     "postinstall": "npm run build",
-    "start": "node bin/www",
+    "start-1": "node bin/www",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "docker:build": "sudo docker build -t jorgeortega30/web-prosa:latest -f Dockerfile-web .",
     "docker:run": "sudo docker run -p 3000:3000 jorgeortega30/web-prosa --name web-prosa",
     "docker:stop": "docker rm -f react",
-    "dev-build-server": "NODE_ENV=development webpack --config webpack.config.js --mode=development -w",
-    "dev-start": "nodemon ./server-build/index.js",
+    "build": "NODE_ENV=development webpack --config webpack.config.js --mode=development -w",
+    "start": "nodemon ./server-build/index.js",
     "build-dev": "npm-run-all --parallel build dev-*"
   },
   "eslintConfig": {
