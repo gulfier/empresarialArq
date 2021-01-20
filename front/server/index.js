@@ -60,11 +60,11 @@ function renderFullPage(html, preloadedState) {
     `
 }
 
-// app.listen(PORT, () => {
-//   console.log(`Server is listening on port ${PORT}`);
-// });
-
-var server = app.listen(app.get('port'), function() {
-  debug('Express server listening on port ' + server.address().port);
+app.listen(PORT, () => {
+  console.log(`Server is listening on port ${PORT}`);
 });
+
+// var server = app.listen(app.get('port'), function() {
+//   debug('Express server listening on port ' + server.address().port);
+// });
 // module.exports = app;
