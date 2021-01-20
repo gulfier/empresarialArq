@@ -11,6 +11,7 @@ import App from '../src/Components/App/AppComponent';
 const PORT = process.env.PORT || 8080;
 const app = express();
 
+app.set('port',PORT);
 //Serve static files
 //app.use('/static', Express.static('static'))
 app.use(express.static('./build'));

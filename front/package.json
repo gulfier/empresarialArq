@@ -35,7 +35,7 @@
   "scripts": {
     "build": "webpack",
     "postinstall": "npm run build",
-    "start": "node ./bin/www",
+    "start": "node app.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "docker:build": "sudo docker build -t jorgeortega30/web-prosa:latest -f Dockerfile-web .",
