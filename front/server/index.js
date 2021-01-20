@@ -1,5 +1,3 @@
-import path from 'path';
-
 import React from 'react';
 import express from 'express';
 import { createStore } from 'redux';
