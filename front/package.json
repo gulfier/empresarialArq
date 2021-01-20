@@ -33,7 +33,7 @@
     "webpack-dev-server": ">=3.1.11"
   },
   "scripts": {
-    "build-1": "webpack",
+    "build": "webpack",
     "postinstall": "npm run build",
     "start": "node ./bin/www",
     "test": "react-scripts test",
@@ -41,7 +41,7 @@
     "docker:build": "sudo docker build -t jorgeortega30/web-prosa:latest -f Dockerfile-web .",
     "docker:run": "sudo docker run -p 3000:3000 jorgeortega30/web-prosa --name web-prosa",
     "docker:stop": "docker rm -f react",
-    "build": "NODE_ENV=development webpack --config webpack.config.js --mode=development -w",
+    "build-1": "NODE_ENV=development webpack --config webpack.config.js --mode=development -w",
     "start-1": "nodemon ./server-build/index.js",
     "build-dev": "npm-run-all --parallel build dev-*"
   },
