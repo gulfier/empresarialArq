@@ -1,10 +1,11 @@
-import express from 'express';
-import { createStore } from 'redux';
+const express = require('express');
+const redux = require('redux');
 import { Provider } from 'react-redux';
+const reactRedux = require('react-redux');
 import rootReducer from './Reducers/RootReducer';
-import ReactDOMServer from 'react-dom/server';
+const ReactDOMServer = require('react-dom/server');
 import App from '../src/Components/App/AppComponent';
-import React from 'react';
+const React = require('react');
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -20,13 +21,13 @@ app.use(handleRender)
 // We are going to fill these out in the sections to follow
 function handleRender(req, res) {
   // Create a new Redux store instance
-  const store = createStore(rootReducer)
+  const store = redux.createStore(rootReducer)
 
   // Render the component to a string
   const html = ReactDOMServer.renderToString(
-    <Provider store={store}>
+    <reactRedux.Provider store={store}>
       <App />
-    </Provider>
+    </reactRedux.Provider>
   )
 
   // Grab the initial state from our Redux store
