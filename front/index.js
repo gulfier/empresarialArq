@@ -27,7 +27,7 @@ function handleRender(req, res) {
     <reactRedux.Provider store={store}>
       <App />
     </reactRedux.Provider>
-  )
+  );
 
   // Grab the initial state from our Redux store
   const preloadedState = store.getState()
