@@ -14,6 +14,8 @@ import { hydrate } from 'react-dom';
 // Grab the state from a global variable injected into the server-generated HTML
 const preloadedState = window.__PRELOADED_STATE__
 
+const initialState = {};
+
 // Allow the passed state to be garbage-collected
 delete window.__PRELOADED_STATE__
 
@@ -21,11 +23,11 @@ const middleware = [thunk]
 
 const store = createStore(
   rootReducer,
-  preloadedState,
+  initialState,
   composeWithDevTools(applyMiddleware(...middleware))
 );
 
-hydrate(
+ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>,
