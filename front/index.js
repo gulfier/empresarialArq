@@ -1,6 +1,5 @@
 const express = require('express');
 const redux = require('redux');
-import { Provider } from 'react-redux';
 const reactRedux = require('react-redux');
 import rootReducer from './Reducers/RootReducer';
 const ReactDOMServer = require('react-dom/server');
