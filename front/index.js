@@ -1,9 +1,9 @@
 const express = require('express');
 const redux = require('redux');
 const reactRedux = require('react-redux');
-import rootReducer from './src/Reducers/RootReducer';
+const rootReducer = require('./src/Reducers/RootReducer');
 const ReactDOMServer = require('react-dom/server');
-import App from './src/Components/App/AppComponent';
+const App = require('./src/Components/App/AppComponent');
 const React = require('react');
 
 const PORT = process.env.PORT || 8080;
