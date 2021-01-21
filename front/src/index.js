@@ -23,11 +23,11 @@ const middleware = [thunk]
 
 const store = createStore(
   rootReducer,
-  initialState,
+  preloadedState,
   composeWithDevTools(applyMiddleware(...middleware))
 );
 
-ReactDOM.render(
+hydrate(
   <Provider store={store}>
     <App />
   </Provider>,

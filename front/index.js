@@ -1,10 +1,10 @@
-import React from 'react';
 import express from 'express';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import rootReducer from './Reducers/RootReducer';
 import ReactDOMServer from 'react-dom/server';
 import App from '../src/Components/App/AppComponent';
+import React from 'react';
 
 const PORT = process.env.PORT || 8080;
 const app = express();
