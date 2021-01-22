@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import mx.com.prosa.poc.controller.aspect.BusinessExceptionInterceptor;
-import mx.com.prosa.poc.service.BaseDatosService;
 import mx.com.prosa.poc.service.IpsService;
-import mx.com.prosa.poc.to.BaseDatosTO;
 import mx.com.prosa.poc.to.IpTO;
 import mx.com.prosa.poc.to.Response;
 
@@ -26,7 +24,7 @@ import mx.com.prosa.poc.to.Response;
 @RequestMapping("/v1/ip")
 @BusinessExceptionInterceptor
 @CrossOrigin
-public class IpsController 
+public class IpsController extends AbstractBaseController
 {
 	
 	@Autowired
@@ -56,6 +54,12 @@ public class IpsController
 	@RequestMapping("/helli")
 	public String helloDocker() {
 		return "Hello Docker!";
+	}
+
+	@Override
+	protected String[] getParameters() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
