@@ -9,6 +9,6 @@ import mx.com.prosa.poc.model.TblTablas;
 /**
  * The Interface TblTablasRepository.
  */
-public interface TblTablasRepository extends JpaRepository<TblTablas, BigDecimal> {
+public interface TblTablasRepository extends JpaRepository<TblTablas, Long> {
 
 }

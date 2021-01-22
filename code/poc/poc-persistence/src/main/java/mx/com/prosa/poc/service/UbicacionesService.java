@@ -12,5 +12,21 @@ public interface UbicacionesService {
 	 *
 	 * @param site the site
 	 */
-	void save( UbicacionTO site );
+	void save( UbicacionTO location );
+	
+	/**
+	 * Edits the.
+	 *
+	 * @param location the location
+	 * @return the boolean
+	 */
+	Boolean edit(UbicacionTO location);
+	
+	/**
+	 * Delete.
+	 *
+	 * @param site the site
+	 * @return the boolean
+	 */
+	Boolean delete( Long id );
 }

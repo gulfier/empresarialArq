@@ -13,5 +13,21 @@ public interface TablasService {
 	 *
 	 * @param site the site
 	 */
-	void save( TablasTO site );
+	void save( TablasTO table );
+	
+	/**
+	 * Edits the.
+	 *
+	 * @param table the table
+	 * @return the boolean
+	 */
+	Boolean edit(TablasTO table);
+	
+	/**
+	 * Delete.
+	 *
+	 * @param id the id
+	 * @return the boolean
+	 */
+	Boolean delete( Long id );
 }
