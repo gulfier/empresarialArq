@@ -9,6 +9,7 @@ import mx.com.prosa.poc.persistence.TblSegmentosRepository;
 import mx.com.prosa.poc.persistence.TblUbicacionesRepository;
 import mx.com.prosa.poc.service.SegmentosService;
 import mx.com.prosa.poc.to.SegmentosTO;
+import mx.com.prosa.poc.util.BaseTOValidationUtil;
 import mx.com.prosa.poc.util.SupplierBusinessException;
 
 // TODO: Auto-generated Javadoc
@@ -47,4 +48,44 @@ public class SegmentosServiceImpl implements SegmentosService {
 		tblSegmentosRepository.save(entity);
 	}
 
+	/**
+	 * Delete.
+	 *
+	 * @param id the id
+	 * @return the boolean
+	 */
+	@Override
+	public Boolean delete(Long id) {
+		tblSegmentosRepository.delete(tblSegmentosRepository.
+				findById(id).orElseThrow(SupplierBusinessException.RED_PART_NOT_FOUND));
+		return true;
+	}
+	
+	/**
+	 * Edits the.
+	 *
+	 * @param object the object
+	 * @return the boolean
+	 */
+	@Override
+	public Boolean edit(SegmentosTO object) {
+		BaseTOValidationUtil.validateIdNotNull( object );
+		TblSegmentos entity = this.tblSegmentosRepository.findById( object.getId() )
+	        .orElseThrow( SupplierBusinessException.RED_PART_NOT_FOUND );
+	    entity.setDsDescrpcion(object.getDsDescrpcion());
+		entity.setDsNombre(object.getDsNombre());
+		entity.setDsPci(object.getDsPci());
+		entity.setDsRangoIpInicia(object.getDsRangoIpInicia());
+		entity.setDsRangoIpTermina(object.getDsRangoIpTermina());
+		entity.setDsTipo(object.getDsTipo());
+		if(object.getFkIdUbicacion()!=null) {
+			TblUbicaciones ubicacion = ubicacionesRepository.findById(object.getFkIdUbicacion())
+					.orElseThrow(SupplierBusinessException.LOCATION_NOT_FOUND);
+			entity.setFkIdUbicacion(ubicacion);
+		}
+	    this.tblSegmentosRepository.save( entity );
+	    this.tblSegmentosRepository.flush();
+		return true;
+	}
+	
 }

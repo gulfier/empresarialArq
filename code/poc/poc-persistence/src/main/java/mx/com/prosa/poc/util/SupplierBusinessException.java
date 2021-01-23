@@ -34,11 +34,21 @@ public final class SupplierBusinessException
   private static final String APP_NOT_FOUND_MESSAGE = "Aplication not found";
   
   private static final String TABLE_NOT_FOUND_MESSAGE = "Table not found";
+  
+  private static final String RED_PART_NOT_FOUND_MESSAGE = "Segmento not found";
 
   private SupplierBusinessException()
   {
     // Se ofusca el constructor
   }
+  
+  public static final Supplier<BusinessException> RED_PART_NOT_FOUND = () -> {
+		BusinessException e = new BusinessException( RED_PART_NOT_FOUND_MESSAGE );
+		e.getError().setId( 404L );
+		e.getError().setNotFound( true );
+		e.getError().setDescription( RED_PART_NOT_FOUND_MESSAGE );
+		return e;
+};
   
   public static final Supplier<BusinessException> TABLE_NOT_FOUND = () -> {
 		BusinessException e = new BusinessException( TABLE_NOT_FOUND_MESSAGE );
