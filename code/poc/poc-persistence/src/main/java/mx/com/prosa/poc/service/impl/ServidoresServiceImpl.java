@@ -1,5 +1,8 @@
 package mx.com.prosa.poc.service.impl;
 
+import java.sql.Timestamp;
+import java.util.Calendar;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +14,7 @@ import mx.com.prosa.poc.persistence.TblServidoresRepository;
 import mx.com.prosa.poc.persistence.TblUbicacionesRepository;
 import mx.com.prosa.poc.service.ServidoresService;
 import mx.com.prosa.poc.to.ServidoresTO;
+import mx.com.prosa.poc.util.BaseTOValidationUtil;
 import mx.com.prosa.poc.util.CommonsUtil;
 import mx.com.prosa.poc.util.SupplierBusinessException;
 
@@ -63,5 +67,58 @@ public class ServidoresServiceImpl implements ServidoresService {
 				.orElseThrow(SupplierBusinessException.LOCATION_NOT_FOUND);
 		entity.setFkIdUbicacion(ubicaciones);
 		tblServidoresRepository.save(entity);
+	}
+	
+	/**
+	 * Delete.
+	 *
+	 * @param id the id
+	 * @return the boolean
+	 */
+	@Override
+	public Boolean delete(Long id) {
+		tblServidoresRepository.delete(tblServidoresRepository.
+				findById(id).orElseThrow(SupplierBusinessException.SERVER_NOT_FOUND));
+		return true;
+	}
+	
+	/**
+	 * Edits the.
+	 *
+	 * @param server the server
+	 * @return the boolean
+	 */
+	@Override
+	public Boolean edit(ServidoresTO server) {
+		BaseTOValidationUtil.validateIdNotNull( server );
+	    TblServidores entity = this.tblServidoresRepository.findById( server.getId() )
+	        .orElseThrow( SupplierBusinessException.IT_SERVICE_NOT_FOUND );
+	    entity.setDsAmbiente(server.getDsAmbiente());
+		entity.setDsCode(server.getDsCode());
+		entity.setDsDescripcion(server.getDsDescripcion());
+		entity.setDsHostName(server.getDsHostName());
+		entity.setDsMarcaModelo(server.getDsMarcaModelo());
+		entity.setDsName(server.getDsName());
+		entity.setDsPci(server.getDsPci());
+		entity.setDsProposito(server.getDsProposito());
+		entity.setDsTipo(server.getDsTipo());
+		entity.setDsVirtualizacion(server.getDsVirtualizacion());
+		if(server.getFkIdResponsable()!=null) {
+			TblActores actore = tblActorRepository.findById(server.getFkIdResponsable())
+					.orElseThrow(SupplierBusinessException.ACTOR_NOT_FOUND);
+			entity.setFkIdResponsable(actore);
+		}
+		if(server.getFkIdUbicacion()!=null) {
+			TblUbicaciones ubicaciones = ubicacionesRepository.findById(server.getFkIdUbicacion())
+					.orElseThrow(SupplierBusinessException.LOCATION_NOT_FOUND);
+			entity.setFkIdUbicacion(ubicaciones);
+		}
+	    
+		entity.setDsUserModification(server.getDsUserModification());
+	    entity.setDtModified( (Timestamp) Calendar.getInstance().getTime() );
+
+	    this.tblServidoresRepository.save( entity );
+	    this.tblServidoresRepository.flush();
+		return true;
 	}
 }
