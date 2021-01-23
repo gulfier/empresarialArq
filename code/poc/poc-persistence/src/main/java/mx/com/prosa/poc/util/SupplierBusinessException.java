@@ -38,11 +38,21 @@ public final class SupplierBusinessException
   private static final String RED_PART_NOT_FOUND_MESSAGE = "Segmento not found";
   
   private static final String PROTOCOL_NOT_FOUND_MESSAGE = "Segmento not found";
+  
+  private static final String LEVEL_SECURITY_NOT_FOUND_MESSAGE = "Level security not found";
 
   private SupplierBusinessException()
   {
     // Se ofusca el constructor
   }
+  
+  public static final Supplier<BusinessException> LEVEL_SECURITY_NOT_FOUND = () -> {
+		BusinessException e = new BusinessException( LEVEL_SECURITY_NOT_FOUND_MESSAGE );
+		e.getError().setId( 404L );
+		e.getError().setNotFound( true );
+		e.getError().setDescription( LEVEL_SECURITY_NOT_FOUND_MESSAGE );
+		return e;
+  };
   
   public static final Supplier<BusinessException> PROTOCOL_NOT_FOUND = () -> {
 		BusinessException e = new BusinessException( PROTOCOL_NOT_FOUND_MESSAGE );
