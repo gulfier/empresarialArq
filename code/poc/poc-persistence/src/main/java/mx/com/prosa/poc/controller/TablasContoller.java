@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import mx.com.prosa.poc.controller.aspect.BusinessExceptionInterceptor;
 import mx.com.prosa.poc.service.TablasService;
 import mx.com.prosa.poc.to.BaseTO;
-import mx.com.prosa.poc.to.ITServiceTO;
 import mx.com.prosa.poc.to.Response;
 import mx.com.prosa.poc.to.TablasTO;
 
@@ -89,7 +88,7 @@ public class TablasContoller extends AbstractBaseController {
 	@DeleteMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Response<BaseTO>> delete(@PathVariable(value = "id") Long id) {
 
-		ITServiceTO request = new ITServiceTO();
+		TablasTO request = new TablasTO();
 		request.setIp(super.getIpAddress());
 		request.setUser(super.getUser());
 		request.setId(id);

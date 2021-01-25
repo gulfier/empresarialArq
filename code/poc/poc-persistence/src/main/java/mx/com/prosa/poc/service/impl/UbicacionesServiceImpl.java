@@ -1,7 +1,7 @@
 package mx.com.prosa.poc.service.impl;
 
 import java.sql.Timestamp;
-import java.util.Calendar;
+import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -95,7 +95,7 @@ public class UbicacionesServiceImpl implements UbicacionesService {
 		entity.setDsPci(location.getDsPci());
 		entity.setDsTipo(location.getDsTipo());
 		entity.setDsUserModification(location.getDsUserModification());
-	    entity.setDtModified( (Timestamp) Calendar.getInstance().getTime() );
+	    entity.setDtModified( Timestamp.valueOf(LocalDateTime.now()) );
 
 	    this.ubicacionesRepository.save( entity );
 	    this.ubicacionesRepository.flush();

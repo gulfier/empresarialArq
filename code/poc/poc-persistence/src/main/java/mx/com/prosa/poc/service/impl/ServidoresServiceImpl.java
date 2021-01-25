@@ -1,7 +1,7 @@
 package mx.com.prosa.poc.service.impl;
 
 import java.sql.Timestamp;
-import java.util.Calendar;
+import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -115,7 +115,7 @@ public class ServidoresServiceImpl implements ServidoresService {
 		}
 	    
 		entity.setDsUserModification(server.getDsUserModification());
-	    entity.setDtModified( (Timestamp) Calendar.getInstance().getTime() );
+	    entity.setDtModified( Timestamp.valueOf(LocalDateTime.now()) );
 
 	    this.tblServidoresRepository.save( entity );
 	    this.tblServidoresRepository.flush();

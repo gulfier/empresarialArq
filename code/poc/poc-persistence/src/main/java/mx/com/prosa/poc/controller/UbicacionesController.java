@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import mx.com.prosa.poc.controller.aspect.BusinessExceptionInterceptor;
 import mx.com.prosa.poc.service.UbicacionesService;
 import mx.com.prosa.poc.to.BaseTO;
-import mx.com.prosa.poc.to.ITServiceTO;
 import mx.com.prosa.poc.to.Response;
 import mx.com.prosa.poc.to.UbicacionTO;
 
@@ -89,7 +88,7 @@ public class UbicacionesController extends AbstractBaseController {
 	@DeleteMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Response<BaseTO>> delete(@PathVariable(value = "id") Long id) {
 
-		ITServiceTO request = new ITServiceTO();
+		UbicacionTO request = new UbicacionTO();
 		request.setIp(super.getIpAddress());
 		request.setUser(super.getUser());
 		request.setId(id);
