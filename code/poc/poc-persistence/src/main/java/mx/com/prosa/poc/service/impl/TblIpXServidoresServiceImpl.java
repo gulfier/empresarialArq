@@ -17,18 +17,30 @@ import mx.com.prosa.poc.to.TblIpXServidoresTO;
 import mx.com.prosa.poc.util.BaseTOValidationUtil;
 import mx.com.prosa.poc.util.SupplierBusinessException;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TblIpXServidoresServiceImpl.
+ */
 @Service
 public class TblIpXServidoresServiceImpl implements TblIpXServidoresService {
 
+	/** The tbl ip X servidores repository. */
 	@Autowired
 	private TblIpXServidoresRepository tblIpXServidoresRepository;
 	
+	/** The tbl servidores repository. */
 	@Autowired
 	private TblServidoresRepository tblServidoresRepository;
 	
+	/** The tbl ip repository. */
 	@Autowired
 	private TblIpRepository tblIpRepository;
 	
+	/**
+	 * Save.
+	 *
+	 * @param object the object
+	 */
 	@Override
 	public void save(TblIpXServidoresTO object) {
 		TblIpXServidores entity = new TblIpXServidores();
@@ -43,6 +55,12 @@ public class TblIpXServidoresServiceImpl implements TblIpXServidoresService {
 		tblIpXServidoresRepository.save(entity);
 	}
 	
+	/**
+	 * Delete.
+	 *
+	 * @param object the object
+	 * @return the boolean
+	 */
 	@Override
 	public Boolean delete(TblIpXServidoresTO object) {
 		tblIpXServidoresRepository.delete(tblIpXServidoresRepository.
@@ -50,6 +68,12 @@ public class TblIpXServidoresServiceImpl implements TblIpXServidoresService {
 		return true;
 	}
 	
+	/**
+	 * Edits the.
+	 *
+	 * @param object the object
+	 * @return the boolean
+	 */
 	@Override
 	public Boolean edit(IpXServidoresEdithTO object) {
 		BaseTOValidationUtil.validateIdNotNull( object );
