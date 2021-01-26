@@ -50,7 +50,7 @@ public class NivelCifradoServiceImpl implements NivelCifradoService {
 	@Override
 	public Boolean edit(NivelCifradoTO levelSecurity) {
 		BaseTOValidationUtil.validateIdNotNull(levelSecurity);
-		TblNivelesCifrado entity = this.tblNivelesCifradoRepository.findById(levelSecurity.getId())
+		TblNivelesCifrado entity = this.tblNivelesCifradoRepository.findById(levelSecurity.getPkIdCifrado())
 				.orElseThrow(SupplierBusinessException.LEVEL_SECURITY_NOT_FOUND);
 		
 		entity.setDsNombre(levelSecurity.getDsNombre());
