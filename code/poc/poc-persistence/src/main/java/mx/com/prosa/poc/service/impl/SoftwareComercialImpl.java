@@ -69,8 +69,8 @@ public class SoftwareComercialImpl implements SoftwareComercialService {
 	@Override
 	public Boolean edit(SoftwareComercialTO software) {
 		BaseTOValidationUtil.validateIdNotNull( software );
-		TblSoftwareComercial entity = this.tblSoftwareComercial.findById( software.getId() )
-	        .orElseThrow( SupplierBusinessException.IT_SERVICE_NOT_FOUND );
+		TblSoftwareComercial entity = this.tblSoftwareComercial.findById( software.getPkIdSoftware() )
+	        .orElseThrow( SupplierBusinessException.SOFTWARE_NOT_FOUND );
 		entity.setDsNombre(software.getDsNombre());
 		entity.setDsTipo(software.getDsTipo());
 		entity.setDsVersion(software.getDsVersion());
