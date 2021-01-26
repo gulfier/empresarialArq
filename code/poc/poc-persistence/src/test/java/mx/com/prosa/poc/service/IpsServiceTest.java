@@ -13,31 +13,45 @@ import mx.com.prosa.poc.to.IpTO;
 @RunWith(SpringRunner.class)
 @SpringBootTest()
 @Transactional
+public class IpsServiceTest {
 
-public class IpsServiceTest
-{
+	@Autowired
+	private IpsService IpsService;
 
+	@Test
+	public void testSave() {
 
-  @Autowired
-  private IpsService IpsService; 
+		IpTO tblIp = new IpTO();
 
-  @Test
-  public void testSave()
-  {
-	  
+		tblIp.setPkIdIp(2L);
+		tblIp.setDsIp("10.0.3.4");
+		tblIp.setDsTipo("Prod");
 
-	  IpTO tblIp = new IpTO();
+		tblIp.setFkIdSegmento(1L);
 
-	  tblIp.setPkIdIp(2L);
-	  tblIp.setDsIp("10.0.3.4");
-	  tblIp.setDsTipo("Prod");
-	  
-	  tblIp.setFkIdSegmento(1L);
-	  
 		IpsService.save(tblIp);
-    Assert.assertNotNull( tblIp );
+		Assert.assertNotNull(tblIp);
 
-  }
+	}
+	
+	@Test
+	public void testUpdate() {
 
+		IpTO tblIp = new IpTO();
+		tblIp.setPkIdIp(1L);
+		tblIp.setDsIp("10.0.6.198");
+		tblIp.setDsTipo("Prod");
+		tblIp.setFkIdSegmento(1L);
+		tblIp.setId(2L);
+		Boolean success = IpsService.edit(tblIp);
+		Assert.assertTrue(success);
+
+	}
+
+	@Test
+	public void testDelete() {
+		Boolean success = IpsService.delete(1L);
+		Assert.assertTrue(success);
+	}
 
 }

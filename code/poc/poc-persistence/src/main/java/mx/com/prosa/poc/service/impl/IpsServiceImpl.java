@@ -80,7 +80,7 @@ public class IpsServiceImpl implements IpsService {
 	@Override
 	public Boolean edit(IpTO ip) {
 		BaseTOValidationUtil.validateIdNotNull(ip);
-		TblIp entity = this.tblIpRepository.findById(ip.getId())
+		TblIp entity = this.tblIpRepository.findById(ip.getPkIdIp())
 				.orElseThrow(SupplierBusinessException.IP_NOT_FOUND);
 		entity.setDsIp(ip.getDsIp());
 		entity.setDsTipo(ip.getDsTipo());
