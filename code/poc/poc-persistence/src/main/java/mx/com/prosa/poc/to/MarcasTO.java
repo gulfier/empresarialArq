@@ -1,8 +1,6 @@
 package mx.com.prosa.poc.to;
 
-import java.io.Serializable;
-
-public class MarcasTO implements Serializable {
+public class MarcasTO extends BaseTO {
 
 	/**
 	 * 

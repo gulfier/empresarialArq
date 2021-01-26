@@ -13,5 +13,21 @@ public interface ServidoresService {
 	 *
 	 * @param site the site
 	 */
-	void save( ServidoresTO site );
+	void save( ServidoresTO server );
+	
+	/**
+	 * Edits the.
+	 *
+	 * @param server the server
+	 * @return the boolean
+	 */
+	Boolean edit(ServidoresTO server);
+	
+	/**
+	 * Delete.
+	 *
+	 * @param id the id
+	 * @return the boolean
+	 */
+	Boolean delete( Long id );
 }
