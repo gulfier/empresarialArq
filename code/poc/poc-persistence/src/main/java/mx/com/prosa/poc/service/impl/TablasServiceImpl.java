@@ -66,7 +66,7 @@ public class TablasServiceImpl implements TablasService {
 	@Override
 	public Boolean edit(TablasTO table) {
 		BaseTOValidationUtil.validateIdNotNull( table );
-	    TblTablas entity = this.tblTablasRepository.findById( table.getId() )
+	    TblTablas entity = this.tblTablasRepository.findById( table.getPkIdTabla() )
 	        .orElseThrow( SupplierBusinessException.TABLE_NOT_FOUND );
 	    entity.setDsTabla(table.getDsTabla());
 	    if(table.getFkIdBase()!=null) {

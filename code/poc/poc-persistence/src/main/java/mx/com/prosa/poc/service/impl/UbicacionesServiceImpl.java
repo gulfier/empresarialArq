@@ -82,7 +82,7 @@ public class UbicacionesServiceImpl implements UbicacionesService {
 	@Override
 	public Boolean edit(UbicacionTO location) {
 		BaseTOValidationUtil.validateIdNotNull( location );
-	    TblUbicaciones entity = this.ubicacionesRepository.findById( location.getId() )
+	    TblUbicaciones entity = this.ubicacionesRepository.findById( location.getPkIdUbicacion() )
 	        .orElseThrow( SupplierBusinessException.IT_SERVICE_NOT_FOUND );
 	    entity.setDsCiudad(location.getDsCiudad());
 		entity.setDsCode(location.getDsCode());

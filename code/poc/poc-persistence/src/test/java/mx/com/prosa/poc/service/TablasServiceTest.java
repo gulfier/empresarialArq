@@ -41,7 +41,7 @@ public class TablasServiceTest
 	  TablasTO entity = new TablasTO();
 		entity.setDsTabla("Auditoria 3");
 		entity.setFkIdBase(3L);
-		entity.setPkIdTabla(1L);
+		entity.setPkIdTabla(2L);
 		entity.setId(2L);
 
 		Boolean success = tablasService.edit(entity);

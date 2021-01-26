@@ -70,7 +70,7 @@ public class SegmentosServiceImpl implements SegmentosService {
 	@Override
 	public Boolean edit(SegmentosTO object) {
 		BaseTOValidationUtil.validateIdNotNull( object );
-		TblSegmentos entity = this.tblSegmentosRepository.findById( object.getId() )
+		TblSegmentos entity = this.tblSegmentosRepository.findById( object.getPkIdSegmento() )
 	        .orElseThrow( SupplierBusinessException.RED_PART_NOT_FOUND );
 	    entity.setDsDescrpcion(object.getDsDescrpcion());
 		entity.setDsNombre(object.getDsNombre());

@@ -52,7 +52,7 @@ public class MarcasServiceImpl implements MarcasService {
 	@Override
 	public Boolean edit(MarcasTO brand) {
 		BaseTOValidationUtil.validateIdNotNull( brand );
-		TblMarcas entity = this.tblMarcasRepository.findById( brand.getId() )
+		TblMarcas entity = this.tblMarcasRepository.findById( brand.getPkIdMarca() )
 	        .orElseThrow( SupplierBusinessException.BRAND_NOT_FOUND );
 		entity.setDsNombre(brand.getDsNombre());
 		entity.setDsDescripcion(brand.getDsDescripcion());
