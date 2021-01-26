@@ -77,17 +77,12 @@ public class TblIpXServidoresServiceImpl implements TblIpXServidoresService {
 	@Override
 	public Boolean edit(IpXServidoresEdithTO object) {
 		BaseTOValidationUtil.validateIdNotNull( object );
-		TblIpXServidores entity = this.tblIpXServidoresRepository.
-				findTable(object.getTable().getFkIdIp(),object.getTable().getFkIdServidor()).orElseThrow(SupplierBusinessException.TABLE_NOT_FOUND);
 	    
 		Optional<TblIpXServidores> entityUpdated = this.tblIpXServidoresRepository.
 				findTable(object.getUpdate().getFkIdIp(),object.getUpdate().getFkIdServidor());
 		
 		if(!entityUpdated.isPresent()) {
-			TblIpXServidoresTO table = new TblIpXServidoresTO();
-			table.setFkIdIp(entity.getFkIdIp());
-			table.setFkIdServidor(entity.getFkIdServidor());
-			this.delete(table);
+			this.delete(object.getTable());
 			TblIpXServidores tableUpdated = new TblIpXServidores();
 			tableUpdated.setFkIdIp(object.getUpdate().getFkIdIp());
 			tableUpdated.setFkIdServidor(object.getUpdate().getFkIdServidor());
