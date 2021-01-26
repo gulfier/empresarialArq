@@ -77,17 +77,17 @@ public class SoftwarescomXServidorServiceImpl implements SoftwarescomXServidorSe
 	@Override
 	public Boolean edit(SoftwarescomXServidorEdithTO object) {
 		BaseTOValidationUtil.validateIdNotNull( object );
-		TblSoftwarescomXServidor entity = this.softwarescpmXServidorRepository.
-				findTable(object.getTable().getFkIdSoftware(),object.getTable().getFkIdServer()).orElseThrow(SupplierBusinessException
-																												.TABLE_NOT_FOUND);
 	    
 		Optional<TblSoftwarescomXServidor> entityUpdated = this.softwarescpmXServidorRepository.
 				findTable(object.getUpdate().getFkIdSoftware(),object.getUpdate().getFkIdServer());
 		
 		if(!entityUpdated.isPresent()) {
-			entity.setFkIdSoftware(object.getUpdate().getFkIdSoftware());
-			entity.setFkIdServer(object.getUpdate().getFkIdServer());
-			this.softwarescpmXServidorRepository.save( entity );
+			this.delete(object.getTable());
+			TblSoftwarescomXServidor tableUpdated = new TblSoftwarescomXServidor();
+			tableUpdated.setFkIdServer(object.getUpdate().getFkIdServer());
+			tableUpdated.setFkIdSoftware(object.getUpdate().getFkIdSoftware());
+			
+			this.softwarescpmXServidorRepository.save( tableUpdated );
 		    this.softwarescpmXServidorRepository.flush();
 		}
 		return true;

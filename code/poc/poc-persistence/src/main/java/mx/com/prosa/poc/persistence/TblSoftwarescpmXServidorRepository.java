@@ -21,7 +21,7 @@ public interface TblSoftwarescpmXServidorRepository extends JpaRepository<TblSof
 	 * @param idtwo the idtwo
 	 * @return the optional
 	 */
-	@Query(value = "SELECT o FROM TBL_SOFTWARESCOM_X_SERVIDOR o "
-			+ " WHERE o.FK_ID_SOFTWARE = :idone AND o.FK_ID_SERVER = :idtwo", nativeQuery = true)
+	@Query(value = "SELECT * FROM TBL_SOFTWARESCOM_X_SERVIDOR"
+			+ " WHERE FK_ID_SOFTWARE = :idone AND FK_ID_SERVER = :idtwo", nativeQuery = true)
 	Optional<TblSoftwarescomXServidor> findTable(@Param("idone") Long idone, @Param("idtwo") Long idtwo);
 }
