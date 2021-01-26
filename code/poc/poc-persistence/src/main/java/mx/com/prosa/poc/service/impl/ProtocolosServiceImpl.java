@@ -85,7 +85,7 @@ public class ProtocolosServiceImpl implements ProtocolosService {
 	@Override
 	public Boolean edit(ProtocoloTO protocol) {
 		BaseTOValidationUtil.validateIdNotNull(protocol);
-		TblProtocolos entity = this.tblProtocolosRepository.findById(protocol.getId())
+		TblProtocolos entity = this.tblProtocolosRepository.findById(protocol.getPkIdProtocolo())
 				.orElseThrow(SupplierBusinessException.PROTOCOL_NOT_FOUND);
 		entity.setDsNombre(protocol.getDsNombre());
 		entity.setDsVersion(protocol.getDsVersion());
