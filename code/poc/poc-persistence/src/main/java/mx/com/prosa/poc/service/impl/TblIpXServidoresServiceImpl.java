@@ -84,10 +84,15 @@ public class TblIpXServidoresServiceImpl implements TblIpXServidoresService {
 				findTable(object.getUpdate().getFkIdIp(),object.getUpdate().getFkIdServidor());
 		
 		if(!entityUpdated.isPresent()) {
-			entity.setFkIdIp(object.getUpdate().getFkIdIp());
-			entity.setFkIdServidor(object.getUpdate().getFkIdServidor());
-			this.tblIpXServidoresRepository.save( entity );
-		    this.tblIpXServidoresRepository.flush();
+			TblIpXServidoresTO table = new TblIpXServidoresTO();
+			table.setFkIdIp(entity.getFkIdIp());
+			table.setFkIdServidor(entity.getFkIdServidor());
+			this.delete(table);
+			TblIpXServidores tableUpdated = new TblIpXServidores();
+			tableUpdated.setFkIdIp(object.getUpdate().getFkIdIp());
+			tableUpdated.setFkIdServidor(object.getUpdate().getFkIdServidor());
+			this.tblIpXServidoresRepository.save( tableUpdated );
+			this.tblIpXServidoresRepository.flush();
 		}
 		return true;
 	}
