@@ -91,7 +91,7 @@ public class ServidoresServiceImpl implements ServidoresService {
 	@Override
 	public Boolean edit(ServidoresTO server) {
 		BaseTOValidationUtil.validateIdNotNull( server );
-	    TblServidores entity = this.tblServidoresRepository.findById( server.getId() )
+	    TblServidores entity = this.tblServidoresRepository.findById( server.getPkIdServidor() )
 	        .orElseThrow( SupplierBusinessException.IT_SERVICE_NOT_FOUND );
 	    entity.setDsAmbiente(server.getDsAmbiente());
 		entity.setDsCode(server.getDsCode());
