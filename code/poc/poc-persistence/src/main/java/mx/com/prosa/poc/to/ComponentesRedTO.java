@@ -1,8 +1,7 @@
 package mx.com.prosa.poc.to;
 
-import java.io.Serializable;
 
-public class ComponentesRedTO implements Serializable {
+public class ComponentesRedTO  extends BaseTO {
 
 	/**
 	 * 

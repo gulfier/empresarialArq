@@ -14,4 +14,17 @@ public interface ActoresService {
 	 * @param site the site
 	 */
 	void save( ActoresTO site );
+	/**
+	 * delete.
+	 *
+	 * @param site the site
+	 */
+	 Boolean delete(Long id);
+	/**
+	 * Edits the.
+	 *
+	 * @param table the table
+	 * @return the boolean
+	 */
+	Boolean edit(ActoresTO table);
 }

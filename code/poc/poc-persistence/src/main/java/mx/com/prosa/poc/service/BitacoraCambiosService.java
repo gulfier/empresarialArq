@@ -65,4 +65,12 @@ public interface BitacoraCambiosService
    * @param site
    */
   void delete( BitacoraCambiosTO site );
+
+/**
+ * Delete.
+ *
+ * @param id the id
+ * @return the boolean
+ */
+Boolean delete(Long id);
 }

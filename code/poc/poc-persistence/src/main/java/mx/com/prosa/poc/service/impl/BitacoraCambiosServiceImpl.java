@@ -139,6 +139,20 @@ public class BitacoraCambiosServiceImpl implements BitacoraCambiosService
 		// TODO Auto-generated method stub
 		
 	}
+	
+	/**
+	 * Delete.
+	 *
+	 * @param id the id
+	 * @return the boolean
+	 */
+	@Override
+	public Boolean delete(Long id) {
+		bitacoraCambiosRepository.delete(bitacoraCambiosRepository.
+				findById(id).orElseThrow(SupplierBusinessException.BITACORA_NOT_FOUND));
+		return true;
+	}
+	
 
 
 

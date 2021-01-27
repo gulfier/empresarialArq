@@ -11,10 +11,15 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import mx.com.prosa.poc.model.TblActores;
 import mx.com.prosa.poc.model.TblAplicaciones;
 import mx.com.prosa.poc.persistence.TblAplicacionesRepository;
 import mx.com.prosa.poc.service.AplicacionesService;
+import mx.com.prosa.poc.to.ActoresTO;
 import mx.com.prosa.poc.to.AplicacionTO;
+import mx.com.prosa.poc.util.BaseTOValidationUtil;
+import mx.com.prosa.poc.util.CommonsUtil;
+import mx.com.prosa.poc.util.SupplierBusinessException;
 
 /**
  * @author gllopezv 
@@ -61,6 +66,59 @@ public class AplicacionesServiceImpl implements AplicacionesService {
           
 	    return app;
 	  }
+	  
+	  
+		/**
+		 * Delete.
+		 *
+		 * @param id the id
+		 * @return the boolean
+		 */
+		@Override
+		public Boolean delete(Long id) {
+			tblAplicacionesRepository.delete(tblAplicacionesRepository.
+					findById(id).orElseThrow(SupplierBusinessException.APPLICATION_NOT_FOUND));
+			return true;
+		}
+		
+		
+		
+		/**
+		 * Edits the.
+		 *
+		 * @param aplicaciones the table
+		 * @return the boolean
+		 */
+		@Override
+		public Boolean edit(AplicacionTO aplicacion) {
+			BaseTOValidationUtil.validateIdNotNull( aplicacion );
+			TblAplicaciones entity = this.tblAplicacionesRepository.findById( aplicacion.getPkIdAplicacion() )
+		        .orElseThrow( SupplierBusinessException.APPLICATION_NOT_FOUND );
+			
+			entity.setDsClasificacion(aplicacion.getDsClasificacion());
+			entity.setDsComment(aplicacion.getDsComment());
+			entity.setDsDescripcion(aplicacion.getDsDescripcion() );
+			entity.setDsEstatus(aplicacion.getDsEstatus()) ;
+			entity.setDsName(aplicacion.getDsName());
+			entity.setDsNombre(aplicacion.getDsNombre()) ;
+			entity.setDsNombreCorto(aplicacion.getDsNombreCorto());
+			entity.setDsNombreLargo(aplicacion.getDsNombreLargo());			
+			
+			entity.setDsCode(aplicacion.getDsCode());
+			entity.setDsDescripcion(aplicacion.getDsDescripcion());
+			entity.setDsName(aplicacion.getDsName());
+			entity.setDsNombre(aplicacion.getDsNombre());
+			entity.setDsPci(aplicacion.getDsPci());
+			entity.setDsUserCreation(aplicacion.getDsUserCreation());
+			entity.setDsUserModification(aplicacion.getDsUserModification());
+			entity.setDtCreation(CommonsUtil.toTimestamp(aplicacion.getDtCreation()));
+			entity.setDtModified(CommonsUtil.toTimestamp(aplicacion.getDtModified()));
+		    
+		    this.tblAplicacionesRepository.save( entity );
+		    this.tblAplicacionesRepository.flush();
+			return true;
+		}
+		
 	  
 	  private Timestamp getDate(String fecha) {
 		  

@@ -11,4 +11,20 @@ public interface  ComponentesRedService {
 	   */
 	  void save( ComponentesRedTO componente );
 
+	/**
+	 * Delete.
+	 *
+	 * @param id the id
+	 * @return the boolean
+	 */
+	Boolean delete(Long id);
+
+	/**
+	 * Edits the.
+	 *
+	 * @param actores the table
+	 * @return the boolean
+	 */
+	Boolean edit(ComponentesRedTO base);
+
 }

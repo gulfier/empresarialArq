@@ -1,6 +1,8 @@
 package mx.com.prosa.poc.service.impl;
 
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +12,9 @@ import mx.com.prosa.poc.model.TblServidores;
 import mx.com.prosa.poc.persistence.TblAplicacionesXServidorRepository;
 import mx.com.prosa.poc.service.AplicacionesXServidorService;
 import mx.com.prosa.poc.to.AplicacionesXServidorTO;
+import mx.com.prosa.poc.to.AplicacionesXservidorEdithTO;
+import mx.com.prosa.poc.util.BaseTOValidationUtil;
+import mx.com.prosa.poc.util.SupplierBusinessException;
 
 @Service
 public class AplicacionesXServidorServiceImpl implements AplicacionesXServidorService {
@@ -37,5 +42,30 @@ public class AplicacionesXServidorServiceImpl implements AplicacionesXServidorSe
 		tblAplicacionesXServidorRepository.save(entity);
 	}
 	
+	@Override
+	public Boolean delete(AplicacionesXServidorTO request) {
+		// TODO Auto-generated method stub
+		tblAplicacionesXServidorRepository.delete(tblAplicacionesXServidorRepository.
+				findTable(request.getFkIdAplicacion(),request.getFkIdServidor()).orElseThrow(SupplierBusinessException.APP_NOT_FOUND));
+		return true;
+	}
+	
+	@Override
+	public Boolean edit(AplicacionesXservidorEdithTO object) {
+		BaseTOValidationUtil.validateIdNotNull( object );
+		TblAplicacionesXServidor entity = this.tblAplicacionesXServidorRepository.
+				findTable(object.getTable().getFkIdAplicacion(),object.getTable().getFkIdServidor()).orElseThrow(SupplierBusinessException.TABLE_NOT_FOUND);
+	    
+		Optional<TblAplicacionesXServidor> entityUpdated = this.tblAplicacionesXServidorRepository.
+				findTable(object.getUpdate().getFkIdAplicacion(),object.getUpdate().getFkIdServidor());
+		
+		if(!entityUpdated.isPresent()) {
+			entity.setFkIdAplicacion(object.getUpdate().getFkIdAplicacion());
+			entity.setFkIdServidor(object.getUpdate().getFkIdServidor());
+			this.tblAplicacionesXServidorRepository.save( entity );
+		    this.tblAplicacionesXServidorRepository.flush();
+		}
+		return true;
+	}
 	
 }
