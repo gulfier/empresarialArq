@@ -8,7 +8,7 @@ import LoginComponent from './src/Components/Login/LoginComponent';
 import HistoryComponent from './src/Components/History/HistoryComponent';
 import ConsoleComponent from './src/Components/Console/ConsoleComponent';
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 const app = express();
 
 app.set('port',PORT);
