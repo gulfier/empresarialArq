@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 export function logOut(){
-  window.localStorage.removeItem("login");
+  //window.localStorage.removeItem("login");
 }
 
 export const mainListItems = (

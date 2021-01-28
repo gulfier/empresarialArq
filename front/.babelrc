@@ -5,8 +5,5 @@
     ],
     "plugins": [
         "css-modules-transform",
-        "@babel/plugin-transform-object-assign"],
-    "ignore": [
-        "*.css"
-    ]
+        "@babel/plugin-transform-object-assign"]
 }
