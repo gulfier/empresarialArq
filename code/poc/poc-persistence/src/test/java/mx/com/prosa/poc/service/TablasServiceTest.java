@@ -35,5 +35,24 @@ public class TablasServiceTest
 
   }
 
+  @Test
+	public void testUpdate() {
+
+	  TablasTO entity = new TablasTO();
+		entity.setDsTabla("Auditoria 3");
+		entity.setFkIdBase(3L);
+		entity.setPkIdTabla(2L);
+		entity.setId(2L);
+
+		Boolean success = tablasService.edit(entity);
+		Assert.assertTrue(success);
+
+	}
+
+	@Test
+	public void testDelete() {
+		Boolean success = tablasService.delete(2L);
+		Assert.assertTrue(success);
+	}
 
 }

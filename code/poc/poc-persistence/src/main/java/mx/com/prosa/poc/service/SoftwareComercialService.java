@@ -14,4 +14,20 @@ public interface SoftwareComercialService {
 	 * @param site the site
 	 */
 	void save( SoftwareComercialTO site );
+	
+	/**
+	 * Edits the.
+	 *
+	 * @param software the software
+	 * @return the boolean
+	 */
+	Boolean edit(SoftwareComercialTO software);
+	
+	/**
+	 * Delete.
+	 *
+	 * @param id the id
+	 * @return the boolean
+	 */
+	Boolean delete( Long id );
 }

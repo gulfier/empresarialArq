@@ -32,11 +32,61 @@ public final class SupplierBusinessException
   private static final String IP_NOT_FOUND_MESSAGE = "IP not found";
   
   private static final String APP_NOT_FOUND_MESSAGE = "Aplication not found";
+  
+  private static final String TABLE_NOT_FOUND_MESSAGE = "Table not found";
+  
+  private static final String RED_PART_NOT_FOUND_MESSAGE = "Segmento not found";
+  
+  private static final String PROTOCOL_NOT_FOUND_MESSAGE = "Segmento not found";
+  
+  private static final String LEVEL_SECURITY_NOT_FOUND_MESSAGE = "Level security not found";
+  
+  private static final String ACTORES_NOT_FOUND_MESSAGE = "Actores not found";
+  
+  private static final String BITACORA_NOT_FOUND_MESSAGE = "Bitacora not found";
+  
+  private static final String COMPONENTE_RED_NOT_FOUND_MESSAGE = "Componente de red not found";
+  
+  
 
+  
+   
   private SupplierBusinessException()
   {
     // Se ofusca el constructor
   }
+  
+  public static final Supplier<BusinessException> LEVEL_SECURITY_NOT_FOUND = () -> {
+		BusinessException e = new BusinessException( LEVEL_SECURITY_NOT_FOUND_MESSAGE );
+		e.getError().setId( 404L );
+		e.getError().setNotFound( true );
+		e.getError().setDescription( LEVEL_SECURITY_NOT_FOUND_MESSAGE );
+		return e;
+  };
+  
+  public static final Supplier<BusinessException> PROTOCOL_NOT_FOUND = () -> {
+		BusinessException e = new BusinessException( PROTOCOL_NOT_FOUND_MESSAGE );
+		e.getError().setId( 404L );
+		e.getError().setNotFound( true );
+		e.getError().setDescription( PROTOCOL_NOT_FOUND_MESSAGE );
+		return e;
+  };
+  
+  public static final Supplier<BusinessException> RED_PART_NOT_FOUND = () -> {
+		BusinessException e = new BusinessException( RED_PART_NOT_FOUND_MESSAGE );
+		e.getError().setId( 404L );
+		e.getError().setNotFound( true );
+		e.getError().setDescription( RED_PART_NOT_FOUND_MESSAGE );
+		return e;
+  };
+  
+  public static final Supplier<BusinessException> TABLE_NOT_FOUND = () -> {
+		BusinessException e = new BusinessException( TABLE_NOT_FOUND_MESSAGE );
+		e.getError().setId( 404L );
+		e.getError().setNotFound( true );
+		e.getError().setDescription( TABLE_NOT_FOUND_MESSAGE );
+		return e;
+  };
   
   public static final Supplier<BusinessException> APP_NOT_FOUND = () -> {
 		BusinessException e = new BusinessException( APP_NOT_FOUND_MESSAGE );
@@ -125,4 +175,28 @@ public final class SupplierBusinessException
     e.getError().setDescription( SITE_NOT_FOUND_MESSAGE );
     return e;
   };
+  
+  public static final Supplier<BusinessException> ACTORES_NOT_FOUND = () -> {
+	    BusinessException e = new BusinessException( ACTORES_NOT_FOUND_MESSAGE );
+	    e.getError().setId( 404L );
+	    e.getError().setNotFound( true );
+	    e.getError().setDescription( ACTORES_NOT_FOUND_MESSAGE );
+	    return e;
+	  };
+	  
+  public static final Supplier<BusinessException> BITACORA_NOT_FOUND = () -> {
+		    BusinessException e = new BusinessException( BITACORA_NOT_FOUND_MESSAGE );
+		    e.getError().setId( 404L );
+		    e.getError().setNotFound( true );
+		    e.getError().setDescription( BITACORA_NOT_FOUND_MESSAGE );
+		    return e;
+		  };
+		  
+   public static final Supplier<BusinessException> COMPONENTE_RED_NOT_FOUND = () -> {
+			    BusinessException e = new BusinessException( COMPONENTE_RED_NOT_FOUND_MESSAGE );
+			    e.getError().setId( 404L );
+			    e.getError().setNotFound( true );
+			    e.getError().setDescription( COMPONENTE_RED_NOT_FOUND_MESSAGE );
+			    return e;
+			  };
 }

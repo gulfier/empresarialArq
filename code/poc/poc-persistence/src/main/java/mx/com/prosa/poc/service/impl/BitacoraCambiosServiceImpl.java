@@ -1,29 +1,18 @@
 package mx.com.prosa.poc.service.impl;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import mx.com.prosa.poc.model.BitacoraCambiosDO;
 import mx.com.prosa.poc.persistence.BitacoraCambiosRepository;
 import mx.com.prosa.poc.service.BitacoraCambiosService;
-import mx.com.prosa.poc.to.BaseTO;
-import mx.com.prosa.poc.to.BusinessException;
 import mx.com.prosa.poc.to.PagingRequestTO;
 import mx.com.prosa.poc.to.PagingResponseTO;
 import mx.com.prosa.poc.to.BitacoraCambiosTO;
-import mx.com.prosa.poc.util.BaseTOValidationUtil;
 import mx.com.prosa.poc.util.PagingRequestUtil;
 import mx.com.prosa.poc.util.SupplierBusinessException;
 
@@ -36,12 +25,6 @@ import mx.com.prosa.poc.util.SupplierBusinessException;
 public class BitacoraCambiosServiceImpl implements BitacoraCambiosService
 {
 
-  private static final String VALIDATION_ERROR = "Error de validaci\u00F3n";
-  private static final String VALIDATION_ERROR_SITE_CODE_EXISTS = "Ya existe el sitio";
-
-  private static final String VALIDATION_ERROR_APPLICATION_ASSOCIATED_NUMBER = "Hay %s aplicaciones asociadas al sitio";
-
-  private static final String VALIDATION_ERROR_APPLICATION_ASSOCIATED = "Hay aplicaciones asociadas al sitio";
 
   @Autowired
   private BitacoraCambiosRepository bitacoraCambiosRepository;
@@ -104,41 +87,21 @@ public class BitacoraCambiosServiceImpl implements BitacoraCambiosService
     return siteTO;
   }
 
-	@Override
-	public void save(BitacoraCambiosTO site) {
-		// TODO Auto-generated method stub
-		
-	}
 
+	
+	/**
+	 * Delete.
+	 *
+	 * @param id the id
+	 * @return the boolean
+	 */
 	@Override
-	public PagingResponseTO<BitacoraCambiosTO> findByExample(PagingRequestTO<BitacoraCambiosTO> request) {
-		// TODO Auto-generated method stub
-		return null;
+	public Boolean delete(Long id) {
+		bitacoraCambiosRepository.delete(bitacoraCambiosRepository.
+				findById(id).orElseThrow(SupplierBusinessException.BITACORA_NOT_FOUND));
+		return true;
 	}
-
-	@Override
-	public BitacoraCambiosTO findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public BitacoraCambiosTO findByCode(String code) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void edit(BitacoraCambiosTO site, boolean patch) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete(BitacoraCambiosTO site) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 
 

@@ -1,14 +1,16 @@
 package mx.com.prosa.poc.service;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+import mx.com.prosa.poc.to.BitacoraCambiosTO;
+import mx.com.prosa.poc.to.PagingRequestTO;
+
+import org.junit.Assert;
 
 
 
@@ -16,22 +18,28 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringRunner.class)
 @SpringBootTest()
 @Transactional
-@Ignore
 public class BitacoraCambiosServiceTest
 {
-  private static final Logger LOG = LoggerFactory.getLogger( BitacoraCambiosServiceTest.class );
 
   @Autowired
   private BitacoraCambiosService bitacoraCambiosService;
 
   @Test
-  public void testSave()
+  public void testUpdate()
   {
-   // bitacoraCambiosService.save( siteTO );
+	  
+	  PagingRequestTO<BitacoraCambiosTO> request = new PagingRequestTO<>();
+      bitacoraCambiosService.findAll(request);
 
-    //Assert.assertNotNull( baseDatos );
+    Assert.assertNotNull( request );
 
   }
-
+  
+  
+	@Test
+	public void testDelete() {
+		Boolean success = bitacoraCambiosService.delete(6L);
+		Assert.assertTrue(success);
+	}
   
 }

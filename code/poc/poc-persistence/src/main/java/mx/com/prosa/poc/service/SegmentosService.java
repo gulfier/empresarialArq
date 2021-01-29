@@ -14,4 +14,20 @@ public interface SegmentosService {
 	 * @param site the site
 	 */
 	void save( SegmentosTO site );
+	
+	/**
+	 * Edits the.
+	 *
+	 * @param location the location
+	 * @return the boolean
+	 */
+	Boolean edit(SegmentosTO object);
+	
+	/**
+	 * Delete.
+	 *
+	 * @param id the id
+	 * @return the boolean
+	 */
+	Boolean delete( Long id );
 }

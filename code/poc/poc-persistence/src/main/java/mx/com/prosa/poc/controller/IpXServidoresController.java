@@ -14,47 +14,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import mx.com.prosa.poc.controller.aspect.BusinessExceptionInterceptor;
-import mx.com.prosa.poc.service.UbicacionesService;
+import mx.com.prosa.poc.service.TblIpXServidoresService;
 import mx.com.prosa.poc.to.BaseTO;
+import mx.com.prosa.poc.to.IpXServidoresEdithTO;
 import mx.com.prosa.poc.to.Response;
-import mx.com.prosa.poc.to.UbicacionTO;
+import mx.com.prosa.poc.to.TblIpXServidoresTO;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class UbicacionesController.
- */
 @RestController
-@RequestMapping("/v1/location")
+@RequestMapping("/v1/ipxserver")
 @BusinessExceptionInterceptor
 @CrossOrigin
-public class UbicacionesController extends AbstractBaseController {
-
-	/** The ubicaciones service. */
+public class IpXServidoresController extends AbstractBaseController {
 	@Autowired
-	private UbicacionesService ubicacionesService;
+	TblIpXServidoresService ipXServidoresService;
 
 	/**
-	 * Save.
-	 *
-	 * @param request the request
-	 * @return the response entity
+	 * Guarda las bases de datos existentes
+	 * 
+	 * @param request
+	 * @return
 	 */
-	@PostMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Response<UbicacionTO>> save(@RequestBody UbicacionTO request) {
+	@PostMapping(path = "/save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Response<TblIpXServidoresTO>> save(@RequestBody TblIpXServidoresTO request) {
+		ipXServidoresService.save(request);
 
-		request.setIp(super.getIpAddress());
-		request.setUser(super.getUser());
-
-		this.ubicacionesService.save(request);
-
-		Response<UbicacionTO> response = new Response<>();
+		Response<TblIpXServidoresTO> response = new Response<>();
 		response.setCode(HttpStatus.CREATED.value());
 		response.setMessage(HttpStatus.CREATED.name());
 		response.setResponse(request);
 
 		return new ResponseEntity<>(response, HttpStatus.CREATED);
 	}
-
+	
 	/**
 	 * Edits the patch.
 	 *
@@ -63,18 +54,18 @@ public class UbicacionesController extends AbstractBaseController {
 	 * @return the response entity
 	 */
 	@PatchMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Response<UbicacionTO>> editPatch(@RequestBody UbicacionTO request,
+	public ResponseEntity<Response<TblIpXServidoresTO>> editPatch(@RequestBody IpXServidoresEdithTO request,
 			@PathVariable(value = "id") Long id) {
 		request.setIp(super.getIpAddress());
 		request.setUser(super.getUser());
 		request.setId(id);
 
-		this.ubicacionesService.edit(request);
+		this.ipXServidoresService.edit(request);
 
-		Response<UbicacionTO> response = new Response<>();
+		Response<TblIpXServidoresTO> response = new Response<>();
 		response.setCode(HttpStatus.OK.value());
 		response.setMessage(HttpStatus.OK.name());
-		response.setResponse(request);
+		response.setResponse(request.getUpdate());
 
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
@@ -82,18 +73,15 @@ public class UbicacionesController extends AbstractBaseController {
 	/**
 	 * Delete.
 	 *
-	 * @param id the id
+	 * @param request the request
 	 * @return the response entity
 	 */
 	@DeleteMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Response<BaseTO>> delete(@PathVariable(value = "id") Long id) {
-
-		UbicacionTO request = new UbicacionTO();
+	public ResponseEntity<Response<BaseTO>> delete(@RequestBody TblIpXServidoresTO request) {
 		request.setIp(super.getIpAddress());
 		request.setUser(super.getUser());
-		request.setId(id);
 
-		this.ubicacionesService.delete(id);
+		this.ipXServidoresService.delete(request);
 
 		Response<BaseTO> response = new Response<>();
 		response.setCode(HttpStatus.OK.value());
@@ -103,13 +91,22 @@ public class UbicacionesController extends AbstractBaseController {
 	}
 
 	/**
+	 * Hello docker.
+	 *
+	 * @return the string
+	 */
+	@RequestMapping("/hello")
+	public String helloDocker() {
+		return "Hello Docker!";
+	}
+
+	/**
 	 * Gets the parameters.
 	 *
 	 * @return the parameters
 	 */
 	@Override
 	protected String[] getParameters() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }

@@ -1,8 +1,6 @@
 package mx.com.prosa.poc.to;
 
-import java.io.Serializable;
-
-public class ProtocoloTO implements Serializable {
+public class ProtocoloTO extends BaseTO {
 
 	/**
 	 * 
