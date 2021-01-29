@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Ignore
 public class BitacoraCambiosServiceTest
 {
-  private static final Logger LOG = LoggerFactory.getLogger( BitacoraCambiosServiceTest.class );
 
   @Autowired
   private BitacoraCambiosService bitacoraCambiosService;

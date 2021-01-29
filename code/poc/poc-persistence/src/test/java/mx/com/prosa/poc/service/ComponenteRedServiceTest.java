@@ -40,6 +40,32 @@ public class ComponenteRedServiceTest
     Assert.assertNotNull( tblComponentesRed );
 
   }
+  
+	@Test
+	public void testUpdate() {
+		
+		  ComponentesRedTO entity = new ComponentesRedTO();
+
+			entity.setDsDescripcion("tpLink");
+			entity.setDsNombre("tpLink");
+			entity.setDsServicio("link");
+			entity.setFkIdIp(1L);
+
+			entity.setPkIdComponente(5L);
+		
+		entity.setId(5L);
+		
+		
+		Boolean success =  componentesRedService.edit(entity);
+		Assert.assertTrue(success);
+	}
+	
+	
+	@Test
+	public void testDelete() {
+		Boolean success = componentesRedService.delete(5L);
+		Assert.assertTrue(success);
+	}
 
 
 }

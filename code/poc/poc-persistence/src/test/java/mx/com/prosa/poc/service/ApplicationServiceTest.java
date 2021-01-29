@@ -48,5 +48,36 @@ public class ApplicationServiceTest
 
   }
 
+	@Test
+	public void testUpdate() {
+		
+		AplicacionTO entity = new AplicacionTO();
+		entity.setPkIdAplicacion(6L);
+		entity.setDsClasificacion("medio");
+		entity.setDsCode("1");
+		entity.setDsComment("windows");
+		entity.setDsDescripcion("paqueeria");
+		entity.setDsName("windows");
+		entity.setDsNombre("windows");
+		entity.setDsNombreCorto("windows");
+		entity.setDsNombreLargo("microsft office");
+		entity.setDsPci("1");
+		entity.setDsUserCreation("Juan");
+		entity.setDsUserModification("JAN");
+		entity.setDtCreation("2020-05-20 19:01:46.593");
+		entity.setDtModified("2020-05-20 19:01:46.593");
+		
+		entity.setId(6L);
+		
+		
+		Boolean success =  AplicacionesService.edit(entity);
+		Assert.assertTrue(success);
+	}
+	
+	@Test
+	public void testDelete() {
+		Boolean success = AplicacionesService.delete(6L);
+		Assert.assertTrue(success);
+	}
 
 }

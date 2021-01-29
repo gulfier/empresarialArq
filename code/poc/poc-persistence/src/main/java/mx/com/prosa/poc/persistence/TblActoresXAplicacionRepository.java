@@ -13,7 +13,7 @@ import mx.com.prosa.poc.model.TblActoresXAplicacion;
  */
 public interface TblActoresXAplicacionRepository extends JpaRepository<TblActoresXAplicacion, Long> {
 	
-	 @Query(value = "SELECT o FROM TBL_ACTORES_X_APLICACION o "
+	 @Query(value = "SELECT * FROM TBL_ACTORES_X_APLICACION o "
 	            + " WHERE o.FK_ID_ACTOR = :idone AND o.FK_ID_APLICACION = :idtwo" , nativeQuery = true)
 	 Optional<TblActoresXAplicacion> findTable(@Param("idone") Long idone,@Param("idtwo") Long idtwo);	
 

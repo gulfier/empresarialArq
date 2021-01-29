@@ -15,7 +15,7 @@ import mx.com.prosa.poc.model.TblAplicacionesXServidor;
 public interface TblAplicacionesXServidorRepository extends JpaRepository<TblAplicacionesXServidor, Long>  {
 	
 	
-	 @Query(value = "SELECT o FROM TBL_APLICACIONES_X_SERVIDOR o "
+	 @Query(value = "SELECT o.* FROM TBL_APLICACIONES_X_SERVIDOR o "
 	            + " WHERE o.FK_ID_APLICACION = :idone AND o.FK_ID_SERVIDOR = :idtwo" , nativeQuery = true)
 	 Optional<TblAplicacionesXServidor> findTable(@Param("idone") Long idone,@Param("idtwo") Long idtwo);	
 

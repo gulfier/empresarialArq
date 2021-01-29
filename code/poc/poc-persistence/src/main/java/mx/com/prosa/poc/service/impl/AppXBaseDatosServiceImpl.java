@@ -5,7 +5,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import mx.com.prosa.poc.model.TblActoresXAplicacion;
 import mx.com.prosa.poc.model.TblAplicaciones;
 import mx.com.prosa.poc.model.TblAppXBaseDatos;
 import mx.com.prosa.poc.model.TblBaseDatos;
@@ -13,10 +12,8 @@ import mx.com.prosa.poc.persistence.TblAplicacionesRepository;
 import mx.com.prosa.poc.persistence.TblAppXBaseDatosRepository;
 import mx.com.prosa.poc.persistence.TblBaseDatosRepository;
 import mx.com.prosa.poc.service.AppXBaseDatosService;
-import mx.com.prosa.poc.to.ActoresXaplicacionEdithTO;
 import mx.com.prosa.poc.to.AppXBaseDatosEdithTO;
 import mx.com.prosa.poc.to.AppXBaseDatosTO;
-import mx.com.prosa.poc.to.AppsXServAppTO;
 import mx.com.prosa.poc.util.BaseTOValidationUtil;
 import mx.com.prosa.poc.util.SupplierBusinessException;
 

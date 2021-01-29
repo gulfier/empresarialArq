@@ -11,11 +11,9 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import mx.com.prosa.poc.model.TblActores;
 import mx.com.prosa.poc.model.TblAplicaciones;
 import mx.com.prosa.poc.persistence.TblAplicacionesRepository;
 import mx.com.prosa.poc.service.AplicacionesService;
-import mx.com.prosa.poc.to.ActoresTO;
 import mx.com.prosa.poc.to.AplicacionTO;
 import mx.com.prosa.poc.util.BaseTOValidationUtil;
 import mx.com.prosa.poc.util.CommonsUtil;
