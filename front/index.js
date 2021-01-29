@@ -7,7 +7,9 @@ import ReactDOMServer from 'react-dom/server';
 import LoginComponent from './src/Components/Login/LoginComponent';
 import HistoryComponent from './src/Components/History/HistoryComponent';
 import ConsoleComponent from './src/Components/Console/ConsoleComponent';
+import path from 'path';
 
+// const PORT = process.env.PORT || 3000;
 const PORT = process.env.PORT || 8080;
 const app = express();
 
@@ -21,6 +23,10 @@ app.use(express.static('./build'));
 
 // Create a new Redux store instance
 const store = createStore(rootReducer);
+
+app.get('/app', function (req, res) {
+  express.static('./build')
+});
 
 app.get('/', function (req, res) {
   res.redirect('/login')
@@ -56,6 +62,28 @@ app.get('/history', function (req, res) {
   handleRender(req,res,html);
 });
 
+console.log("dirname",__dirname);
+
+app.get('/:name', function (req, res, next) {
+  var options = {
+    root: path.join(__dirname+"/src/Util/css", ''),
+    dotfiles: 'deny',
+    headers: {
+      'x-timestamp': Date.now(),
+      'x-sent': true
+    }
+  }
+
+  var fileName = req.params.name;
+  res.sendFile(fileName, options, function (err) {
+    if (err) {
+      next(err)
+    } else {
+      console.log('Sent:', fileName)
+    }
+  })
+});
+
 // We are going to fill these out in the sections to follow
 function handleRender(req, res,html) {
   // Grab the initial state from our Redux store
@@ -77,6 +105,7 @@ function renderFullPage(html, preloadedState) {
           name="description"
           content="Web site created using create-react-app"
         />
+        <link rel="stylesheet" href="LoginComponent.css">
         <link
           rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"

@@ -1,4 +1,4 @@
-import './LoginComponent.css';
+import '../../Util/css/LoginComponent.css';
 import React, {useEffect, useState} from 'react';
 import { connect } from 'react-redux';
 import { getToken } from "../../Actions/LoginAction";
