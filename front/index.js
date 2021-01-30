@@ -16,7 +16,7 @@ const app = express();
 app.set('port',PORT);
 //Serve static files
 //app.use('/static', Express.static('static'))
-app.use(express.static('./build'));
+app.use(express.static('./dist'));
 
 // This is fired every time the server side receives a request
 //app.use(handleRender)
@@ -25,7 +25,7 @@ app.use(express.static('./build'));
 const store = createStore(rootReducer);
 
 app.get('/app', function (req, res) {
-  express.static('./build')
+  express.static('./dist')
 });
 
 app.get('/', function (req, res) {

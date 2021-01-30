@@ -61,7 +61,7 @@
   "scripts": {
     "build": "webpack",
     "postinstall": "npm run build",
-    "start": "cp ./build ./ & ls & babel-node ./index.js",
+    "start": "cp ./build ./ & npm install & ls & babel-node ./index.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "docker:build": "sudo docker build -t jorgeortega30/web-prosa:latest -f Dockerfile-web .",
