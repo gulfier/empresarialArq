@@ -1,11 +1,11 @@
-require('./ConsoleComponent.css');
+import './ConsoleComponent.css';
 import React, {useEffect} from 'react';
 import Form from 'react-bootstrap/Form';
 import DataTable from 'react-data-table-component';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import SearchIcon from '@material-ui/icons/Search';
-var CheckCircleOutlineIcon = require('@material-ui/icons/CheckCircleOutline');
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import DetailChangePopup from '../../Dialogs/DetailChange/DetailChangePopup';
 import FrameComponent from '../Frame/FrameComponent';
