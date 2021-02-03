@@ -59,8 +59,10 @@
     "webpack-node-externals": "^1.7.2"
   },
   "scripts": {
-    "build": "webpack",
-    "start": "npm install & babel-node ./index.js",
+    "postinstall": "npm run build",
+    "build1": "webpack",
+    "build": "react-scripts build",
+    "start": "ls & npm install & babel-node ./index.js",
     "start1": "echo $DEBUG_PORT & DEBUG_PORT=8080 & npx react-scripts start",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

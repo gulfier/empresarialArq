@@ -16,7 +16,7 @@ const app = express();
 app.set('port',PORT);
 //Serve static files
 //app.use('/static', Express.static('static'))
-app.use(express.static('./dist'));
+app.use(express.static('./build'));
 
 // This is fired every time the server side receives a request
 //app.use(handleRender)
@@ -138,9 +138,9 @@ app.use(express.static('./dist'));
 //     `
 // }
 
-// app.listen(PORT, () => {
-//   console.log(`Server is listening on port ${PORT}`);
-// });
+app.listen(PORT, () => {
+  console.log(`Server is listening on port ${PORT}`);
+});
 
 // // var server = app.listen(app.get('port'), function() {
 // //   debug('Express server listening on port ' + server.address().port);
