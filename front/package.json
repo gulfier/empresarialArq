@@ -60,8 +60,7 @@
   },
   "scripts": {
     "build": "webpack",
-    "postinstall": "npm run build",
-    "start": "cp ./build ./ & npm install & ls & babel-node ./index.js",
+    "start": "npm install & babel-node ./index.js",
     "start1": "echo $DEBUG_PORT & DEBUG_PORT=8080 & npx react-scripts start",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
