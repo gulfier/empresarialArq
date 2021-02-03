@@ -62,7 +62,7 @@
     "build": "webpack",
     "postinstall": "npm run build",
     "start1": "cp ./build ./ & npm install & ls & babel-node ./index.js",
-    "start": "echo $DEBUG_PORT & echo $OPENSHIFT_NODEJS_IP & npx react-scripts start",
+    "start": "echo $DEBUG_PORT & DEBUG_PORT=8080 & npx react-scripts start",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "docker:build": "sudo docker build -t jorgeortega30/web-prosa:latest -f Dockerfile-web .",
