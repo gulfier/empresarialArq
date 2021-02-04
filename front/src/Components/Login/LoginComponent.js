@@ -23,9 +23,9 @@ function LoginComponent(props) {
 }
 
   function login(){
-    // props.getToken(dataLogin.user,dataLogin.password);
-    //window.localStorage.setItem("token","Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3JnZS5vcnRlZ2FoQGF4aXR5LmNvbSIsImF1ZCI6IkludGVyZmF6Ok1lZ2EvUmVtZWR5Iiwic2NwIjoiYXBpL3BlcnNpc3RlbmNlIiwiaXNzIjoiaHR0cHM6Ly93d3cucHJvc2FtZXhpY28ubXgvIiwiZXhwIjo2MTYwOTI3MTUxMSwiaWF0IjoxNjA5MjcxNTcxfQ.jqgGECc06AavD95RgImqzFmRAPLEgVwLi5Hxn2Aqixs");
-    //window.localStorage.setItem("login",true);
+    props.getToken(dataLogin.user,dataLogin.password);
+    window.localStorage.setItem("token","Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3JnZS5vcnRlZ2FoQGF4aXR5LmNvbSIsImF1ZCI6IkludGVyZmF6Ok1lZ2EvUmVtZWR5Iiwic2NwIjoiYXBpL3BlcnNpc3RlbmNlIiwiaXNzIjoiaHR0cHM6Ly93d3cucHJvc2FtZXhpY28ubXgvIiwiZXhwIjo2MTYwOTI3MTUxMSwiaWF0IjoxNjA5MjcxNTcxfQ.jqgGECc06AavD95RgImqzFmRAPLEgVwLi5Hxn2Aqixs");
+    window.localStorage.setItem("login",true);
   }
 
   return (
@@ -37,7 +37,7 @@ function LoginComponent(props) {
           <form>
             <div className="form-group">
               <label for="exampleInputEmail1">Nombre de usuario</label>
-              <input type="email" className="form-control" id="exampleInputEmail1" onChange={handleInputChange} name="name" aria-describedby="emailHelp" placeholder=""/>
+              <input type="text" className="form-control" id="exampleInputEmail1" onChange={handleInputChange} name="name" aria-describedby="emailHelp" placeholder=""/>
             </div>
             <div className="form-group">
               <label for="exampleInputPassword1">Contraseña</label>
