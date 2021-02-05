@@ -11,6 +11,7 @@ function App() {
 
   function renderRedirect(){
     console.log("este es el redirect: ",redirect);
+    console.log("este es el redirect: ",window.localStorage);
     // if (redirect == "true") {
     //   return <Redirect
     //         from="/"
