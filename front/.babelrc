@@ -7,7 +7,6 @@
         "@babel/plugin-syntax-dynamic-import",
         [
             "css-modules-transform", {
-                "extractCss": "combined.css",
                 "extensions": [".css", ".scss", ".less"]
             }
         ],

@@ -2,10 +2,11 @@ import {http} from '../Util/scripts/http.service';
 
 const TOKEN = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJndWlsbGVybW8uc2VndXJhQGF4aXR5LmNvbSIsImF1ZCI6IkludGVyZmF6Ok1lZ2EvUmVtZWR5Iiwic2NwIjoiYXBpL3BlcnNpc3RlbmNlIiwiaXNzIjoiaHR0cHM6Ly93d3cucHJvc2FtZXhpY28ubXgvIiwiZXhwIjo2MTYwNzkzNjI2MSwiaWF0IjoxNjA3OTM2MzIxfQ.J_gAk5pwbXjpm6aLF-mBIes66vKvpLIBWMZsoFxo6v4';
 
-const urlBase = 'http://localhost:';
-const portPersistence = '8082';
-const portWeb = '8083';
-const baseURL = '/persistence/v1';
+// const urlBase = 'http://localhost:';
+const urlBase = "http://web-prosa.192.168.99.103.nip.io";
+const portPersistence = '8080';
+const portWeb = '8080';
+const baseURL = '/v1';
 
 export function getDataConsola(){
     return http.get(urlBase+portPersistence+baseURL+'/CambiosAutorizar/',{
