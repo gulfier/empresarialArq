@@ -25,11 +25,11 @@ function App() {
     <BrowserRouter>
       <div className="App">
         {renderRedirect()}
-        <Switch>
+        <React.Fragment>
           <Route exact path='/login' component={LoginComponent} />
           <Route exact path='/console' component={ConsoleComponent} />
           <Route exact path='/history' component={HistoryComponent} />
-        </Switch>
+        </React.Fragment>
       </div>
     </BrowserRouter>
   );

@@ -1,9 +1,8 @@
-/*  imported from LoginComponent.css  */
+/*  imported from ConsoleComponent.css  */
 
-.LoginComponent__Login___3BGee{
-    width: 100%;
-    height: 100vh;
-    background-image: url("prosa.png");
-    background-repeat: no-repeat, repeat;
-    background-color: transparent;
-  }
+.ConsoleComponent__Console___1-PBT{
+}
+
+.ConsoleComponent__Table___28im2{
+    background-color: #344955 !important;
+}

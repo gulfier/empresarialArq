@@ -2,6 +2,7 @@ import '../../Util/css/LoginComponent.css';
 import React, {useEffect, useState} from 'react';
 import { connect } from 'react-redux';
 import { getToken } from "../../Actions/LoginAction";
+import { Redirect } from 'react-router-dom';
 
 function LoginComponent(props) {
 
@@ -9,6 +10,8 @@ function LoginComponent(props) {
     user: '',
     password: ''
   });
+
+  const [redirectFlag, setRedirectFlag] = useState(false);
 
   useEffect(() => {
   },[]);
@@ -26,10 +29,12 @@ function LoginComponent(props) {
     props.getToken(dataLogin.user,dataLogin.password);
     window.localStorage.setItem("token","Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3JnZS5vcnRlZ2FoQGF4aXR5LmNvbSIsImF1ZCI6IkludGVyZmF6Ok1lZ2EvUmVtZWR5Iiwic2NwIjoiYXBpL3BlcnNpc3RlbmNlIiwiaXNzIjoiaHR0cHM6Ly93d3cucHJvc2FtZXhpY28ubXgvIiwiZXhwIjo2MTYwOTI3MTUxMSwiaWF0IjoxNjA5MjcxNTcxfQ.jqgGECc06AavD95RgImqzFmRAPLEgVwLi5Hxn2Aqixs");
     window.localStorage.setItem("login",true);
+    setRedirectFlag(true);
   }
 
   return (
     <div className="Login d-flex align-items-center justify-content-center">
+      {redirectFlag && <Redirect to="/console"/>}
       <div className="card">
         <div className="card-body">
           <h5 className="card-title">Login</h5>
