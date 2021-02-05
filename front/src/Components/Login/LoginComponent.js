@@ -24,7 +24,10 @@ function LoginComponent(props) {
 }
 
   function login(){
+    console.log("Se envio peticion con: ",dataLogin.user,dataLogin.password);
     props.getToken(dataLogin.user,dataLogin.password);
+    window.localStorage.setItem("token",res.data.response.token);
+    window.localStorage.setItem("login",true);
   }
 
   return (
@@ -45,7 +48,7 @@ function LoginComponent(props) {
             </div>
             <small id="emailHelp" className="form-text text-muted">Ingresar con sus credenciales de PROSA</small>
             <div className="mt-4 d-flex justify-content-end">
-              <button className="btn btn-primary" onClick={login}>Inicio</button>
+              <button onClick={login}>Inicio</button>
             </div>
           </form>
         </div>
