@@ -23,7 +23,7 @@ import mx.com.prosa.poc.to.TokenTO;
  */
 @RestController
 @RequestMapping("/v1/web")
-@BusinessExceptionInterceptor
+//@BusinessExceptionInterceptor
 @CrossOrigin
 public class WebApplicationController extends AbstractBaseController
 {
@@ -90,4 +90,14 @@ public class WebApplicationController extends AbstractBaseController
     return QUERY_PARAMS;
   }
 
+  
+	/**
+	 * Hello docker.
+	 *
+	 * @return the string
+	 */
+	@RequestMapping("/helloweb")
+	public String helloDocker() {
+		return "Hello Docker!";
+	}
 }
