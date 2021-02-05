@@ -46,7 +46,7 @@ public class BitacoraCambiosController extends AbstractBaseController
    */
   // TODO agregar informacion de swagger
   @GetMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)
-  @CrossOrigin(origins = "http://localhost:3000")
+  @CrossOrigin
   public ResponseEntity<Response<PagingResponseTO<BitacoraCambiosTO>>> findAll()
   {
 	  
