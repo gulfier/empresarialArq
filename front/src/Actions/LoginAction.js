@@ -9,8 +9,8 @@ export const getToken = (user,password) => async dispatch => {
         const res = await getDataLogin(user,password);
         if(res.data.code===200){
             console.log("Data:",res.data);
-            //window.localStorage.setItem("token",res.data.response.token);
-            //window.localStorage.setItem("login",true);
+            window.localStorage.setItem("token",res.data.response.token);
+            window.localStorage.setItem("login",true);
             dispatch( {
                 type: GET_LOGIN,
                 payload: res.data
