@@ -1,10 +1,9 @@
 package mx.com.prosa.poc.to;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 
-public class BaseDatosTO implements Serializable{
+public class BaseDatosTO extends BaseTO{
 
 	/**
 	 * 

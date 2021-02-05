@@ -10,5 +10,22 @@ public interface  AplicacionesService {
 	   * @param aplicacion
 	   */
 	  void save( AplicacionTO aplicacion );
+	  
+	  
+	  /**
+	   * Elimina aplicaciones
+	   * 
+	   * @param aplicacion
+	   */
+	  Boolean delete(Long id);
+
+
+	/**
+	 * Edits the.
+	 *
+	 * @param aplicaciones the table
+	 * @return the boolean
+	 */
+	Boolean edit(AplicacionTO aplicacion);
 
 }

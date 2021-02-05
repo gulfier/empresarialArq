@@ -16,6 +16,8 @@ import mx.com.prosa.poc.model.TblBaseDatos;
 import mx.com.prosa.poc.persistence.TblBaseDatosRepository;
 import mx.com.prosa.poc.service.BaseDatosService;
 import mx.com.prosa.poc.to.BaseDatosTO;
+import mx.com.prosa.poc.util.BaseTOValidationUtil;
+import mx.com.prosa.poc.util.SupplierBusinessException;
 
 /**
  * @author gllopezv 
@@ -63,6 +65,53 @@ public class BaseDatosServiceImpl implements BaseDatosService {
 		
 	    return baseDatos;
 	  }
+	  
+		/**
+		 * Delete.
+		 *
+		 * @param id the id
+		 * @return the boolean
+		 */
+		@Override
+		public Boolean delete(Long id) {
+			tblBaseDatosRepository.delete(tblBaseDatosRepository.
+					findById(id).orElseThrow(SupplierBusinessException.DATA_BASE_NOT_FOUND));
+			return true;
+		}
+		
+		
+		/**
+		 * Edits the.
+		 *
+		 * @param actores the table
+		 * @return the boolean
+		 */
+		@Override
+		public Boolean edit(BaseDatosTO base) {
+			BaseTOValidationUtil.validateIdNotNull( base );
+			TblBaseDatos entity = this.tblBaseDatosRepository.findById( base.getPkIdBase() )
+		        .orElseThrow( SupplierBusinessException.DATA_BASE_NOT_FOUND );
+			entity.setDsAlgoritmo(base.getDsAlgoritmo());
+			entity.setDsCode(base.getDsCode());
+			entity.setDsEncripcion(base.getDsEncripcion());
+			entity.setDsName(base.getDsName());
+			entity.setDsNombre(base.getDsNombre()) ;
+			entity.setDsPci(base.getDsPci());
+			entity.setDsUserCreation(base.getDsUserCreation());
+			entity.setDsUserModification(base.getDsUserModification());
+			
+			TblActores tblActores = new TblActores();
+			tblActores.setPkIdActor(base.getFkIdResponsable());
+			entity.setFkIdResponsable(tblActores);
+			
+			
+			entity.setDtCreation(getDate(base.getDtCreation()));
+			entity.setDtModified(getDate(base.getDtModified()));
+		    
+		    this.tblBaseDatosRepository.save( entity );
+		    this.tblBaseDatosRepository.flush();
+			return true;
+		}
 	  
 	  private Timestamp getDate(String fecha) {
 		  

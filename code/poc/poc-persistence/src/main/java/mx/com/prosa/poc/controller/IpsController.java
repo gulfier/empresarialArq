@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import mx.com.prosa.poc.controller.aspect.BusinessExceptionInterceptor;
 import mx.com.prosa.poc.service.IpsService;
 import mx.com.prosa.poc.to.BaseTO;
 import mx.com.prosa.poc.to.IpTO;
@@ -27,7 +26,6 @@ import mx.com.prosa.poc.to.Response;
  */
 @RestController
 @RequestMapping("/v1/ip")
-@BusinessExceptionInterceptor
 @CrossOrigin
 public class IpsController extends AbstractBaseController {
 
