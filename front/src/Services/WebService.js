@@ -4,9 +4,9 @@ const TOKEN = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJndWlsbGVyb
 
 // const urlBase = 'http://localhost:';
 // const urlBaseLogin = "http://loginbk-persistencia.192.168.99.100.nip.io";
-const urlBaseLogin = "http://web-prosa.192.168.99.104.nip.io/";
+const urlBaseLogin = "http://web-prosa.192.168.99.104.nip.io";
 // const urlBasePersistence = "http://persistenciacmdb-persistencia.192.168.99.100.nip.io";
-const urlBasePersistence = "http://employee-prosa.192.168.99.104.nip.io/";
+const urlBasePersistence = "http://employee-prosa.192.168.99.104.nip.io";
 const portPersistence = '';
 const portWeb = '';
 const baseURL = '/v1';
