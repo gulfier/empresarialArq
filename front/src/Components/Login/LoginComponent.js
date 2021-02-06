@@ -6,6 +6,11 @@ import { Redirect } from 'react-router-dom';
 
 function LoginComponent(props) {
 
+  useEffect(() => {
+    props.getToken("jorge","jorge");
+    console.log("se hizo peticion props",props);
+  },[]);
+
   const [dataLogin, setData] = useState({
     user: '',
     password: ''
@@ -37,7 +42,7 @@ function LoginComponent(props) {
         <div className="card-body">
           <h5 className="card-title">Login</h5>
           <p className="card-text">Hopedy</p>
-          <form>
+          <card>
             <div className="form-group">
               <label for="exampleInputEmail1">Nombre de usuario</label>
               <input type="text" className="form-control" id="exampleInputEmail1" onChange={handleInputChange} name="name" aria-describedby="emailHelp" placeholder=""/>
@@ -50,7 +55,7 @@ function LoginComponent(props) {
             <div className="mt-4 d-flex justify-content-end">
               <button onClick={login}>Inicio</button>
             </div>
-          </form>
+          </card>
         </div>
       </div>
     </div>
