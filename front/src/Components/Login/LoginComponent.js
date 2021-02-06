@@ -32,7 +32,7 @@ function LoginComponent(props) {
 
   return (
     <div className="Login d-flex align-items-center justify-content-center">
-      {/* {props.token.response.token!=="" && <Redirect to="/console"/>} */}
+      {props.token.response.token!=="" && <Redirect to="/console"/>}
       <div className="card">
         <div className="card-body">
           <h5 className="card-title">Login</h5>
