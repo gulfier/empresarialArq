@@ -4,9 +4,9 @@ import {
 } from '../Util/scripts/TipoAcciones';
 import { getDataConsola } from '../Services/WebService';
 
-export const getDataConsole = () => async dispatch => {
+export const getDataConsole = (token) => async dispatch => {
     try{
-        const res = await getDataConsola();
+        const res = await getDataConsola(token);
         dispatch( {
             type: GET_DATA_CONSOLE,
             payload: res.data

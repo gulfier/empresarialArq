@@ -21,6 +21,20 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems, secondaryListItems } from './listItems';
 import Chart from './Chart';
 import Deposits from './Deposits';
+import { withRouter } from 'react-router-dom';
+
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import PeopleIcon from '@material-ui/icons/People';
+import BarChartIcon from '@material-ui/icons/BarChart';
+import LayersIcon from '@material-ui/icons/Layers';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import AssignmentIcon from '@material-ui/icons/Assignment';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { connect } from 'react-redux';
+import { removeToken } from "../../Actions/LogoutAction";
 
 function Copyright() {
   return (
@@ -121,8 +135,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Dashboard(props) {
+function Dashboard(props) {
   const classes = useStyles();
+  const { history } = props;
   const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -131,6 +146,13 @@ export default function Dashboard(props) {
     setOpen(false);
   };
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+
+  function logOut(){
+    window.localStorage.removeItem("token");
+    window.localStorage.removeItem("login");
+    props.removeToken();
+    history.push('/login');
+  }
 
   return (
     <div className={classes.root}>
@@ -169,9 +191,52 @@ export default function Dashboard(props) {
           </IconButton>
         </div>
         <Divider/>
-        <List>{mainListItems}</List>
+        <List>
+          <div>
+            <ListItem button onClick={()=> history.push('/console')}>
+              <ListItemIcon>
+                <DashboardIcon onClick={()=> history.push('/console')} color="primary"/>
+              </ListItemIcon>
+              <ListItemText onClick={()=> history.push('/console')} primary={<Typography style={{color: "#FFF"}}>Consola</Typography>}/>
+            </ListItem>
+            <ListItem button onClick={()=> history.push('/history')}>
+              <ListItemIcon>
+                <LayersIcon onClick={()=> history.push('/history')} color="primary"/>
+              </ListItemIcon>
+              <ListItemText onClick={()=> history.push('/history')} primary={<Typography style={{color: "#FFF"}}>Historial</Typography>}/>
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <PeopleIcon color="primary"/>
+              </ListItemIcon>
+              <ListItemText primary={<Typography style={{color: "#FFF"}}>Administración</Typography>}/>
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <BarChartIcon color="primary"/>
+              </ListItemIcon>
+              <ListItemText primary={<Typography style={{color: "#FFF"}}>Reportes</Typography>}/>
+            </ListItem>
+          </div>
+        </List>
         <Divider />
-        <List>{secondaryListItems}</List>
+        <List>
+          <div>
+            <ListSubheader inset style={{color: "#FFF", opacity: "10px"}}>Reportes</ListSubheader>
+            <ListItem button>
+              <ListItemIcon>
+                <AssignmentIcon color="primary"/>
+              </ListItemIcon>
+              <ListItemText primary={<Typography style={{color: "#FFF"}}>Reporte 17/Nov/20</Typography>}/>
+            </ListItem>
+            <ListItem button onClick={logOut}>
+              <ListItemIcon>
+                <ExitToAppIcon color="primary"/>
+              </ListItemIcon> 
+              <ListItemText onClick={logOut} primary={<Typography style={{color: "#FFF"}}>LogOut</Typography>}/>
+            </ListItem>
+          </div>
+        </List>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
@@ -205,3 +270,13 @@ export default function Dashboard(props) {
     </div>
   );
 }
+
+function mapStateToProps (state) {
+  console.log("token",state);
+  return{
+    ...state,
+    token: state.login.data
+  };
+}
+
+export default connect (mapStateToProps, { removeToken })(withRouter(Dashboard));

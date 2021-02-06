@@ -11,6 +11,7 @@ import DetailChangePopup from '../../Dialogs/DetailChange/DetailChangePopup';
 import FrameComponent from '../Frame/FrameComponent';
 import { connect } from 'react-redux';
 import { getDataConsole } from "../../Actions/ConsoleAction";
+import { withRouter } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -78,11 +79,16 @@ const columns = [
 
 function ConsoleComponent(props) {
   const classes = useStyles();
+  const { history } = props;
   const [open, setOpen] = React.useState(false);
   const [jsonDetail, setJsonDetail] = React.useState({});
 
   useEffect(() => {
-    props.getDataConsole();
+    console.log("props.token",props.token.response.token);
+    if(props.token.response.token==null){
+      history.push('/login')
+    }
+    props.getDataConsole(props.token.response.token);
     // console.log("props",props);
   },[]);
 
@@ -174,7 +180,8 @@ function ConsoleComponent(props) {
 }
 
 const mapStateToProps = (state) => ({
-    infoConsole: state.console.data
+    infoConsole: state.console.data,
+    token: state.login.data
 });
 
-export default connect (mapStateToProps, { getDataConsole })( ConsoleComponent);
+export default connect (mapStateToProps, { getDataConsole })( withRouter(ConsoleComponent));

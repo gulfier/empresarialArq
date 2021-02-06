@@ -30,7 +30,7 @@ function LoginComponent(props) {
 
   return (
     <div className="Login d-flex align-items-center justify-content-center">
-      {props.token.response.token!=="" && <Redirect to="/console"/>}
+      {props.token.response.token!==null && <Redirect to="/console"/>}
       <div className="card">
         <div className="card-body">
           <h5 className="card-title">Login</h5>
@@ -46,7 +46,7 @@ function LoginComponent(props) {
             </div>
             <small id="emailHelp" className="form-text text-muted">Ingresar con sus credenciales de PROSA</small>
             <div className="mt-4 d-flex justify-content-end">
-              <button onClick={login}>Inicio</button>
+              <button className="btn btn-primary" onClick={login}>Inicio</button>
             </div>
           </card>
         </div>

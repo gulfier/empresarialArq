@@ -10,13 +10,11 @@ function App() {
   const [redirect, setRedirect] = React.useState(window.localStorage.getItem("login"));
 
   function renderRedirect(){
+    console.log("redirect",redirect);
     if (redirect == "true") {
-      return <Redirect
-            from="/"
-            to="/console" />;
+      return null;
     }else{
       return <Redirect
-            from="/"
             to="/login" />;
     }
   }
@@ -26,6 +24,7 @@ function App() {
       <div className="App">
         {renderRedirect()}
         <React.Fragment>
+        <Route exact path='/' component={LoginComponent} />
           <Route exact path='/login' component={LoginComponent} />
           <Route exact path='/console' component={ConsoleComponent} />
           <Route exact path='/history' component={HistoryComponent} />
