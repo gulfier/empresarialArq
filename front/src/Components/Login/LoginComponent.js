@@ -6,11 +6,6 @@ import { Redirect } from 'react-router-dom';
 
 function LoginComponent(props) {
 
-  useEffect(() => {
-    props.getToken("jorge","jorge");
-    console.log("se hizo peticion props",props);
-  },[]);
-
   const [dataLogin, setData] = useState({
     user: '',
     password: ''
