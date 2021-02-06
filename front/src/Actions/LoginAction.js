@@ -6,7 +6,7 @@ import { getDataLogin } from '../Services/WebService';
 
 export const getToken = (user,password) => async dispatch => {
     try{
-        console.log("Se hizo login");
+        // console.log("Se hizo login");
         const res = await getDataLogin(user,password);
         if(res.data.code===200){
             console.log("Data:",res.data);

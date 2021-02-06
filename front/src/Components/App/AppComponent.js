@@ -10,17 +10,15 @@ function App() {
   const [redirect, setRedirect] = React.useState(window.localStorage.getItem("login"));
 
   function renderRedirect(){
-    console.log("este es el redirect: ",redirect);
-    console.log("este es el redirect: ",window.localStorage);
-    // if (redirect == "true") {
-    //   return <Redirect
-    //         from="/"
-    //         to="/console" />;
-    // }else{
-    //   return <Redirect
-    //         from="/"
-    //         to="/login" />;
-    // }
+    if (redirect == "true") {
+      return <Redirect
+            from="/"
+            to="/console" />;
+    }else{
+      return <Redirect
+            from="/"
+            to="/login" />;
+    }
   }
 
   return (
