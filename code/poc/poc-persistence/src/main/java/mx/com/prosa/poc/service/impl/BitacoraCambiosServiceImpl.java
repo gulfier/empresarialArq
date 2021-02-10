@@ -5,14 +5,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import mx.com.prosa.poc.model.BitacoraCambiosDO;
 import mx.com.prosa.poc.persistence.BitacoraCambiosRepository;
 import mx.com.prosa.poc.service.BitacoraCambiosService;
+import mx.com.prosa.poc.to.BitacoraCambiosTO;
 import mx.com.prosa.poc.to.PagingRequestTO;
 import mx.com.prosa.poc.to.PagingResponseTO;
-import mx.com.prosa.poc.to.BitacoraCambiosTO;
 import mx.com.prosa.poc.util.PagingRequestUtil;
 import mx.com.prosa.poc.util.SupplierBusinessException;
 
@@ -43,7 +44,9 @@ public class BitacoraCambiosServiceImpl implements BitacoraCambiosService
     
    // Page<BitacoraCambiosDO> paged = this.bitacoraCambiosRepository.findAll( pg );
     
-    List<BitacoraCambiosDO> hj= bitacoraCambiosRepository.findAllCambios();
+    Pageable paginacion = PageRequest.of(1 - 1, 10);
+    
+    List<BitacoraCambiosDO> hj= bitacoraCambiosRepository.findAllCambios(paginacion);
 
      PagingResponseTO<BitacoraCambiosTO> response = new PagingResponseTO<>();
 

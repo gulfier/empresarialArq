@@ -22,7 +22,7 @@ public class BitacoraCambiosTO extends BaseTO
   
   private Long id;
   
-  private String dsCodigo;
+  private Integer dsCodigo;
   
   private Date fecha;
   
