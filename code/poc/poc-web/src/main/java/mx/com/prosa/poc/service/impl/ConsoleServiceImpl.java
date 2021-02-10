@@ -152,7 +152,7 @@ public class ConsoleServiceImpl implements ConsoleService {
 	 * @return the token TO
 	 */
 	public TokenTO createToken(CredentialTO credential) {
-        System.out.println(" ldapParams: "+ldapParams+" ldapUrl: "+ldapUrl+" ldapsecurityPrincipal: "+ldapsecurityPrincipal+" ldapsecurityCredencial: "+ldapsecurityCredencial+" ldapBase: "+ldapBase+" ldapGroups: "+ldapGroups);
+        logger.info(" ldapParams: "+ldapParams+" ldapUrl: "+ldapUrl+" ldapsecurityPrincipal: "+ldapsecurityPrincipal+" ldapsecurityCredencial: "+ldapsecurityCredencial+" ldapBase: "+ldapBase+" ldapGroups: "+ldapGroups);
 		final ConnectionFactory connection = loginLdap(credential.getUserName(),credential.getPassword());
         Connection conn = null;
         logger.info(credential.getUserName());
