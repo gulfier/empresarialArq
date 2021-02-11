@@ -205,7 +205,7 @@ function Dashboard(props) {
               </ListItemIcon>
               <ListItemText onClick={()=> history.push('/history')} primary={<Typography style={{color: "#FFF"}}>Historial</Typography>}/>
             </ListItem>
-            <ListItem button>
+            {/* <ListItem button>
               <ListItemIcon>
                 <PeopleIcon color="primary"/>
               </ListItemIcon>
@@ -216,19 +216,19 @@ function Dashboard(props) {
                 <BarChartIcon color="primary"/>
               </ListItemIcon>
               <ListItemText primary={<Typography style={{color: "#FFF"}}>Reportes</Typography>}/>
-            </ListItem>
+            </ListItem> */}
           </div>
         </List>
         <Divider />
         <List>
           <div>
-            <ListSubheader inset style={{color: "#FFF", opacity: "10px"}}>Reportes</ListSubheader>
+            {/* <ListSubheader inset style={{color: "#FFF", opacity: "10px"}}>Reportes</ListSubheader>
             <ListItem button>
               <ListItemIcon>
                 <AssignmentIcon color="primary"/>
               </ListItemIcon>
               <ListItemText primary={<Typography style={{color: "#FFF"}}>Reporte 17/Nov/20</Typography>}/>
-            </ListItem>
+            </ListItem> */}
             <ListItem button onClick={logOut}>
               <ListItemIcon>
                 <ExitToAppIcon color="primary"/>

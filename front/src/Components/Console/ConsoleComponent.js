@@ -120,7 +120,7 @@ function ConsoleComponent(props) {
   }
 
   return (
-    <FrameComponent title="Cambios HOPEX">
+    <FrameComponent title="Cambios CMDB Oracle">
       <div className="Console">
           <div className="row">
               <div className="col ml-4 pr-0">
