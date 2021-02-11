@@ -122,7 +122,7 @@ function ConsoleComponent(props) {
   return (
     <FrameComponent title="Cambios CMDB Oracle">
       <div className="Console">
-          <div className="row">
+          {/* <div className="row">
               <div className="col ml-4 pr-0">
                   <Form.Control placeholder="Aplicativo" />
               </div>
@@ -162,7 +162,7 @@ function ConsoleComponent(props) {
               <div className="col-auto">
                   <SearchIcon/>
               </div>
-          </div>
+          </div> */}
           <DataTable
               columns={columns}
               data={handleApi(props.infoConsole)}
