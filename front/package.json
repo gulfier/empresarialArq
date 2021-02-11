@@ -63,7 +63,7 @@
     "build1": "webpack",
     "build": "react-scripts build",
     "start1": "ls & npm install & babel-node ./index.js",
-    "start": "ls & DEBUG_PORT=8080 & npx react-scripts start",
+    "start": "ls & set REACT_APP_PORT_JORGIN=8080 & REACT_APP_PORT=8080 & npx react-scripts start",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "docker:build": "sudo docker build -t jorgeortega30/web-prosa:latest -f Dockerfile-web .",

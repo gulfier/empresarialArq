@@ -3,10 +3,10 @@ import {http} from '../Util/scripts/http.service';
 // const urlBase = 'http://localhost:';
 // const urlBaseLogin = "http://loginbk-persistencia.192.168.99.100.nip.io";
 // const urlBaseLogin = "http://web-prosa.192.168.99.104.nip.io";
-const urlBaseLogin = process.env.URL_BASE_LOGIN;
+const urlBaseLogin =  process.env.REACT_APP_URL_BASE_LOGIN;
 // const urlBasePersistence = "http://persistenciacmdb-persistencia.192.168.99.100.nip.io";
 // const urlBasePersistence = "http://employee-prosa.192.168.99.104.nip.io";
-const urlBasePersistence = process.env.URL_BASE_PERSISTENCE;
+const urlBasePersistence = process.env.REACT_APP_URL_BASE_PERSISTENCE;
 const portPersistence = '';
 const portWeb = '';
 const baseURL = '/v1';
@@ -21,6 +21,7 @@ export function getDataConsola(token){
 }
 
 export function getDataLogin(user, password){
+    console.log("url login:",process.env);
     console.log("url login:",urlBaseLogin);
     var body = {
         "userName": user,
