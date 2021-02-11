@@ -66,7 +66,7 @@ public class BitacoraCambiosServiceImpl implements BitacoraCambiosService
 
     response.setPage( pg.getPageNumber() );
     response.setSize( pg.getPageSize() );
-    response.setRecords( data.size());
+    response.setRecords( bitacoraCambiosRepository.countChanges());
     response.setPages(1 );
 
     return response;

@@ -23,4 +23,7 @@ public interface BitacoraCambiosRepository extends JpaRepository<BitacoraCambios
 	@Query(value = "SELECT e"
 			 + " FROM BitacoraCambiosDO e ")
 	List<BitacoraCambiosDO> findAllCambios(Pageable paginacion);
+	
+	@Query(value = "select count(PK_ID_BITACORA) from TBL_BITACORA_CAMBIOS", nativeQuery= true)
+	Long countChanges();
 }

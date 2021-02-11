@@ -8,7 +8,11 @@ const initialState = {
         "code": 200,
         "message": "OK",
         "response": {
-            "data": []
+            "data": [],
+            "records": 0,
+            "pages": 1,
+            "page": 0,
+            "size": 10
         }
     },
     loading:true

@@ -1,5 +1,6 @@
 import './ConsoleComponent.css';
 import React, {useEffect} from 'react';
+import clsx from 'clsx';
 import Form from 'react-bootstrap/Form';
 import DataTable from 'react-data-table-component';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
@@ -12,6 +13,13 @@ import FrameComponent from '../Frame/FrameComponent';
 import { connect } from 'react-redux';
 import { getDataConsole } from "../../Actions/ConsoleAction";
 import { withRouter } from 'react-router-dom';
+import Box from '@material-ui/core/Box';
+import Badge from '@material-ui/core/Badge';
+import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import Chart from './Chart';
+import Deposits from './Deposits';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -83,6 +91,7 @@ function ConsoleComponent(props) {
   const [open, setOpen] = React.useState(false);
   const [jsonDetail, setJsonDetail] = React.useState({});
 
+  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   useEffect(() => {
     console.log("props.token",props.token.response.token);
     if(props.token.response.token==null){
@@ -121,60 +130,73 @@ function ConsoleComponent(props) {
 
   return (
     <FrameComponent title="Cambios CMDB Oracle">
-      <div className="Console">
-          {/* <div className="row">
-              <div className="col ml-4 pr-0">
-                  <Form.Control placeholder="Aplicativo" />
+          <Grid item xs={12}>
+              <div className="card">
+                  {/* <div className="row">
+                    <div className="col ml-4 pr-0">
+                        <Form.Control placeholder="Aplicativo" />
+                    </div>
+                    <div className="col">
+                        <Form.Control placeholder="Base de datos" />
+                    </div>
+                    <div className="col">
+                        <Form.Label className="mr-sm-2" htmlFor="inlineFormCustomSelect" srOnly>
+                            Preference
+                        </Form.Label>
+                        <Form.Control
+                            as="select"
+                            className="mr-sm-2"
+                            id="inlineFormCustomSelect"
+                            custom
+                        >
+                            <option value="0">Site</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </Form.Control>
+                    </div>
+                    <div className="col">
+                        <form className={classes.container} noValidate>
+                            <TextField
+                                id="date"
+                                label=""
+                                type="date"
+                                defaultValue="2017-05-24"
+                                className={classes.textField}
+                                InputLabelProps={{
+                                shrink: true,
+                                }}
+                            />
+                        </form>
+                    </div>
+                    <div className="col-auto">
+                        <SearchIcon/>
+                    </div>
+                </div> */}
+                <DataTable
+                    columns={columns}
+                    data={handleApi(props.infoConsole)}
+                    theme="Table"
+                    pagination
+                    selectableRows
+                    fixedHeader
+                    fixedHeaderScrollHeight="50vh"
+                    onRowClicked={handleRowClicked}
+                />
+                <DetailChangePopup onClose={handleClose} open={open} id="ID 72129398" response={jsonDetail}/>
               </div>
-              <div className="col">
-                  <Form.Control placeholder="Base de datos" />
-              </div>
-              <div className="col">
-                  <Form.Label className="mr-sm-2" htmlFor="inlineFormCustomSelect" srOnly>
-                      Preference
-                  </Form.Label>
-                  <Form.Control
-                      as="select"
-                      className="mr-sm-2"
-                      id="inlineFormCustomSelect"
-                      custom
-                  >
-                      <option value="0">Site</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                  </Form.Control>
-              </div>
-              <div className="col">
-                  <form className={classes.container} noValidate>
-                      <TextField
-                          id="date"
-                          label=""
-                          type="date"
-                          defaultValue="2017-05-24"
-                          className={classes.textField}
-                          InputLabelProps={{
-                          shrink: true,
-                          }}
-                      />
-                  </form>
-              </div>
-              <div className="col-auto">
-                  <SearchIcon/>
-              </div>
-          </div> */}
-          <DataTable
-              columns={columns}
-              data={handleApi(props.infoConsole)}
-              theme="Table"
-              pagination
-              selectableRows
-              fixedHeader
-              fixedHeaderScrollHeight="50vh"
-              onRowClicked={handleRowClicked}
-          />
-          <DetailChangePopup onClose={handleClose} open={open} id="ID 72129398" response={jsonDetail}/>
-      </div>
+          </Grid>
+          <div className="col-8">
+            <div className="card p-3" style={{height: "100%"}}>
+              <Chart />
+            </div>
+          </div>
+          {/* Recent Deposits */}
+          <div className="col-4">
+            <div className="card p-5" style={{height: "100%"}}>
+              <Deposits records={props.infoConsole.response.records} />
+            </div>
+          </div>
     </FrameComponent>
   );
 }

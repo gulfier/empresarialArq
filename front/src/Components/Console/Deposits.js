@@ -14,21 +14,21 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Deposits() {
+export default function Deposits(props) {
   const classes = useStyles();
+  const today = new Date();
+  var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+  const stringDate = today.getDate() + " / " + (meses[today.getMonth()]) + " / " + today.getFullYear()
   return (
     <React.Fragment>
       <Title>Cambios hechos</Title>
       <Typography component="p" variant="h4">
-        298
+        {props.records}
       </Typography>
-      <Typography color="textSecondary" className={classes.depositContext}>
-        13 Nov, 2020
-      </Typography>
-      <div>
-        <Link href="#" onClick={preventDefault}>
-          View balance
-        </Link>
+      <div className="mt-5">
+        <Typography color="textSecondary" className={classes.depositContext}>
+          { stringDate }
+        </Typography>
       </div>
     </React.Fragment>
   );
