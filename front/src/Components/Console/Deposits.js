@@ -21,7 +21,7 @@ export default function Deposits(props) {
   const stringDate = today.getDate() + " / " + (meses[today.getMonth()]) + " / " + today.getFullYear()
   return (
     <React.Fragment>
-      <Title>Cambios hechos</Title>
+      <Title>Cambios identificados</Title>
       <Typography component="p" variant="h4">
         {props.records}
       </Typography>

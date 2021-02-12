@@ -94,9 +94,9 @@ function HistoryComponent() {
       <div className="Console">
         <div className="row">
             <div className="col">
-                <Form.Control placeholder="Persona aurotizó" />
+                <Form.Control placeholder="Tipo" />
             </div>
-            <div className="col">
+            {/* <div className="col">
                 <Form.Control placeholder="Base de datos" />
             </div>
             <div className="col">
@@ -109,12 +109,13 @@ function HistoryComponent() {
                     id="inlineFormCustomSelect"
                     custom
                 >
-                    <option value="0">Site</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option value="0">Database</option>
+                    <option value="1">IBusiness process</option>
+                    <option value="2">IT Service</option>
+                    <option value="3">Application</option>
+                    <option value="3">Server</option>
                 </Form.Control>
-            </div>
+            </div> */}
             <div className="col">
                 <form className={classes.container} noValidate>
                     <TextField
@@ -147,6 +148,7 @@ function HistoryComponent() {
                 <SearchIcon/>
             </div>
         </div>
+        <div className="row" style={{width:"100%"}}>
         <DataTable
             columns={columns}
             data={data}
@@ -157,6 +159,7 @@ function HistoryComponent() {
             fixedHeaderScrollHeight="50vh"
             onRowClicked={handleRowClicked}
         />
+        </div>
         <DialogPopup onClose={handleClose} open={open} dialogTitle="ID 72129398">
           <div className="Detail-Component row">
             <div className="col-11 m-2">
