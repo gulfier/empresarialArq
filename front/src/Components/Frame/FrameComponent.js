@@ -170,7 +170,7 @@ function Dashboard(props) {
             {props.title}
           </Typography>
           <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
+            <Badge badgeContent={props.records} color="secondary">
               <NotificationsIcon color=""/>
             </Badge>
           </IconButton>
@@ -255,7 +255,8 @@ function mapStateToProps (state) {
   console.log("token",state);
   return{
     ...state,
-    token: state.login.data
+    token: state.login.data,
+    records: state.console.data.response.changes.records,
   };
 }
 

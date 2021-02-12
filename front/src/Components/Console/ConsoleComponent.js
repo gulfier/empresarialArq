@@ -98,7 +98,7 @@ function ConsoleComponent(props) {
       history.push('/login')
     }
     props.getDataConsole(props.token.response.token);
-    // console.log("props",props);
+    console.log("props",props);
   },[]);
 
   const handleRowClicked = (event) =>{
@@ -114,15 +114,15 @@ function ConsoleComponent(props) {
   const handleApi = (data) =>{
     var dataTable = [];
     if(data !== undefined){
-      for(var key in data.response.data){
-        dataTable.push({ id: key, date:data.response.data[key].fecha.split("T")[0],
-          object: data.response.data[key].dsTipo,
-          code: data.response.data[key].dsCodigo,
-        type: data.response.data[key].dsTipo,
-        autor: data.response.data[key].dsAutor,
+      for(var key in data.response.changes.data){
+        dataTable.push({ id: key, date:data.response.changes.data[key].fecha.split("T")[0],
+          object: data.response.changes.data[key].dsTipo,
+          code: data.response.changes.data[key].dsCodigo,
+        type: data.response.changes.data[key].dsTipo,
+        autor: data.response.changes.data[key].dsAutor,
         actions: 'Aceptar  Declinar',
-        dsCambioActual: data.response.data[key].dsCambioActual,
-        dsCambioAnterior: data.response.data[key].dsCambioAnterior},);
+        dsCambioActual: data.response.changes.data[key].dsCambioActual,
+        dsCambioAnterior: data.response.changes.data[key].dsCambioAnterior},);
       }
     }
     return dataTable;
@@ -188,13 +188,13 @@ function ConsoleComponent(props) {
           </Grid>
           <div className="col-8">
             <div className="card p-3" style={{height: "100%"}}>
-              <Chart />
+              <Chart graph={props.infoConsole.response.graph} />
             </div>
           </div>
           {/* Recent Deposits */}
           <div className="col-4">
             <div className="card p-5" style={{height: "100%"}}>
-              <Deposits records={props.infoConsole.response.records} />
+              <Deposits records={props.infoConsole.response.changes.records} />
             </div>
           </div>
     </FrameComponent>

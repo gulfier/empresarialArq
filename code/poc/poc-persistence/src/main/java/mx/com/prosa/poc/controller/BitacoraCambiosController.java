@@ -15,6 +15,7 @@ import mx.com.prosa.poc.controller.aspect.BusinessExceptionInterceptor;
 import mx.com.prosa.poc.service.BitacoraCambiosService;
 import mx.com.prosa.poc.to.BaseTO;
 import mx.com.prosa.poc.to.BitacoraCambiosTO;
+import mx.com.prosa.poc.to.ConsoleResponseTO;
 import mx.com.prosa.poc.to.ITServiceTO;
 import mx.com.prosa.poc.to.PagingRequestTO;
 import mx.com.prosa.poc.to.PagingResponseTO;
@@ -29,48 +30,42 @@ import mx.com.prosa.poc.to.Response;
 @RequestMapping("/v1/CambiosAutorizar")
 @BusinessExceptionInterceptor
 @CrossOrigin
-public class BitacoraCambiosController extends AbstractBaseController
-{
+public class BitacoraCambiosController extends AbstractBaseController {
 
-  @Autowired
-  private BitacoraCambiosService bitacoraCambiosService;
+	@Autowired
+	private BitacoraCambiosService bitacoraCambiosService;
 
-  private static final String QUERY_PARAM_NAME = "name";
-  private static final String QUERY_PARAM_CODE = "code";
-  private static final String[] QUERY_PARAMS = new String[] { QUERY_PARAM_NAME, QUERY_PARAM_CODE };
+	private static final String QUERY_PARAM_NAME = "name";
+	private static final String QUERY_PARAM_CODE = "code";
+	private static final String[] QUERY_PARAMS = new String[] { QUERY_PARAM_NAME, QUERY_PARAM_CODE };
 
-  /**
-   * Obtiene la consulta de los sitios
-   * 
-   * @return
-   */
-  // TODO agregar informacion de swagger
-  @GetMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)
-  @CrossOrigin
-  public ResponseEntity<Response<PagingResponseTO<BitacoraCambiosTO>>> findAll()
-  {
-	  
-    PagingRequestTO<BitacoraCambiosTO> request = new PagingRequestTO<>();
-    super.processPaging( request );
-    request.setIp( super.getIpAddress() );
-    request.setUser( super.getUser() );
-    
-    boolean as = isQuery();
+	/**
+	 * Obtiene la consulta de los sitios
+	 * 
+	 * @return
+	 */
+	// TODO agregar informacion de swagger
+	@GetMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)
+	@CrossOrigin
+	public ResponseEntity<Response<ConsoleResponseTO<PagingResponseTO<BitacoraCambiosTO>>>> findAll() {
 
-    PagingResponseTO<BitacoraCambiosTO> pagingResponseTO = null;
+		PagingRequestTO<BitacoraCambiosTO> request = new PagingRequestTO<>();
+		super.processPaging(request);
+		request.setIp(super.getIpAddress());
+		request.setUser(super.getUser());
 
-      pagingResponseTO = bitacoraCambiosService.findAll( request );
-      System.out.println(pagingResponseTO.getSize());
-    
+		ConsoleResponseTO<PagingResponseTO<BitacoraCambiosTO>> responseConsole;
 
-    Response<PagingResponseTO<BitacoraCambiosTO>> body = new Response<>();
-    body.setResponse( pagingResponseTO );
-    body.setCode( HttpStatus.OK.value() );
-    body.setMessage( HttpStatus.OK.name() );
-    return new ResponseEntity<>( body, HttpStatus.OK );
-  }
-  
-  
+		responseConsole = bitacoraCambiosService.findAll(request);
+		System.out.println(responseConsole.getChanges().getSize());
+
+		Response<ConsoleResponseTO<PagingResponseTO<BitacoraCambiosTO>>> body = new Response<>();
+		body.setResponse(responseConsole);
+		body.setCode(HttpStatus.OK.value());
+		body.setMessage(HttpStatus.OK.name());
+		return new ResponseEntity<>(body, HttpStatus.OK);
+	}
+
 	/**
 	 * Delete.
 	 *
@@ -94,16 +89,10 @@ public class BitacoraCambiosController extends AbstractBaseController
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
-@Override
-protected String[] getParameters() {
-	// TODO Auto-generated method stub
-	 return QUERY_PARAMS;
-}
-
-  
-
-
-
-
+	@Override
+	protected String[] getParameters() {
+		// TODO Auto-generated method stub
+		return QUERY_PARAMS;
+	}
 
 }

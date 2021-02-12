@@ -3,6 +3,7 @@ package mx.com.prosa.poc.service;
 import mx.com.prosa.poc.to.PagingRequestTO;
 import mx.com.prosa.poc.to.PagingResponseTO;
 import mx.com.prosa.poc.to.BitacoraCambiosTO;
+import mx.com.prosa.poc.to.ConsoleResponseTO;
 
 /**
  * Interface para la manipulacion de la persistencia de los sitios
@@ -18,7 +19,7 @@ public interface BitacoraCambiosService
    * @param request parametros de busqueda paginada
    * @return
    */
-  PagingResponseTO<BitacoraCambiosTO> findAll( PagingRequestTO<BitacoraCambiosTO> request );
+	ConsoleResponseTO<PagingResponseTO<BitacoraCambiosTO>> findAll( PagingRequestTO<BitacoraCambiosTO> request );
 
 
 
