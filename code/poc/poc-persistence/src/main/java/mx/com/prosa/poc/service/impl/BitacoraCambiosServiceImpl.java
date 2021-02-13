@@ -37,7 +37,7 @@ public class BitacoraCambiosServiceImpl implements BitacoraCambiosService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ConsoleResponseTO<PagingResponseTO<BitacoraCambiosTO>> findAll(PagingRequestTO<BitacoraCambiosTO> request) {
+	public ConsoleResponseTO<PagingResponseTO<BitacoraCambiosTO>> findAll(PagingRequestTO<BitacoraCambiosTO> request,Integer page,Integer size) {
 		PageRequest pg = PagingRequestUtil.extractPaging(request);
 
 		// Iterable<BitacoraCambiosDO> bitacoraCambiosDO =
@@ -46,7 +46,7 @@ public class BitacoraCambiosServiceImpl implements BitacoraCambiosService {
 
 		// Page<BitacoraCambiosDO> paged = this.bitacoraCambiosRepository.findAll( pg );
 
-		Pageable paginacion = PageRequest.of(1 - 1, 10);
+		Pageable paginacion = PageRequest.of(page - 1, size);
 
 		List<BitacoraCambiosDO> hj = bitacoraCambiosRepository.findAllCambios(paginacion);
 
@@ -138,7 +138,7 @@ public class BitacoraCambiosServiceImpl implements BitacoraCambiosService {
 			records = bitacoraCambiosRepository.countChangesWithType(type);
 			listBitacora = bitacoraCambiosRepository.filterHistoryType(pagination, type);
 		} else {
-			records = bitacoraCambiosRepository.countChanges();
+			records = bitacoraCambiosRepository.countHistoryChanges();
 			listBitacora = bitacoraCambiosRepository.history(pagination);
 		}
 

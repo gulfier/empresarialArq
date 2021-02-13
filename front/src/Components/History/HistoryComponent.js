@@ -48,8 +48,8 @@ const columns = [
     compact: true,
   },
   {
-    name: 'Objeto',
-    selector: 'object',
+    name: 'Tipo',
+    selector: 'type',
     sortable: true,
     center: true,
     compact: true,
@@ -63,8 +63,8 @@ const columns = [
     compact: true,
   },
   {
-    name: 'Tipo',
-    selector: 'type',
+    name: 'Descripción',
+    selector: 'description',
     sortable: true,
     right: true,
     center: true,
@@ -88,12 +88,13 @@ function HistoryComponent(props) {
     fromDate: '',
     toDate: ''
   });
+  const [pagination, setPagination] = React.useState(1);
 
   useEffect(() => {
     var d = new Date();
     console.log("Date: ",d.getTime());
     props.getHistory(props.token.response.token,"",0,
-                      0,1,10);
+                      0,pagination,10);
     console.log("props",props);
   },[]);
 
@@ -108,12 +109,13 @@ function HistoryComponent(props) {
 
   const handleApi = (data) =>{
     var dataTable = [];
+    console.log("API: ",data.response);
     if(data !== undefined){
       for(var key in data.response.data){
         dataTable.push({ id: key, date:data.response.data[key].fecha.split("T")[0],
-          object: data.response.data[key].dsTipo,
+          type: data.response.data[key].dsTipo,
           code: data.response.data[key].dsCodigo,
-        type: data.response.data[key].dsTipo,
+        description: data.response.data[key].dsDescripcion,
         autor: data.response.data[key].dsAutor,
         actions: 'Aceptar  Declinar',
         dsCambioActual: data.response.data[key].dsCambioActual,
@@ -143,6 +145,13 @@ function HistoryComponent(props) {
       toDate = moment(filters.toDate,"YYYY-MM-DD").utc().valueOf();
     }
     props.getHistory(props.token.response.token,filters.type,fromDate,toDate,1,10);
+  }
+
+  const handlerPagination = (event) =>{
+    setPagination(pagination+1);
+    props.getDataConsole(props.token.response.token,pagination,10);
+    props.getHistory(props.token.response.token,"",0,
+                      0,pagination,10);
   }
 
   return (
@@ -196,10 +205,12 @@ function HistoryComponent(props) {
               data={handleApi(props.infoHistory)}
               theme="Table"
               pagination
+              paginationTotalRows={props.infoHistory.response.records}
               selectableRows
               fixedHeader
               fixedHeaderScrollHeight="50vh"
               onRowClicked={handleRowClicked}
+              onChangePage={handlerPagination}
           />
         </div>
         <DialogPopup onClose={handleClose} open={open} dialogTitle="ID 72129398">

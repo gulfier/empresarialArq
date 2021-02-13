@@ -25,9 +25,8 @@ public interface BitacoraCambiosRepository extends JpaRepository<BitacoraCambios
 	 * @param paginacion the paginacion
 	 * @return the list
 	 */
-	@Query(value = "SELECT e"
-			 + " FROM BitacoraCambiosDO e"
-			 + " WHERE e.dsEstatus = 1")
+	@Query(value = "SELECT * FROM TBL_BITACORA_CAMBIOS"
+			 + " WHERE ID_ESTATUS = 1", nativeQuery = true)
 	List<BitacoraCambiosDO> findAllCambios(Pageable paginacion);
 	
 	/**
@@ -100,4 +99,12 @@ public interface BitacoraCambiosRepository extends JpaRepository<BitacoraCambios
 	@Query(value = "select count(t.id) from BitacoraCambiosDO t"
 			+ " WHERE t.dsTipo = :type AND t.dsEstatus != 1")
 	Long countChangesWithType(@Param("type") String type);
+	
+	/**
+	 * Count changes.
+	 *
+	 * @return the long
+	 */
+	@Query(value = "select count(PK_ID_BITACORA) from TBL_BITACORA_CAMBIOS WHERE ID_ESTATUS!=1", nativeQuery= true)
+	Long countHistoryChanges();
 }

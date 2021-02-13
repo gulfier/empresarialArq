@@ -53,7 +53,9 @@ public class BitacoraCambiosController extends AbstractBaseController {
 	 */
 	@GetMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	@CrossOrigin
-	public ResponseEntity<Response<ConsoleResponseTO<PagingResponseTO<BitacoraCambiosTO>>>> findAll() {
+	public ResponseEntity<Response<ConsoleResponseTO<PagingResponseTO<BitacoraCambiosTO>>>> findAll(
+			@RequestHeader(value = "page", required = false) Integer page,
+			@RequestHeader(value = "size", required = false) Integer size) {
 
 		PagingRequestTO<BitacoraCambiosTO> request = new PagingRequestTO<>();
 		super.processPaging(request);
@@ -62,7 +64,7 @@ public class BitacoraCambiosController extends AbstractBaseController {
 
 		ConsoleResponseTO<PagingResponseTO<BitacoraCambiosTO>> responseConsole;
 
-		responseConsole = bitacoraCambiosService.findAll(request);
+		responseConsole = bitacoraCambiosService.findAll(request,page,size);
 		System.out.println(responseConsole.getChanges().getSize());
 
 		Response<ConsoleResponseTO<PagingResponseTO<BitacoraCambiosTO>>> body = new Response<>();

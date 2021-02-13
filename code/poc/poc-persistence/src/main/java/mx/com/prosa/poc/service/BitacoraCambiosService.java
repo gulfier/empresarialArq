@@ -19,7 +19,7 @@ public interface BitacoraCambiosService
    * @param request parametros de busqueda paginada
    * @return
    */
-	ConsoleResponseTO<PagingResponseTO<BitacoraCambiosTO>> findAll( PagingRequestTO<BitacoraCambiosTO> request );
+	ConsoleResponseTO<PagingResponseTO<BitacoraCambiosTO>> findAll( PagingRequestTO<BitacoraCambiosTO> request, Integer page, Integer size);
 
 	PagingResponseTO<BitacoraCambiosTO> getHistory( PagingRequestTO<BitacoraCambiosTO> request,Integer size, Integer page, String type,
 			Long initDate,Long endDate);

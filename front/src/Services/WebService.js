@@ -26,11 +26,13 @@ export function getDataHistory(token,typeFilter,fromDate,toDate,page,size){
        });
 }
 
-export function getDataConsola(token){
+export function getDataConsola(token,page,size){
     console.log("url:",urlBasePersistence);
     return http.get(urlBasePersistence+baseURL+'/CambiosAutorizar/',{
         headers: {
-            Authorization: token
+            Authorization: token,
+            PAGE: page,
+            SIZE: size
         }
        });
 }

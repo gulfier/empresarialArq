@@ -29,7 +29,7 @@ public class BitacoraCambiosServiceTest
   {
 	  
 	  PagingRequestTO<BitacoraCambiosTO> request = new PagingRequestTO<>();
-      bitacoraCambiosService.findAll(request);
+      bitacoraCambiosService.findAll(request,1,10);
 
     Assert.assertNotNull( request );
 

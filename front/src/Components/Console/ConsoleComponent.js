@@ -44,8 +44,8 @@ const columns = [
     compact: true,
   },
   {
-    name: 'Objeto',
-    selector: 'object',
+    name: 'Tipo',
+    selector: 'type',
     sortable: true,
     center: true,
     compact: true,
@@ -59,8 +59,8 @@ const columns = [
     compact: true,
   },
   {
-    name: 'Tipo',
-    selector: 'type',
+    name: 'Descripción',
+    selector: 'description',
     sortable: true,
     right: true,
     center: true,
@@ -90,6 +90,7 @@ function ConsoleComponent(props) {
   const { history } = props;
   const [open, setOpen] = React.useState(false);
   const [jsonDetail, setJsonDetail] = React.useState({});
+  const [pagination, setPagination] = React.useState(1);
 
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   useEffect(() => {
@@ -97,7 +98,7 @@ function ConsoleComponent(props) {
     if(props.token.response.token==null){
       history.push('/login')
     }
-    props.getDataConsole(props.token.response.token);
+    props.getDataConsole(props.token.response.token,pagination,10);
     console.log("props",props);
   },[]);
 
@@ -116,9 +117,9 @@ function ConsoleComponent(props) {
     if(data !== undefined){
       for(var key in data.response.changes.data){
         dataTable.push({ id: key, date:data.response.changes.data[key].fecha.split("T")[0],
-          object: data.response.changes.data[key].dsTipo,
+          type: data.response.changes.data[key].dsTipo,
           code: data.response.changes.data[key].dsCodigo,
-        type: data.response.changes.data[key].dsTipo,
+        description: data.response.changes.data[key].dsDescripcion,
         autor: data.response.changes.data[key].dsAutor,
         actions: 'Aceptar  Declinar',
         dsCambioActual: data.response.changes.data[key].dsCambioActual,
@@ -126,6 +127,11 @@ function ConsoleComponent(props) {
       }
     }
     return dataTable;
+  }
+
+  const handlerPagination = (event) =>{
+    setPagination(pagination+1);
+    props.getDataConsole(props.token.response.token,pagination,10);
   }
 
   return (
@@ -177,11 +183,13 @@ function ConsoleComponent(props) {
                     columns={columns}
                     data={handleApi(props.infoConsole)}
                     theme="Table"
-                    pagination
+                    pagination={true}
+                    paginationTotalRows={props.infoConsole.response.changes.records}
                     selectableRows
                     fixedHeader
                     fixedHeaderScrollHeight="50vh"
                     onRowClicked={handleRowClicked}
+                    onChangePage={handlerPagination}
                 />
                 <DetailChangePopup onClose={handleClose} open={open} id="ID 72129398" response={jsonDetail}/>
               </div>
