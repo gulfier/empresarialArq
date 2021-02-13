@@ -1,5 +1,5 @@
 import './HistoryComponent.css';
-import React from 'react';
+import React, {useEffect,useState} from 'react';
 import Form from 'react-bootstrap/Form';
 import DataTable from 'react-data-table-component';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
@@ -7,6 +7,10 @@ import TextField from '@material-ui/core/TextField';
 import SearchIcon from '@material-ui/icons/Search';
 import DialogPopup from '../../Dialogs/Dialog/DialogPopup';
 import FrameComponent from '../Frame/FrameComponent';
+import { withRouter } from 'react-router-dom';
+import { getHistory } from "../../Actions/HistoryAction";
+import { connect } from 'react-redux';
+import moment from 'moment';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -76,9 +80,22 @@ const columns = [
   }
 ];
 
-function HistoryComponent() {
+function HistoryComponent(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const [filters, setFilters] = useState({
+    type: '',
+    fromDate: '',
+    toDate: ''
+  });
+
+  useEffect(() => {
+    var d = new Date();
+    console.log("Date: ",d.getTime());
+    props.getHistory(props.token.response.token,"",0,
+                      0,1,10);
+    console.log("props",props);
+  },[]);
 
   const handleRowClicked = (event) =>{
     console.log("Entro handle",event);
@@ -89,76 +106,101 @@ function HistoryComponent() {
     setOpen(false);
   };
 
+  const handleApi = (data) =>{
+    var dataTable = [];
+    if(data !== undefined){
+      for(var key in data.response.data){
+        dataTable.push({ id: key, date:data.response.data[key].fecha.split("T")[0],
+          object: data.response.data[key].dsTipo,
+          code: data.response.data[key].dsCodigo,
+        type: data.response.data[key].dsTipo,
+        autor: data.response.data[key].dsAutor,
+        actions: 'Aceptar  Declinar',
+        dsCambioActual: data.response.data[key].dsCambioActual,
+        dsCambioAnterior: data.response.data[key].dsCambioAnterior},);
+      }
+    }
+    return dataTable;
+  }
+
+  const handleInputChange = (event) => {
+    // console.log(event.target.name)
+    // console.log(event.target.value)
+    setFilters({
+        ...filters,
+        [event.target.name] : event.target.value
+    })
+  }
+
+  const handleFind = () => {
+    console.log("Entro: ",filters,moment(filters.fromDate,"YYYY-MM-DD").utc().valueOf());
+    var toDate = 0;
+    var fromDate = 0;
+    if(filters.fromDate!==""){
+      fromDate = moment(filters.fromDate,"YYYY-MM-DD").utc().valueOf();
+    }
+    if(filters.toDate!==""){
+      toDate = moment(filters.toDate,"YYYY-MM-DD").utc().valueOf();
+    }
+    props.getHistory(props.token.response.token,filters.type,fromDate,toDate,1,10);
+  }
+
   return (
     <FrameComponent title="Historial cambios">
       <div className="Console">
-        <div className="row">
-            <div className="col">
-                <Form.Control placeholder="Tipo" />
-            </div>
-            {/* <div className="col">
-                <Form.Control placeholder="Base de datos" />
-            </div>
-            <div className="col">
-                <Form.Label className="mr-sm-2" htmlFor="inlineFormCustomSelect" srOnly>
-                    Preference
-                </Form.Label>
-                <Form.Control
-                    as="select"
-                    className="mr-sm-2"
-                    id="inlineFormCustomSelect"
-                    custom
-                >
-                    <option value="0">Database</option>
-                    <option value="1">IBusiness process</option>
-                    <option value="2">IT Service</option>
-                    <option value="3">Application</option>
-                    <option value="3">Server</option>
-                </Form.Control>
-            </div> */}
-            <div className="col">
-                <form className={classes.container} noValidate>
-                    <TextField
-                        id="date"
-                        label="De"
-                        type="date"
-                        defaultValue="2017-05-24"
-                        className={classes.textField}
-                        InputLabelProps={{
-                        shrink: true,
-                        }}
-                    />
-                </form>
-            </div>
-            <div className="col">
-                <form className={classes.container} noValidate>
-                    <TextField
-                        id="date"
-                        label="Hasta"
-                        type="date"
-                        defaultValue="2017-05-24"
-                        className={classes.textField}
-                        InputLabelProps={{
-                        shrink: true,
-                        }}
-                    />
-                </form>
-            </div>
-            <div className="col-auto">
-                <SearchIcon/>
-            </div>
-        </div>
-        <div className="row" style={{width:"100%"}}>
-        <DataTable
-            columns={columns}
-            data={data}
-            theme="Table"
-            pagination
-            selectableRows
-            fixedHeader
-            fixedHeaderScrollHeight="50vh"
-            onRowClicked={handleRowClicked}
-        />
+        <div className="row pt-3" style={{backgroundColor:"#FFF"}}>
+          <div className="col ml-5">
+            <Form.Control name="type"
+                          aria-describedby="emailHelp"
+                          type="text"
+                          placeholder="Tipo"
+                          onChange={handleInputChange} />
+          </div>
+          <div className="col">
+            <form className={classes.container} noValidate>
+                <TextField
+                    id="date"
+                    label="De"
+                    type="date"
+                    name="fromDate"
+                    onChange={handleInputChange}
+                    defaultValue=""
+                    className={classes.textField}
+                    InputLabelProps={{
+                    shrink: true,
+                    }}
+                />
+            </form>
+          </div>
+          <div className="col">
+            <form className={classes.container} noValidate>
+                <TextField
+                    id="date"
+                    label="Hasta"
+                    type="date"
+                    name="toDate"
+                    defaultValue=""
+                    className={classes.textField}
+                    InputLabelProps={{
+                    shrink: true,
+                    }}
+                    onChange={handleInputChange}
+                />
+            </form>
+          </div>
+          <div className="col-auto mr-5">
+              <SearchIcon onClick={handleFind}/>
+          </div>
+          <DataTable
+              columns={columns}
+              data={handleApi(props.infoHistory)}
+              theme="Table"
+              pagination
+              selectableRows
+              fixedHeader
+              fixedHeaderScrollHeight="50vh"
+              onRowClicked={handleRowClicked}
+          />
         </div>
         <DialogPopup onClose={handleClose} open={open} dialogTitle="ID 72129398">
           <div className="Detail-Component row">
@@ -204,4 +246,9 @@ function HistoryComponent() {
   );
 }
 
-export default HistoryComponent;
+const mapStateToProps = (state) => ({
+  infoHistory: state.history.data,
+  token: state.login.data
+});
+
+export default connect (mapStateToProps, { getHistory })( withRouter(HistoryComponent));

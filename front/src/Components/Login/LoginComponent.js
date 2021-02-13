@@ -21,7 +21,7 @@ function LoginComponent(props) {
         ...dataLogin,
         [event.target.name] : event.target.value
     })
-}
+  }
 
   function login(){
     console.log("Se envio peticion con: ",dataLogin.user,dataLogin.password);

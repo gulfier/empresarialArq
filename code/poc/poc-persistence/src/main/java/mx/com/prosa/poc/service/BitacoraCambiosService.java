@@ -8,7 +8,7 @@ import mx.com.prosa.poc.to.ConsoleResponseTO;
 /**
  * Interface para la manipulacion de la persistencia de los sitios
  * 
- * @author Guillermo Segura Olivera <guillermo.segura@axity.com>
+ * @author Jorge Ortega Hernández <jorgeortega30@live.com.mx>
  */
 public interface BitacoraCambiosService
 {
@@ -21,7 +21,8 @@ public interface BitacoraCambiosService
    */
 	ConsoleResponseTO<PagingResponseTO<BitacoraCambiosTO>> findAll( PagingRequestTO<BitacoraCambiosTO> request );
 
-
+	PagingResponseTO<BitacoraCambiosTO> getHistory( PagingRequestTO<BitacoraCambiosTO> request,Integer size, Integer page, String type,
+			Long initDate,Long endDate);
 
 	/**
 	 * Delete.

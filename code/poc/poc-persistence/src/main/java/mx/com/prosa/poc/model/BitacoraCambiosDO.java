@@ -10,25 +10,25 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 // TODO: Auto-generated Javadoc
 /**
  * Entity class de la tabla K_SITE.
  *
- * @author Guillermo Segura Olivera <guillermo.segura@axity.com>
+ * @author Jorge Ortega Hernández <jorgeortega30@live.com.mx>
  */
 @Entity
 @Table(name = "TBL_BITACORA_CAMBIOS")
 public class BitacoraCambiosDO implements Serializable {
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 24906249547588369L;
 
 	/** The id. */
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "PK_ID_BITACORA")
 	private Long id;
 
@@ -38,6 +38,7 @@ public class BitacoraCambiosDO implements Serializable {
 
 	/** The fecha. */
 	@Column(name = "DS_FECHA")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date fecha;
 
 	/** The ds descripcion. */
