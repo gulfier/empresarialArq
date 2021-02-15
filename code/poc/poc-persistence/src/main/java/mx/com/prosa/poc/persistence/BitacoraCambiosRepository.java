@@ -58,10 +58,10 @@ public interface BitacoraCambiosRepository extends JpaRepository<BitacoraCambios
 	 * @return the list
 	 */
 	@Query(value = "SELECT t FROM BitacoraCambiosDO t"
-			+ " WHERE t.dsTipo = :type AND t.dsEstatus != 1"
+			+ " WHERE t.dsEstatus != 1"
 			+ " AND t.fecha BETWEEN :initDate AND :endDate"
 			+ " ORDER BY t.fecha")
-	List<BitacoraCambiosDO> filterHistory(Pageable paginacion,@Param("type") String type,
+	List<BitacoraCambiosDO> filterHistory(Pageable paginacion,
 			@Param("initDate") Date initDate,@Param("endDate") Date endDate);
 	
 	/**
@@ -84,10 +84,10 @@ public interface BitacoraCambiosRepository extends JpaRepository<BitacoraCambios
 	 * @return the long
 	 */
 	@Query(value = "select count(t.id) from BitacoraCambiosDO t"
-			+ " WHERE t.dsTipo = :type AND t.dsEstatus != 1"
+			+ " WHERE t.dsEstatus != 1"
 			+ " AND t.fecha BETWEEN :initDate AND :endDate"
 			+ " ORDER BY t.fecha")
-	Long countChangesWithFilters(@Param("type") String type,
+	Long countChangesWithFilters(
 			@Param("initDate") Date initDate,@Param("endDate") Date endDate);
 	
 	/**

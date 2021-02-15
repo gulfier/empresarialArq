@@ -131,8 +131,8 @@ public class BitacoraCambiosServiceImpl implements BitacoraCambiosService {
 		List<BitacoraCambiosDO> listBitacora = new ArrayList<>();
 		Long records;
 		if (initDate != null && initDate != 0 && endDate != null && endDate != 0) {
-			records = bitacoraCambiosRepository.countChangesWithFilters(type, new Date(initDate), new Date(endDate));
-			listBitacora = bitacoraCambiosRepository.filterHistory(pagination, type, new Date(initDate),
+			records = bitacoraCambiosRepository.countChangesWithFilters(new Date(initDate), new Date(endDate));
+			listBitacora = bitacoraCambiosRepository.filterHistory(pagination, new Date(initDate),
 					new Date(endDate));
 		} else if (type != null && !type.equals("")) {
 			records = bitacoraCambiosRepository.countChangesWithType(type);
